@@ -384,7 +384,7 @@ extern NSInteger debug;
 
 - (NSString *)toString
 {
-    return [NSString stringWithString:data];
+    return (data != nil) ? [NSString stringWithString:data] : @"";
 }
 
 //---------------------------------------------------------- 
