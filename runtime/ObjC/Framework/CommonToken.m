@@ -26,6 +26,7 @@
 
 
 #import "CommonToken.h"
+#import "ANTLRStringStream.h"
 
 static CommonToken *SKIP_TOKEN;
 static CommonToken *EOF_TOKEN;
@@ -156,10 +157,17 @@ static CommonToken *INVALID_TOKEN;
         channel = aChannel;
         startIndex = aStart;
         stopIndex = aStop;
-        if (type == TokenTypeEOF)
-            text = @"EOF";
-        else
-            text = [input substringWithRange:NSMakeRange(startIndex, (stopIndex-startIndex)+1)];
+        if ( [input isKindOfClass:[ANTLRStringStream class]] ) {
+            NSInteger len = [[((ANTLRStringStream *)input) toString] length];
+            if ( len == startIndex )
+                type = TokenTypeEOF;
+        }
+        if ( type == TokenTypeEOF )
+            text = @"<EOF>";
+        else {
+            NSRange r = NSMakeRange(startIndex, (stopIndex-startIndex)+1);
+            text = [input substringWithRange:r];
+        }
         if ( text ) [text retain];
     }
     return self;
