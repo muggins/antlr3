@@ -96,9 +96,9 @@
 }
 
 - (CommonToken *)getMissingSymbol:(id<TokenStream>)anInput
-                             Exception:(RecognitionException *)e
-                                 TType:(NSInteger)expectedTokenType
-                                BitSet:(ANTLRBitSet *)follow
+                        Exception:(RecognitionException *)e
+                        TokenType:(NSInteger)expectedTokenType
+                           Follow:(ANTLRBitSet *)follow
 {
     NSString *tokenText = nil;
     if ( expectedTokenType == TokenTypeEOF )

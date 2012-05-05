@@ -103,8 +103,8 @@
 
 - (id) getMissingSymbol:(id<IntStream>)anInput
               Exception:(RecognitionException *)e
-          ExpectedToken:(NSInteger)expectedTokenType
-                 BitSet:(ANTLRBitSet *)follow
+              TokenType:(NSInteger)expectedTokenType
+                 Follow:(ANTLRBitSet *)follow
 {
     NSString *tokenText =[NSString stringWithFormat:@"<missing %@ %d>", [self getTokenNames], expectedTokenType];
     //id<TreeAdaptor> anAdaptor = (id<TreeAdaptor>)[((id<TreeNodeStream>)e.input) getTreeAdaptor];
