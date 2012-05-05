@@ -114,6 +114,9 @@
            else {
                c = [anInputStream LA:1];
            }
+        } else {
+            self.line = [input getLine];
+            self.charPositionInLine = [input getCharPositionInLine];
         }
 	}
 	return self;
