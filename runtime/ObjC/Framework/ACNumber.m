@@ -183,7 +183,7 @@
     if ( fBOOL ) {
         [encoder encodeBool:u.b forKey:[NSString stringWithCString:type encoding:NSASCIIStringEncoding]];;
     } else if ( fChar ) {
-        [encoder encodeBytes:&u.c length:1 forKey:[NSString stringWithCString:type encoding:NSASCIIStringEncoding]];;
+        [encoder encodeBytes:(const uint8_t *)&u.c length:1 forKey:[NSString stringWithCString:type encoding:NSASCIIStringEncoding]];;
     } else if ( fDouble ) {
         [encoder encodeBool:u.d forKey:[NSString stringWithCString:type encoding:NSASCIIStringEncoding]];;
     } else if ( fFloat ) {
@@ -216,6 +216,7 @@
         return (BOOL) u.f;
     else if ( fInt || fNSInt )
         return (BOOL) u.i;
+    return NO;
 }
 
 - (char)charValue
@@ -230,6 +231,7 @@
         return (char) u.f;
     else if ( fInt || fNSInt )
         return (char) u.i;
+    return (char)0;
 }
 
 - (double)doubleValue
@@ -244,6 +246,7 @@
         return (double) u.f;
     else if ( fInt || fNSInt )
         return (double) u.i;
+    return (double)0.0;
 }
 
 - (float)floatValue
@@ -258,6 +261,7 @@
         return (float) u.d;
     else if ( fInt || fNSInt )
         return (float) u.i;
+    return (float)0.0;
 }
 
 - (int)intValue
@@ -272,6 +276,7 @@
         return (int) u.f;
     else if ( fNSInt )
         return (int) u.i;
+    return (int)0;
 }
 
 - (NSInteger)integerValue
@@ -289,6 +294,7 @@
     } else if ( fInt || fNSInt ) {
         return (NSInteger) u.i;
     }
+    return (NSInteger)0;
 }
 
 - (NSInteger)inc
@@ -356,13 +362,14 @@
     if (fBOOL)
         return ([self boolValue] - [aNumber boolValue]); 
     else if (fChar)
-        return [NSNumber numberWithInt:u.c];
+        return u.c - [aNumber charValue];
     else if (fInt)
-        return [NSNumber numberWithInt:u.i];
+        return u.i - [aNumber intValue];
     else if (fNSInt)
-        return [NSNumber numberWithInteger:u.i];
+        return u.i - [aNumber integerValue];
     else if (fDouble)
-        return [NSNumber numberWithDouble:u.d];
+        return u.d - [aNumber doubleValue];
+    return -1;
 }
 
 - (NSNumber *)getNSNum
@@ -377,6 +384,7 @@
         return [NSNumber numberWithInteger:u.i];
     else if (fDouble)
         return [NSNumber numberWithDouble:u.d];
+    return nil;
 }
 
 
