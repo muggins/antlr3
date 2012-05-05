@@ -373,7 +373,7 @@ static NSString *NEXT_TOKEN_RULE_NAME;
         else {
             tokenName = [theTokNams objectAtIndex:mte.expecting];
         }
-        msg = [NSString stringWithFormat:@"missing %@ at %@", tokenName, [self getTokenErrorDisplay:(e.token)] ];
+        msg = [NSString stringWithFormat:@"mismatched input %@ expecting %@", [self getTokenErrorDisplay:(e.token)], tokenName];
     }
     else if ( [e isKindOfClass:[MismatchedTokenException class]] ) {
         MismatchedTokenException *mte = (MismatchedTokenException *)e;
@@ -384,7 +384,7 @@ static NSString *NEXT_TOKEN_RULE_NAME;
         else {
             tokenName = [theTokNams objectAtIndex:mte.expecting];
         }
-        msg = [NSString stringWithFormat:@"mismatched input %@ expecting %@",[self getTokenErrorDisplay:(e.token)], tokenName];
+        msg = [NSString stringWithFormat:@"mismatched input %@ expecting %@", [self getTokenErrorDisplay:(e.token)], tokenName];
     }
     else if ( [e isKindOfClass:[MismatchedTreeNodeException class]] ) {
         MismatchedTreeNodeException *mtne = (MismatchedTreeNodeException *)e;
@@ -403,12 +403,15 @@ static NSString *NEXT_TOKEN_RULE_NAME;
         // and "(decision="+nvae.decisionNumber+") and
         // "state "+nvae.stateNumber
         //        msg = [NSString stringWithFormat:@"no viable alternative at input %@", [self getTokenErrorDisplay:e.token]];
+/*
         msg = [NSString stringWithFormat:@"no viable alternative decision:%d state:%d at input %@", ((NoViableAltException *)e).stateNumber, ((NoViableAltException *)e).decisionNumber, [self getTokenErrorDisplay:e.token]];
+ */
+        msg = [NSString stringWithFormat:@"no viable alternative at input %@", [self getTokenErrorDisplay:e.token]];
     }
     else if ( [e isKindOfClass:[EarlyExitException class]] ) {
         //EarlyExitException *eee = (EarlyExitException *)e;
         // for development, can add "(decision="+eee.decisionNumber+")"
-        msg =[NSString stringWithFormat: @"required (...)+ loop did not match anything at input ", [self getTokenErrorDisplay:e.token]];
+        msg =[NSString stringWithFormat: @"required (...)+ loop did not match anything at input %@", [self getTokenErrorDisplay:e.token]];
     }
     else if ( [e isKindOfClass:[MismatchedSetException class]] ) {
         MismatchedSetException *mse = (MismatchedSetException *)e;
