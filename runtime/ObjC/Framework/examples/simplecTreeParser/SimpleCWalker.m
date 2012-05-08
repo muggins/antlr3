@@ -1218,7 +1218,7 @@ static _stack;
 
                  
 
-                 NSLog(@"assigning %@ to variable %@", (e!=nil?[[input getTokenStream] toStringFromStart:[[input getTreeAdaptor] getTokenStartIndex:[e getStart]]ToEnd:[[input getTreeAdaptor] getTokenStopIndex:[e getStart]]]:0), (K_ID1!=nil?K_ID1.text:nil)); 
+                 NSLog(@"assigning %@ to variable %@", (e!=nil?[[input getTokenStream] descriptionFromStart:[[input getTreeAdaptor] getTokenStartIndex:[e getStart]]ToEnd:[[input getTreeAdaptor] getTokenStopIndex:[e getStart]]]:0), (K_ID1!=nil?K_ID1.text:nil)); 
 
                  
                 }

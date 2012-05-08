@@ -197,7 +197,7 @@ headerFile( LEXER,
 /* =============================================================================
  * Standard antlr OBJC runtime definitions
  */
-#import \<Cocoa/Cocoa.h>
+#import \<Foundataion/Foundation.h>
 #import \<ANTLR/ANTLR.h>
 /* End of standard antlr3 runtime definitions
  * =============================================================================
@@ -1293,7 +1293,7 @@ wildcardCharListLabel(label, elementIndex) ::= <<
 
 /** Match a rule reference by invoking it possibly with arguments
  *  and a return value or values.  The 'rule' argument was the
- *  target rule name, but now is type Rule, whose toString is
+ *  target rule name, but now is type Rule, whose description is
  *  same: the rule name.  Now though you can access full rule
  *  descriptor stuff.
  */
@@ -1314,7 +1314,7 @@ ruleRefAndListLabel(rule,label,elementIndex,args,scope) ::= <<
 /** A lexer rule reference.
  *
  *  The 'rule' argument was the target rule name, but now
- *  is type Rule, whose toString is same: the rule name.
+ *  is type Rule, whose description is same: the rule name.
  *  Now though you can access full rule descriptor stuff.
  */
 lexerRuleRef(rule,label,args,elementIndex,scope) ::= <<
@@ -2053,10 +2053,10 @@ ruleLabelPropertyRef_stop(scope,attr) ::= "(<scope>!=nil?((<labelType> *)<scope>
 ruleLabelPropertyRef_tree(scope,attr) ::= "(<scope>!=nil?((<ASTLabelType> *)<scope>.tree):nil)"
 ruleLabelPropertyRef_text(scope,attr) ::= <%
 <if(TREE_PARSER)>
-(<scope>!=nil?[[input getTokenStream] toStringFromStart:[[input getTreeAdaptor] getTokenStartIndex:[<scope> getStart]]
+(<scope>!=nil?[[input getTokenStream] descriptionFromStart:[[input getTreeAdaptor] getTokenStartIndex:[<scope> getStart]]
          ToEnd:[[input getTreeAdaptor] getTokenStopIndex:[<scope> getStart]]]:0)
 <else>
-(<scope>!=nil?([input toStringFromToken:[<scope> getStart] ToToken:[<scope> getStop]]:0)
+(<scope>!=nil?([input descriptionFromToken:[<scope> getStart] ToToken:[<scope> getStop]]:0)
 <endif>
 %>
 ruleLabelPropertyRef_st(scope,attr) ::= "(<scope>!=nil?[<scope> st]:nil)"
@@ -2078,10 +2078,10 @@ rulePropertyRef_stop(scope,attr) ::= "((<labelType> *)retval.stopToken)"
 rulePropertyRef_tree(scope,attr) ::= "((<ASTLabelType> *)retval.tree)"
 rulePropertyRef_text(scope,attr) ::= <<
 <if(TREE_PARSER)>
-[[input getTokenStream] toStringFromStart:[[input getTreeAdaptor] getTokenStartIndex:retval.start.token.startIndex]
+[[input getTokenStream] descriptionFromStart:[[input getTreeAdaptor] getTokenStartIndex:retval.start.token.startIndex]
                                     ToEnd:[[input getTreeAdaptor] getTokenStopIndex:retval.start.token.stopIndex]]
 <else>
-[input toStringFromToken:retval.start ToToken:[input LT:-1]]
+[input descriptionFromToken:retval.start ToToken:[input LT:-1]]
 <endif>
 >>
 rulePropertyRef_st(scope,attr) ::= "retval.st"

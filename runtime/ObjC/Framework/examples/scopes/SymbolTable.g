@@ -35,7 +35,7 @@ scope Symbols;
 }
     :   (decl)*
         {
-            NSLog( @"globals: \%@", [$Symbols::names toString] );
+            NSLog( @"globals: \%@", [$Symbols::names description] );
             level--;
         }
     ;
@@ -52,7 +52,7 @@ scope Symbols;
 }
     :   '{' (decl)* (stat)* '}'
         {
-            NSLog( @"level \%d symbols: \%@", level, [$Symbols::names toString] );
+            NSLog( @"level \%d symbols: \%@", level, [$Symbols::names description] );
             level--;
         }
     ;

@@ -56,7 +56,7 @@ int main(int argc, const char * argv[]) {
 
     NSLog(@"Reached end of first parse\n");
 	// Print the matched tree as a Lisp-style string
-	NSLog(@"tree: %@", [program_tree treeDescription]);
+	NSLog(@"tree: %@", [program_tree descriptionTree]);
 	
 	// Create a new tree node stream that's feeding off of the root node (thus seeing the whole tree)
 	CommonTreeNodeStream *treeStream = [CommonTreeNodeStream newCommonTreeNodeStream:program_tree];

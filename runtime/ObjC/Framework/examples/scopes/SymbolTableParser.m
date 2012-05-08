@@ -310,7 +310,7 @@ static SymbolStack *Symbols_stack;
          
 
 
-                    NSLog( @"globals: %@", [((Symbols_Scope *)[Symbols_stack peek]).names toString] );
+                    NSLog( @"globals: %@", [((Symbols_Scope *)[Symbols_stack peek]).names description] );
                     level--;
                 
 
@@ -479,7 +479,7 @@ static SymbolStack *Symbols_stack;
          
 
 
-                    NSLog( @"level %d symbols: %@", level, [((Symbols_Scope *)[Symbols_stack peek]).names toString] );
+                    NSLog( @"level %d symbols: %@", level, [((Symbols_Scope *)[Symbols_stack peek]).names description] );
                     level--;
                 
 

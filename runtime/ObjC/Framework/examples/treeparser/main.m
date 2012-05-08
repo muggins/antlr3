@@ -18,7 +18,7 @@ public class Main {
 		LangParser parser = new LangParser(tokens);
 		//LangParser.decl_return r = parser.decl();
 		LangParser.start_return r = parser.start();
-		System.out.println("tree: "+((Tree)r.tree).toStringTree());
+		System.out.println("tree: "+((Tree)r.tree).descriptionTree());
 		CommonTree r0 = ((CommonTree)r.tree);
         
 		CommonTreeNodeStream nodes = new CommonTreeNodeStream(r0);
@@ -42,7 +42,7 @@ int main(int argc, const char * argv[])
     LangParser *parser = [LangParser newLangParser:tokens];
 //    LangParser_decl_return *r = [parser decl];
     LangParser_start_return *r = [parser start];
-    NSLog( @"tree: %@", [r.tree toStringTree]);
+    NSLog( @"tree: %@", [r.tree descriptionTree]);
     CommonTree *r0 = [r getTree];
     
     CommonTreeNodeStream *nodes = [CommonTreeNodeStream newCommonTreeNodeStream:r0];

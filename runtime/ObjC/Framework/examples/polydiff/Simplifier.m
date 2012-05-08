@@ -931,13 +931,13 @@ return self;
                 root_0 = (CommonTree *)[[[treeAdaptor class] newEmptyTree] retain];
 
                 // 24:24: -> { [[$p.tree toStringTree] isEqualToString:@\"0\"] }? $q
-                if ( [[(p!=nil?((CommonTree *)p.tree):nil) toStringTree] isEqualToString:@"0"] ) {
+                if ( [[(p!=nil?((CommonTree *)p.tree):nil) descriptionTree] isEqualToString:@"0"] ) {
                     [treeAdaptor addChild:[stream_q nextTree] toTree:root_0];
 
                 }
 
                 else // 25:8: -> { [[$q.tree toStringTree] isEqualToString:@\"0\"] }? $p
-                if ( [[(q!=nil?((CommonTree *)q.tree):nil) toStringTree] isEqualToString:@"0"] ) {
+                if ( [[(q!=nil?((CommonTree *)q.tree):nil) descriptionTree] isEqualToString:@"0"] ) {
                     [treeAdaptor addChild:[stream_p nextTree] toTree:root_0];
 
                 }

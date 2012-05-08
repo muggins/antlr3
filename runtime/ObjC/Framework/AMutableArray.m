@@ -280,11 +280,6 @@
     return str;
 }
 
-- (NSString *) toString
-{
-    return [self description];
-}
-
 - (void) ensureCapacity:(NSInteger) index
 {
 	if ((index * sizeof(id)) >= [buffer length])

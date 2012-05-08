@@ -82,7 +82,6 @@
 - (BOOL) member:(NSUInteger)bitNumber;
 - (BOOL) isNil;
 - (NSString *) description;
-- (NSString *) toString;
 
 #pragma mark NSCopying support
 

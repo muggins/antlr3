@@ -439,14 +439,14 @@
 	CommonTree *tree = [CommonTree newTreeWithToken:token];
 	
 	// Description for tree
-	NSString *treeDesc = [tree treeDescription];
+	NSString *treeDesc = [tree descriptionTree];
     STAssertNotNil(treeDesc, @"Tree description should not be nil");
     STAssertTrue([treeDesc isEqualToString:@"||"], @"Tree description was not || but rather %@", treeDesc);
 	
 	CommonTree *parent = [CommonTree newTree];
-	STAssertTrue([[parent treeDescription] isEqualToString:@"nil"], @"Tree description was not nil was %@", [parent treeDescription]);
+	STAssertTrue([[parent descriptionTree] isEqualToString:@"nil"], @"Tree description was not nil was %@", [parent descriptionTree]);
 	[parent addChild:tree];
-	treeDesc = [parent treeDescription];
+	treeDesc = [parent descriptionTree];
 	STAssertTrue([treeDesc isEqualToString:@"||"], @"Tree description was not || but was: %@", treeDesc);
 	
 	// Test non empty parent
@@ -454,7 +454,7 @@
 	down.token.text = @"<DOWN>";
 	
 	[tree addChild:down];
-	treeDesc = [parent treeDescription];
+	treeDesc = [parent descriptionTree];
 	STAssertTrue([treeDesc isEqualToString:@"(|| <DOWN>)"], @"Tree description was wrong expected (|| <DOWN>) but got: %@", treeDesc);
     return;
 }

@@ -141,11 +141,6 @@
 	return [data objectAtIndex:absIndex];
 }
 
-- (NSString *) toString
-{
-    return [self description];
-}
-
 - (NSString *) description
 {
 	NSMutableString *buf = [NSMutableString stringWithCapacity:30];

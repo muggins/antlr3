@@ -218,7 +218,7 @@
     }
 }
 
-- (NSString *) toStringFromNode:(id<BaseTree>)startNode ToNode:(id<BaseTree>)stopNode
+- (NSString *) descriptionFromNode:(id<BaseTree>)startNode ToNode:(id<BaseTree>)stopNode
 {
     // we'll have to walk from start to stop in tree; we're not keeping
     // a complete node stream buffer

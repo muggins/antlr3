@@ -96,7 +96,7 @@
 
 - (NSString *)getSourceName;
 
-- (NSString *)toString;
+- (NSString *)description;
 
 // accessors to the raw data of this stream
 

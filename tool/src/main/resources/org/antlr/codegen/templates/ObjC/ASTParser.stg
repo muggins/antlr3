@@ -40,7 +40,7 @@
 @rule.setErrorReturnValue() ::= <<
 /* ASTParser rule.setErrorReturnValue */
 retval.tree = (<ASTLabelType> *)[treeAdaptor errorNode:input From:retval.start To:[input LT:-1] Exception:re];
-<! System.out.println("<ruleName> returns "+((CommonTree)retval.tree).toStringTree()); !>
+// NSLog(@"<ruleName> returns %@", [((CommonTree *)retval.tree) descriptionTree]);
 >>
 
 // TOKEN AST STUFF

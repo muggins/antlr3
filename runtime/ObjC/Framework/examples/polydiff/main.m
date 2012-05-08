@@ -20,7 +20,7 @@ int main(int argc, const char *argv[])
     CommonTokenStream *tokens = [CommonTokenStream newCommonTokenStreamWithTokenSource:lex];
     PolyParser *parser = [PolyParser newPolyParser:tokens];
     PolyParser_poly_return *r = [parser poly];
-    NSLog(@"tree=%@", [r.tree toStringTree]);
+    NSLog(@"tree=%@", [r.tree descriptionTree]);
 
 #ifdef DONTUSENOMO
 // DIFFERENTIATE
@@ -28,21 +28,21 @@ int main(int argc, const char *argv[])
     [nodes setTokenStream:tokens];
     PolyDifferentiator *differ = [PolyDifferentiator newPolyDifferentiator:nodes];
     PolyDifferentiator_poly_return *r2 = [differ poly];
-    NSLog("d/dx=%@", [r2.tree toStringTree]);
+    NSLog("d/dx=%@", [r2.tree descriptionTree]);
 
 // SIMPLIFY / NORMALIZE
     nodes = [CommonTreeNodeStream newCommonTreeNodeStream:r2.tree];
     [nodes setTokenStream:tokens];
     Simplifier *reducer = [Simplifier newSimplifier:nodes];
     Simplifier_poly_return *r3 = [reducer poly];
-    NSLog("simplified=%@", [r3.tree toStringTree]);
+    NSLog("simplified=%@", [r3.tree descriptionTree]);
 
 // CONVERT BACK TO POLYNOMIAL
     nodes = [CommonTreeNodeStream newCommonTreeNodeStream:r3.tree];
     [nodes setTokenStream:tokens];
     PolyPrinter *printer = [PolyPrinter newPolyPrinter:nodes];
     PolyPrinter_poly_return *r4 = [printer poly];
-    NSLog( [r4.st toString]);
+    NSLog( [r4.st description]);
 #endif
 
     NSLog(@"exiting PolyDiff\n");

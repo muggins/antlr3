@@ -19,7 +19,7 @@ int main() {
 	CommonTokenStream *tokenStream = [CommonTokenStream newCommonTokenStreamWithTokenSource:lexer];
 	TreeRewriteParser *parser = [[TreeRewriteParser alloc] initWithTokenStream:tokenStream];
 	CommonTree *rule_tree = [[parser rule] getTree];
-	NSLog(@"tree: %@", [rule_tree treeDescription]);
+	NSLog(@"tree: %@", [rule_tree descriptionTree]);
 //	CommonTreeNodeStream *treeStream = [[CommonTreeNodeStream alloc] initWithTree:program_tree];
 //	SimpleCTP *walker = [[SimpleCTP alloc] initWithTreeNodeStream:treeStream];
 //	[walker program];

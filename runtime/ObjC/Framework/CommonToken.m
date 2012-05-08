@@ -158,7 +158,7 @@ static CommonToken *INVALID_TOKEN;
         startIndex = aStart;
         stopIndex = aStop;
         if ( [input isKindOfClass:[ANTLRStringStream class]] ) {
-            NSInteger len = [[((ANTLRStringStream *)input) toString] length];
+            NSInteger len = [[((ANTLRStringStream *)input) description] length];
             if ( len == startIndex )
                 type = TokenTypeEOF;
         }
@@ -401,11 +401,6 @@ static CommonToken *INVALID_TOKEN;
         txtString = [NSMutableString stringWithString:@"<no text>"];
     }
     return [NSString stringWithFormat:@"[@%d, %d:%d='%@',<%d>%@,%d:%d]", index, startIndex, stopIndex, txtString, type, channelStr, line, charPositionInLine];
-}
-
-- (NSString *)toString
-{
-   return [self description];
 }
 
 @end

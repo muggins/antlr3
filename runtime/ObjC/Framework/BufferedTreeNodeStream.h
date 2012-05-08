@@ -147,7 +147,7 @@
 
 - (NSString *) toTokenTypeString;
 - (NSString *) toTokenString:(NSInteger)aStart ToEnd:(NSInteger)aStop;
-- (NSString *) toStringFromNode:(id)aStart ToNode:(id)aStop;
+- (NSString *) descriptionFromNode:(id)aStart ToNode:(id)aStop;
 
 // getters and setters
 - (AMutableArray *) getNodes;

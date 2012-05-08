@@ -21,8 +21,8 @@ poly:	^('+' a=INT b=INT)	-> INT[[NSString stringWithFormat:@"\%d", ($a.int+$b.in
 	|	^('+' ^('+' p=poly a=INT) b=INT)
 							-> ^('+' $p INT[[NSString stringWithFormat:@"\%d", ($a.int+$b.int)\]])
 	
-	|	^('+' p=poly q=poly)-> { [[$p.tree toStringTree] isEqualToString:@"0"] }? $q
-							-> { [[$q.tree toStringTree] isEqualToString:@"0"] }? $p
+	|	^('+' p=poly q=poly)-> { [[$p.tree descriptionTree] isEqualToString:@"0"] }? $q
+							-> { [[$q.tree descriptionTree] isEqualToString:@"0"] }? $p
 							-> ^('+' $p $q)
 
 	|	^(MULT INT poly)	-> {$INT.int==1}? poly

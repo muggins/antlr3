@@ -89,11 +89,8 @@
 
 
 #pragma mark Informational
-- (NSString *) treeDescription;
 - (NSString *) description;
-
-- (NSString *) toString;
-- (NSString *) toStringTree;
+- (NSString *) descriptionTree;
 
 @property (retain) AMutableArray *children;
 @property (retain) NSException *anException;
@@ -165,10 +162,8 @@
 - (NSUInteger)charPositionInLine;
 - (void) setCharPositionInLine:(NSUInteger)pos;
 
-- (NSString *) treeDescription;
 - (NSString *) description;
-- (NSString *) toString;
-- (NSString *) toStringTree;
+- (NSString *) descriptionTree;
 
 @property (retain) AMutableArray *children;
 @property (retain) NSException *anException;

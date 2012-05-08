@@ -277,7 +277,7 @@ static NSString *NEXT_TOKEN_RULE_NAME;
     // then we know we're missing a token; error recovery is free to
     // "insert" the missing token
     
-    //System.out.println("viable tokens="+follow.toString(getTokenNames()));
+    //System.out.println("viable tokens="+follow.description(getTokenNames()));
     //System.out.println("LT(1)="+((TokenStream)input).LT(1));
     
     // BitSet cannot handle negative numbers like -1 (EOF) so I leave EOR

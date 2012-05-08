@@ -53,7 +53,6 @@ ST *st;
 /** Add this to each rule's return value struct */
 @returnScope.ruleReturn.methodsDecl() ::= <<
 - (ST *)getTemplate;
-- (NSString *)toString;
 >>
 
 /** Add this to each rule's return value struct */
@@ -64,7 +63,7 @@ ST *st;
 /** Add this to each rule's return value struct */
 @returnScope.ruleReturn.methods() ::= <<
 - (ST *)getTemplate { return st; }
-- (NSString *)toString { return st==nil?nil:[st render]; }
+- (NSString *)description { return st==nil?nil:[st render]; }
 >>
 
 @genericParser.members() ::= <<

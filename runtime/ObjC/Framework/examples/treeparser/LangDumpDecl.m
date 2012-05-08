@@ -157,7 +157,7 @@ return self;
 
          
 
-         NSLog(@"int %@", (declarator1!=nil?[[input getTokenStream] toStringFromStart:[[input getTreeAdaptor] getTokenStartIndex:[declarator1 getStart]]ToEnd:[[input getTreeAdaptor] getTokenStopIndex:[declarator1 getStart]]]:0));
+         NSLog(@"int %@", (declarator1!=nil?[[input getTokenStream] descriptionFromStart:[[input getTreeAdaptor] getTokenStartIndex:[declarator1 getStart]]ToEnd:[[input getTreeAdaptor] getTokenStopIndex:[declarator1 getStart]]]:0));
 
          
         }

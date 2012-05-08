@@ -6,7 +6,7 @@ public class Main {
 		CharStream input = new ANTLRFileStream(args[i]);
 		FuzzyJava lex = new FuzzyJava(input);
 		TokenStream tokens = new CommonTokenStream(lex);
-		tokens.toString();
+		[tokens description];
 		//System.out.println(tokens);
 	    }
 	}

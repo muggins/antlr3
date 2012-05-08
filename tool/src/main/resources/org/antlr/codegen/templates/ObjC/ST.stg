@@ -45,7 +45,6 @@ ST *st;
 <@super.methodsDecl()>
 /* ST AST returnScopeInterface.methodsDecl */
 - (id) getTemplate;
-- (NSString *) toString;
 - (NSString *) description;
 >>
 
@@ -70,8 +69,7 @@ ST *st;
 <@super.methods()>
 /* ST returnScope.methods */
 - (id) getTemplate { return st; }
-- (NSString *) toString { return st==nil?nil:[st toString]; }
-- (NSString *) description { [self toString]; }
+- (NSString *) description { return st==nil?nil:[st description]; }
 >>
 
 @returnScopeImplementation() ::= <<

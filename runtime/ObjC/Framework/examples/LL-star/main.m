@@ -15,7 +15,7 @@ int main()
 
 //	CommonToken *currentToken;
 //	while ((currentToken = [lexer nextToken]) && currentToken.type != TokenTypeEOF) {
-//		NSLog(@"%@", [currentToken toString]);
+//		NSLog(@"%@", [currentToken description]);
 //	}
 	
 	CommonTokenStream *tokens = [[CommonTokenStream alloc] initWithTokenSource:lexer];
