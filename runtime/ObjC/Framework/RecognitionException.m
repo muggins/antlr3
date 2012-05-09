@@ -101,22 +101,24 @@
             self.token = [(id<TokenStream>)anInputStream LT:1];
             self.line = [token line];
             self.charPositionInLine = [token charPositionInLine];
-           if ( [input conformsToProtocol:objc_getProtocol("TreeNodeStream")] ) {
-               [self extractInformationFromTreeNodeStream:anInputStream];
-           }
-           else if ( [[anInputStream class] instancesRespondToSelector:@selector(LA1:)] ) {
-               c = [anInputStream LA:1];
-               if ( [[anInputStream class] instancesRespondToSelector:@selector(getLine)] )
-                   line = [anInputStream getLine];
-               if ( [[anInputStream class] instancesRespondToSelector:@selector(getCharPositionInLine)] )
-                   charPositionInLine = [anInputStream getCharPositionInLine];
-           }
-           else {
-               c = [anInputStream LA:1];
-           }
+            if ( [input conformsToProtocol:objc_getProtocol("TreeNodeStream")] ) {
+                [self extractInformationFromTreeNodeStream:anInputStream];
+            }
+            else if ( [[anInputStream class] instancesRespondToSelector:@selector(LA1:)] ) {
+                c = [anInputStream LA:1];
+            }
+            else {
+                c = [anInputStream LA:1];
+            }
         } else {
-            self.line = [input getLine];
-            self.charPositionInLine = [input getCharPositionInLine];
+            if ( [[anInputStream class] instancesRespondToSelector:@selector(line)] )
+                line = [anInputStream line];
+            else if ( [[anInputStream class] instancesRespondToSelector:@selector(getLine)] )
+                line = [anInputStream getLine];
+            if ( [[anInputStream class] instancesRespondToSelector:@selector(charPositionInLine)] )
+                charPositionInLine = [anInputStream charPositionInLine];
+            else if ( [[anInputStream class] instancesRespondToSelector:@selector(getCharPositionInLine)] )
+                line = [anInputStream getLine];
         }
 	}
 	return self;
