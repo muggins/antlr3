@@ -158,7 +158,7 @@
  */
 - (NSString *)getErrorHeader:(RecognitionException *)e
 {
-     return [NSString stringWithFormat:@"%@: node after line %@:%@",
+     return [NSString stringWithFormat:@"%@: node after line %d:%d",
             [self getGrammarFileName], e.line, e.charPositionInLine];
 }
 
@@ -167,7 +167,7 @@
  */
 - (NSString *)getErrorMessage:(RecognitionException *)e  TokenNames:(AMutableArray *) theTokNams
 {
-    if ( [self isKindOfClass:[TreeParser class]] ) {
+    if ( [self isMemberOfClass:[TreeParser class]] ) {
         CommonTreeAdaptor *adaptor = (CommonTreeAdaptor *)[((id<TreeNodeStream>)e.input) getTreeAdaptor];
         e.token = [adaptor getToken:((CommonTree *)e.node)];
         if ( e.token == nil ) { // could be an UP/DOWN node
