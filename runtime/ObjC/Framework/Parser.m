@@ -104,7 +104,7 @@
     if ( expectedTokenType == TokenTypeEOF )
         tokenText = @"<missing EOF>";
     else
-        tokenText = [NSString stringWithFormat:@"<missing %@>\n",[[BaseRecognizer getTokenNames] objectAtIndex:expectedTokenType]];
+        tokenText = [NSString stringWithFormat:@"<missing %@>",[[BaseRecognizer getTokenNames] objectAtIndex:expectedTokenType]];
     CommonToken *t = [[CommonToken newToken:expectedTokenType Text:tokenText] retain];
     CommonToken *current = [anInput LT:1];
     if ( current.type == TokenTypeEOF ) {

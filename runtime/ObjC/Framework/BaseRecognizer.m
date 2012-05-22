@@ -373,7 +373,7 @@ static NSString *NEXT_TOKEN_RULE_NAME;
         else {
             tokenName = [theTokNams objectAtIndex:mte.expecting];
         }
-        msg = [NSString stringWithFormat:@"mismatched input %@ expecting %@", [self getTokenErrorDisplay:(e.token)], tokenName];
+        msg = [NSString stringWithFormat:@"missing %@ at %@", tokenName, [self getTokenErrorDisplay:(e.token)]];
     }
     else if ( [e isKindOfClass:[MismatchedTokenException class]] ) {
         MismatchedTokenException *mte = (MismatchedTokenException *)e;
