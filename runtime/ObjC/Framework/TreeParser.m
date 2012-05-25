@@ -107,9 +107,9 @@
                  Follow:(ANTLRBitSet *)follow
 {
     NSString *tokenText =[NSString stringWithFormat:@"<missing %@ %d>", [self getTokenNames], expectedTokenType];
-    //id<TreeAdaptor> anAdaptor = (id<TreeAdaptor>)[((id<TreeNodeStream>)e.input) getTreeAdaptor];
-    //return [anAdaptor createToken:expectedTokenType Text:tokenText];
-    return [CommonToken newToken:expectedTokenType Text:tokenText];
+    id<TreeAdaptor> anAdaptor = (id<TreeAdaptor>)[((id<TreeNodeStream>)e.input) getTreeAdaptor];
+    return [anAdaptor createToken:expectedTokenType Text:tokenText];
+//    return [CommonToken newToken:expectedTokenType Text:tokenText];
 }
 
 /** Match '.' in tree parser has special meaning.  Skip node or

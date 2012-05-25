@@ -137,6 +137,7 @@ static CommonToken *INVALID_TOKEN;
         input = nil;
         type = TokenTypeInvalid;
         channel = TokenChannelDefault;
+        index = -1;
         startIndex = 0;
         stopIndex = 0;
     }
@@ -197,6 +198,7 @@ static CommonToken *INVALID_TOKEN;
 {
     if ((self = [super init]) != nil) {
         self.type = aTType;
+        index = -1;
     }
     return self;
 }
@@ -207,6 +209,7 @@ static CommonToken *INVALID_TOKEN;
         self.type = aTType;
         self.text = [NSString stringWithString:tokenText];
         if ( text ) [text retain];
+        index = -1;
     }
     return self;
 }
