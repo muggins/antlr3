@@ -1,4 +1,4 @@
-// $ANTLR 3.4 /Users/acondit/source/antlr/code/antlr3/runtime/ObjC/Framework/examples/polydiff/Poly.g 2012-02-16 18:10:10
+// $ANTLR 3.4 /Users/acondit/source/antlr/code/antlr3/runtime/ObjC/Framework/examples/polydiff/Poly.g 2012-05-25 15:23:47
 
 /* =============================================================================
  * Standard antlr OBJC runtime definitions
@@ -23,6 +23,8 @@ typedef enum {
 #endif
 
 #pragma mark Tokens
+#ifndef TOKENLISTAlreadyDefined
+#define TOKENLISTAlreadyDefined 1
 #ifdef EOF
 #undef EOF
 #endif
@@ -33,6 +35,7 @@ typedef enum {
 #define INT 5
 #define MULT 6
 #define WS 7
+#endif
 #pragma mark Dynamic Global Scopes globalAttributeScopeInterface
 #pragma mark Dynamic Rule Scopes ruleAttributeScopeInterface
 #pragma mark Rule Return Scopes returnScopeInterface
@@ -135,7 +138,7 @@ id<TreeAdaptor> treeAdaptor;   /* AST parserMemVars */
 /* ObjC end of properties */
 
 + (void) initialize;
-+ (id) newPolyParser:(id<TokenStream>)aStream;
++ (PolyParser *) newPolyParser:(id<TokenStream>)aStream;
 /* ObjC start of actions.(actionScope).methodsDecl */
 /* ObjC end of actions.(actionScope).methodsDecl */
 

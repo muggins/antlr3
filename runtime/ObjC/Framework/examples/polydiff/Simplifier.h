@@ -1,4 +1,4 @@
-// $ANTLR 3.4 /Users/acondit/source/antlr/code/antlr3/runtime/ObjC/Framework/examples/polydiff/Simplifier.g 2012-02-16 18:11:30
+// $ANTLR 3.4 /Users/acondit/source/antlr/code/antlr3/runtime/ObjC/Framework/examples/polydiff/Simplifier.g 2012-05-25 15:24:16
 
 /* =============================================================================
  * Standard antlr OBJC runtime definitions
@@ -23,6 +23,8 @@ typedef enum {
 #endif
 
 #pragma mark Tokens
+#ifndef TOKENLISTAlreadyDefined
+#define TOKENLISTAlreadyDefined 1
 #ifdef EOF
 #undef EOF
 #endif
@@ -33,6 +35,7 @@ typedef enum {
 #define INT 5
 #define MULT 6
 #define WS 7
+#endif
 #pragma mark Dynamic Global Scopes globalAttributeScopeInterface
 #pragma mark Dynamic Rule Scopes ruleAttributeScopeInterface
 #pragma mark Rule Return Scopes returnScopeInterface
@@ -180,7 +183,7 @@ SEL synpred3_SimplifierSelector;
 /* ObjC end of properties */
 
 + (void) initialize;
-+ (id) newSimplifier:(id<TreeNodeStream>)aStream;
++ (Simplifier *) newSimplifier:(id<TreeNodeStream>)aStream;
 /* ObjC start of actions.(actionScope).methodsDecl */
 /* ObjC end of actions.(actionScope).methodsDecl */
 

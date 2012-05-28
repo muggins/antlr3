@@ -1,7 +1,7 @@
-// $ANTLR 3.3.1-SNAPSHOT Jan 30, 2011 08:28:24 PolyPrinter.g 2011-01-30 08:45:32
+// $ANTLR 3.4 /Users/acondit/source/antlr/code/antlr3/runtime/ObjC/Framework/examples/polydiff/PolyPrinter.g 2012-05-25 18:42:52
 
 /* =============================================================================
- * Standard antlr3 OBJC runtime definitions
+ * Standard antlr OBJC runtime definitions
  */
 #import <Foundation/Foundation.h>
 #import <ANTLR/ANTLR.h>
@@ -12,7 +12,6 @@
  */
 
 /* treeParserHeaderFile */
-
 #ifndef ANTLR3TokenTypeAlreadyDefined
 #define ANTLR3TokenTypeAlreadyDefined
 typedef enum {
@@ -26,49 +25,79 @@ typedef enum {
 #endif
 
 #pragma mark Tokens
+#ifndef TOKENLISTAlreadyDefined
+#define TOKENLISTAlreadyDefined 1
 #ifdef EOF
 #undef EOF
 #endif
 #define EOF -1
 #define T__8 8
 #define T__9 9
-#define MULT 4
+#define ID 4
 #define INT 5
-#define ID 6
+#define MULT 6
 #define WS 7
-#pragma mark Dynamic Global Scopes
-#pragma mark Dynamic Rule Scopes
-#pragma mark Rule Return Scopes start
-/* returnScopeInterface */
-@interface PolyPrinter_poly_return :TreeRuleReturnScope { /* returnScopeInterface line 1838 */
-ST *st; /* start of memVars() */
+#endif
+#pragma mark Dynamic Global Scopes globalAttributeScopeInterface
+#pragma mark Dynamic Rule Scopes ruleAttributeScopeInterface
+#pragma mark Rule Return Scopes returnScopeInterface
+/* returnScopeInterface PolyPrinter_poly_return */
+@interface PolyPrinter_poly_return : TreeRuleReturnScope { /* returnScopeInterface line 1838 */
+/* ST returnInterface.memVars */
+ST *st; /* ObjC start of memVars() */
+
 }
- /* start properties */
+/* start property declarations */
+/* ST returnScope.properties */
+@property (retain, getter=getST, setter=setST:) ST *st;
+
+/* start of method declarations */
+
 + (PolyPrinter_poly_return *)newPolyPrinter_poly_return;
 /* this is start of set and get methods */
-/* AST returnScopeInterface.methodsdecl */
-- (id) getTemplate;  /* methodsDecl */
+/* ST AST returnScopeInterface.methodsDecl */
+- (id) getTemplate;
+- (NSString *) description;  /* methodsDecl */
+
 @end /* end of returnScopeInterface interface */
 
-#pragma mark Rule return scopes end
-@interface PolyPrinter : TreeParser { /* line 572 */
-// start of globalAttributeScopeMemVar
 
 
-// start of action-actionScope-memVars
-// start of ruleAttributeScopeMemVar
+/* Interface grammar class */
+@interface PolyPrinter  : TreeParser { /* line 572 */
+#pragma mark Dynamic Rule Scopes ruleAttributeScopeDecl
+#pragma mark Dynamic Global Rule Scopes globalAttributeScopeMemVar
 
 
-// Start of memVars
+/* ObjC start of actions.(actionScope).memVars */
+/* ObjC end of actions.(actionScope).memVars */
+/* ObjC start of memVars */
+/* ST genericParserHeaderFile.memVars -- empty now */
+STGroup *group; /* ST -- really a part of STAttrMap */
+/* ObjC end of memVars */
 
  }
 
-// start of action-actionScope-methodsDecl
-+ (id) newPolyPrinter:(id<TreeNodeStream>)aStream;
+/* ObjC start of actions.(actionScope).properties */
+/* ObjC end of actions.(actionScope).properties */
+/* ObjC start of properties */
+/* ST genericParser.properties */
+@property (retain, getter=getGroup, setter=setGroup:) STGroup *group;
+/* ObjC end of properties */
 
++ (void) initialize;
++ (PolyPrinter *) newPolyPrinter:(id<TreeNodeStream>)aStream;
+/* ObjC start of actions.(actionScope).methodsDecl */
+/* ObjC end of actions.(actionScope).methodsDecl */
 
+/* ObjC start of methodsDecl */
+/* ST genericParser.methodsDecl */
+- init;
+- (STGroup *) getGroup;
+- (void) setGroup:(STGroup *)aGroup;
 
 - (PolyPrinter_poly_return *)poly; 
 
 
 @end /* end of PolyPrinter interface */
+

@@ -14,6 +14,8 @@
 #pragma mark Rule return scopes Interface start
 #pragma mark Rule return scopes Interface end
 #pragma mark Tokens
+#ifndef TOKENLISTAlreadyDefined
+#define TOKENLISTAlreadyDefined 1
 #ifdef EOF
 #undef EOF
 #endif
@@ -24,6 +26,7 @@
 #define INT 5
 #define MULT 6
 #define WS 7
+#endif
 /* interface lexer class */
 @interface PolyLexer : Lexer { // line 283
 /* ObjC start of actions.lexer.memVars */
