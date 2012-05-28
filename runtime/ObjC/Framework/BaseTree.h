@@ -32,8 +32,8 @@
 
 + (id<BaseTree>) INVALID_NODE;
 
-+ (id<BaseTree>) newTree;
-+ (id<BaseTree>) newTree:(id<BaseTree>)node;
+//+ (id<BaseTree>) newTree;
+//+ (id<BaseTree>) newTree:(id<BaseTree>)node;
 
 - (id<BaseTree>) init;
 - (id<BaseTree>) initWith:(id<BaseTree>)node;
@@ -104,8 +104,8 @@
 }
 
 + (id<BaseTree>) INVALID_NODE;
-+ (id<BaseTree>) newTree;
-+ (id<BaseTree>) newTree:(id<BaseTree>)node;
+//+ (id<BaseTree>) newTree;
+//+ (id<BaseTree>) newTree:(id<BaseTree>)node;
          
 - (id<BaseTree>) init;
 - (id<BaseTree>) initWith:(id<BaseTree>)node;

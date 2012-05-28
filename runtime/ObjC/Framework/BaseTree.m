@@ -61,19 +61,22 @@ static id<BaseTree> invalidNode = nil;
 	return invalidNode;
 }
 
+/*
 + newTree
 {
     return [[BaseTree alloc] init];
 }
-
+ */
 /** Create a new node from an existing node does nothing for BaseTree
  *  as there are no fields other than the children list, which cannot
  *  be copied as the children are not considered part of this node. 
  */
+/*
 + newTree:(id<BaseTree>) node
 {
-    return [[BaseTree alloc] initWith:(id<BaseTree>) node];
+    return [[[node class] alloc] initWith:(id<BaseTree>) node];
 }
+ */
 
 - (id) init
 {
