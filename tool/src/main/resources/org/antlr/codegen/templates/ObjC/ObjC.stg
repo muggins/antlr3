@@ -197,7 +197,7 @@ headerFile( LEXER,
 /* =============================================================================
  * Standard antlr OBJC runtime definitions
  */
-#import \<Foundataion/Foundation.h>
+#import \<Foundation/Foundation.h>
 #import \<ANTLR/ANTLR.h>
 /* End of standard antlr3 runtime definitions
  * =============================================================================
@@ -2059,7 +2059,7 @@ ruleLabelPropertyRef_text(scope,attr) ::= <%
 (<scope>!=nil?([input descriptionFromToken:[<scope> getStart] ToToken:[<scope> getStop]]:0)
 <endif>
 %>
-ruleLabelPropertyRef_st(scope,attr) ::= "(<scope>!=nil?[<scope> st]:nil)"
+ruleLabelPropertyRef_st(scope,attr) ::= "(<scope>!=nil?<scope>.st:nil)"
 
 /** Isolated $RULE ref ok in lexer as it's a Token */
 lexerRuleLabel(label) ::= "<label>"
