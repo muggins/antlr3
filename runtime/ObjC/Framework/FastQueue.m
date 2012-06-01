@@ -103,7 +103,7 @@
 
 - (void) addObject:(id) obj
 {
-    [data addObject:obj];
+    [data addObject:[obj retain]];
 }
 
 - (NSUInteger) count
