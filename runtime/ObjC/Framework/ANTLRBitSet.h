@@ -90,5 +90,5 @@
 
 //private
 - (CFMutableBitVectorRef) _bitVector;
-@property (getter=_bitVector) CFMutableBitVectorRef bitVector;
+@property (assign) CFMutableBitVectorRef bitVector;
 @end
