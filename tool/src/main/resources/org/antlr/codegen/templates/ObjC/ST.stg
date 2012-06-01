@@ -119,6 +119,13 @@ STGroup *group; /* ST -- really a part of STAttrMap */
 @synthesize group;
 >>
 
+/* additional init code for ST support */
+@genericParser.init() ::= <<
+/* ST genericParser.init */
+<@super.init()>
+    group = STGroup.defaultGroup;
+>>
+
 @genericParser.methods() ::= <<
 <@super.methods()>
 /* ST genericParser.methods */
@@ -138,16 +145,15 @@ STGroup *group; /* ST -- really a part of STAttrMap */
 @genericParser.members() ::= <<
 /* ST genericParser.members */
 <@super.members()>
-STGroup *group = [STGroup  newSTGroup:@"<name>Templates"];
 
 - (STGroup *) getGroup
 {
-  return group;
+    return group;
 }
 
 - (void) setGroup:(STGroup *) aGroup
 {
-  self.group = aGroup;
+    self.group = aGroup;
 }
 
 >>
@@ -256,7 +262,6 @@ ruleRefAndListLabel(rule,label,elementIndex,args,scope) ::= <<
 
 rewriteTemplate(alts) ::= <<
 /* -------- ST start rewriteTemplate ------------ */
-// TEMPLATE REWRITE
 <if(backtracking)>
 if ( <actions.(actionScope).synpredgate> ) {
     <alts:rewriteTemplateAlt(); separator="else ">
@@ -286,18 +291,18 @@ replaceTextInLine() ::= <<
 >>
 
 rewriteTemplateAlt(alt) ::= <%
-/* -------- ST start rewriteTemplateAlt ------------ */
-/* ST <alt.description> */
+<! /* -------- ST start rewriteTemplateAlt ------------ */<\n> !>
+/* ST <alt.description> */<\n>
 <if(alt.pred)>
-if (<alt.pred>) {
+if (<alt.pred>) {<\n>
     retval.st = <alt.alt>;<\n>
-}
+}<\n>
 <else>
-{
+{<\n>
     retval.st = <alt.alt>;<\n>
 }<\n>
 <endif>
-/* -------- ST end rewriteTemplateAlt ------------ */
+<! /* -------- ST end rewriteTemplateAlt ------------ */<\n> !>
 %>
 
 rewriteEmptyTemplate(alts) ::= <%
@@ -346,7 +351,7 @@ rewriteAction(action) ::= <%
 /** An action has %st.attrName=expr; or %{st}.attrName=expr; */
 actionSetAttribute(st,attrName,expr) ::= <%
 <! /* -------- ST start actionSetAttribute ------------ */ !>
-[[ST attributes] put:@"<attrName>" value:<expr>];<\n>
+[<st> add:@"<attrName>" value:<expr>];<\n>
 <![<st> setAttribute:<expr> name:@"<attrName>"];!>
 <! /* -------- ST end actionSetAttribute ------------ */ !>
 %>

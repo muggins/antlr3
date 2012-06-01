@@ -9,7 +9,8 @@
 
 int main(int argc, const char *argv[])
 {
-    NSError *error;
+    NSAutoreleasePool *mainPool = [[NSAutoreleasePool alloc] init];
+    //    NSError *error;
     NSLog(@"starting polydiff\n");
     //	NSString *input = [NSString stringWithContentsOfFile:@"../../examples/polydiff/input"  encoding:NSASCIIStringEncoding error:&error];
 	NSString *input = @"2x^3 + x^5 + 4x + 10x + 8x + x + 2";
@@ -40,10 +41,14 @@ int main(int argc, const char *argv[])
 // CONVERT BACK TO POLYNOMIAL
     nodes = [CommonTreeNodeStream newCommonTreeNodeStream:r3.tree];
     [nodes setTokenStream:tokens];
+    //    NSLog( @"%@", [nodes description] );
+    //    STGroup *ppGroup = [STGroup newSTGroup];
     PolyPrinter *printer = [PolyPrinter newPolyPrinter:nodes];
+    //    [nodes setGroup:ppGroup];
     PolyPrinter_poly_return *r4 = [printer poly];
-    NSLog( @"%@", [r4.st description]);
+    NSLog( @"%@", [r4.st render]);
 
     NSLog(@"exiting PolyDiff\n");
+    [mainPool drain];
     return 0;
 }
