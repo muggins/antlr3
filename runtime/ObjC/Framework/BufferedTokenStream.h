@@ -56,7 +56,7 @@ NSInteger range; // how deep have we gone?
     
 }
 @property (retain, getter=getTokenSource,setter=setTokenSource:) id<TokenSource> tokenSource;
-@property (retain, getter=getTokens,setter=setTokens:) AMutableArray *tokens;
+@property (retain, getter=getTokens) AMutableArray *tokens;
 @property (assign, getter=getLastMarker,setter=setLastMarker:) NSInteger lastMarker;
 @property (assign) NSInteger index;
 @property (assign, getter=getRange,setter=setRange:) NSInteger range;
