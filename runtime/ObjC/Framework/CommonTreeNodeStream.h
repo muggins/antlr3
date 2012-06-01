@@ -112,7 +112,7 @@ NSInteger level;
 - (NSString *) descriptionFromNode:(id<BaseTree>)startNode ToNode:(id<BaseTree>)stopNode;
 
 /** For debugging; destructive: moves tree iterator to end. */
-- (NSString *) toTokenTypeString;
+- (NSString *) description;
 
 @property (retain) TreeIterator *it;
 @property (retain) IntArray *calls;

@@ -460,7 +460,7 @@ extern NSInteger debug;
 	}
 }
 
--(NSString *) toTokenTypeString
+-(NSString *) description
 {
 	if (index == -1)
 	{
@@ -474,7 +474,7 @@ extern NSInteger debug;
 	return buf;
 }
 
--(NSString *) toTokenString:(NSInteger)aStart ToEnd:(NSInteger)aStop
+-(NSString *) description:(NSInteger)aStart ToEnd:(NSInteger)aStop
 {
 	if (index == -1) {
 		[self fillBuffer];
