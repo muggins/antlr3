@@ -102,7 +102,7 @@
     [stream addElement:token1];
     STAssertTrue([stream hasNext], @"-hasNext should be YES, but isn't");
     CommonTree *tree = [stream nextNode];
-    STAssertEqualObjects([tree getToken], token1, @"return token from stream should be token1, but isn't");
+    STAssertEqualObjects(tree.token, token1, @"return token from stream should be token1, but isn't");
 }
 
 - (void) test04SingleElementDup
@@ -115,7 +115,7 @@
     STAssertNoThrow(tree2 = [stream nextNode],
                     @"stream iteration past element count (single element) should not throw exception"
                     );
-    STAssertEqualObjects([tree1 getToken], [tree2 getToken],
+    STAssertEqualObjects(tree1.token, tree2.token,
                          @"tokens should be the same");
     STAssertFalse(tree1 == tree2, 
                          @"trees should be different, but aren't");
@@ -130,19 +130,19 @@
     STAssertNoThrow(tree1 = [stream nextNode],
                     @"stream iteration should not throw exception"
                     );
-    STAssertEqualObjects([tree1 getToken], token1,
+    STAssertEqualObjects(tree1.token, token1,
                          @"[tree1 token] should be equal to token1"
                          );
     STAssertNoThrow(tree2 = [stream nextNode],
                     @"stream iteration should not throw exception"
                     );
-    STAssertEqualObjects([tree2 getToken], token2,
+    STAssertEqualObjects(tree2.token, token2,
                          @"[tree2 token] should be equal to token2"
                          );
     STAssertNoThrow(tree3 = [stream nextNode],
                     @"stream iteration should not throw exception"
                     );
-    STAssertEqualObjects([tree3 getToken], token3,
+    STAssertEqualObjects(tree3.token, token3,
                          @"[tree3 token] should be equal to token3"
                          );
     STAssertThrows(tree4 = [stream nextNode],
@@ -161,13 +161,13 @@
     STAssertNoThrow(tree1 = [stream nextNode],
                     @"stream iteration should not throw exception"
                     );
-    STAssertEqualObjects([tree1 getToken], token1,
+    STAssertEqualObjects(tree1.token, token1,
                          @"[tree1 token] should be equal to token1"
                          );
     STAssertNoThrow(tree2 = [stream nextNode],
                     @"stream iteration should not throw exception"
                     );
-    STAssertEqualObjects([tree2 getToken], token2,
+    STAssertEqualObjects(tree2.token, token2,
                          @"[tree2 token] should be equal to token2"
                          );
     STAssertNoThrow(tree3 = [stream nextNode],

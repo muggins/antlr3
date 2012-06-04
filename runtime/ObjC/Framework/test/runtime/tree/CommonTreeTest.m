@@ -335,7 +335,7 @@
 	
 	CommonTree *ancestor = [tree getAncestor:TokenTypeUP];
 	STAssertNotNil(ancestor, @"Ancestor should not be nil");
-	STAssertEquals(ancestor, parent, @"Acenstors do not match");
+	STAssertEquals(ancestor, parent, @"Ancestors do not match");
 	//[parent release];
     return;
 }
