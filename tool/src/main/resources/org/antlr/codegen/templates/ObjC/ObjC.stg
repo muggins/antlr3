@@ -695,10 +695,10 @@ genericParser(  grammar,
 
 @implementation <grammar.recognizerName>  // line 637
 
-/* ObjC start of ruleAttributeScope */
+<! /* ObjC start of ruleAttributeScope */
 #pragma mark Dynamic Rule Scopes ruleAttributeScope
 <rules:{rule | <rule.ruleDescriptor.ruleScope:ruleAttributeScope()>}>
-/* ObjC end of ruleAttributeScope */
+/* ObjC end of ruleAttributeScope */ !>
 #pragma mark global Attribute Scopes globalAttributeScope
 /* ObjC start globalAttributeScope */
 <scopes:{it | <if(it.isDynamicGlobalScope)><globalAttributeScope()><endif>}>
@@ -1765,7 +1765,7 @@ globalAttributeScopeImplementation(scope) ::= <%
 %>
 
 globalAttributeScopeInit(scope) ::= <<
-/* globalAttributeScopeInit */<\n>
+/* ObjC globalAttributeScopeInit */<\n>
 <scope.name>_scope = [<scope.name>_Scope new<scope.name>_Scope];<\n>
 <scope.name>_stack = [SymbolStack newSymbolStackWithLen:30];<\n>
 >>
@@ -1774,7 +1774,8 @@ globalAttributeScopeDealloc(scope) ::= <% [<scope.name>_stack release];<\n> %>
 
 globalAttributeScope(scope) ::= <%
 <if(scope.name)>
-static <scope.name>_stack;<\n>
+<scope.name>_Scope *<scope.name>_scope; /* ObjC ruleAttributeScopeMemVar */<\n>
+SymbolStack *<scope.name>_stack;<\n>
 <endif>
 %>
 
@@ -1782,6 +1783,7 @@ ruleAttributeScopeMemVar(scope) ::= <%
 /* ObjC ruleAttributeScopeMemVar */<\n>
 <if(scope.attributes)>
 <scope.name>_Scope *<scope.name>_scope; /* ObjC ruleAttributeScopeMemVar */<\n>
+SymbolStack *<scope.name>_stack;<\n>
 <endif>
 %>
 
@@ -1836,8 +1838,8 @@ ruleAttributeScopeDealloc(scope) ::= <% [<scope.name>_Scope release];<\n> %>
 ruleAttributeScope(scope) ::= <%
 <if(scope.attributes)>
 /* ruleAttributeScope */<\n>
-static SymbolStack *<scope.name>_stack;<\n>
-static <scope.name>_Scope *<scope.name>_scope;
+SymbolStack *<scope.name>_stack;<\n>
+<scope.name>_Scope *<scope.name>_scope;<\n>
 <endif>
 %>
 
@@ -2005,13 +2007,13 @@ scopeAttributeRefStack() ::= <<
 isolatedDynamicScopeRef(scope) ::= "<scope>_stack"
 
 /** reference an attribute of rule; might only have single return value */
-ruleLabelRef(referencedRule,scope,attr) ::= <<
+ruleLabelRef(referencedRule,scope,attr) ::= <%
 <if(referencedRule.hasMultipleReturnValues)>
 (<scope>!=nil?<scope>.<attr.name>:<initValue(attr.type)>)
 <else>
 <scope>
 <endif>
->>
+%>
 
 returnAttributeRef(ruleDescriptor,attr) ::= <%
 <if(ruleDescriptor.hasMultipleReturnValues)>
@@ -2053,10 +2055,9 @@ ruleLabelPropertyRef_stop(scope,attr) ::= "(<scope>!=nil?((<labelType> *)<scope>
 ruleLabelPropertyRef_tree(scope,attr) ::= "(<scope>!=nil?((<ASTLabelType> *)<scope>.tree):nil)"
 ruleLabelPropertyRef_text(scope,attr) ::= <%
 <if(TREE_PARSER)>
-(<scope>!=nil?[[input getTokenStream] descriptionFromStart:[[input getTreeAdaptor] getTokenStartIndex:[<scope> getStart]]
-         ToEnd:[[input getTreeAdaptor] getTokenStopIndex:[<scope> getStart]]]:0)
+((<scope>!=nil)?([[input getTokenStream] descriptionFromStart:[[input getTreeAdaptor] getTokenStartIndex:[<scope> getStart]] ToEnd:[[input getTreeAdaptor] getTokenStopIndex:[<scope> getStart]]]):0)
 <else>
-(<scope>!=nil?([input descriptionFromToken:[<scope> getStart] ToToken:[<scope> getStop]]:0)
+((<scope>!=nil)?([input descriptionFromToken:[<scope> getStart] ToToken:[<scope> getStop]]):0)
 <endif>
 %>
 ruleLabelPropertyRef_st(scope,attr) ::= "(<scope>!=nil?<scope>.st:nil)"
@@ -2076,14 +2077,13 @@ lexerRuleLabelPropertyRef_int(scope,attr) ::="(<scope>!=nil?[<scope>.text intege
 rulePropertyRef_start(scope,attr) ::= "((<labelType> *)retval.start)"
 rulePropertyRef_stop(scope,attr) ::= "((<labelType> *)retval.stopToken)"
 rulePropertyRef_tree(scope,attr) ::= "((<ASTLabelType> *)retval.tree)"
-rulePropertyRef_text(scope,attr) ::= <<
+rulePropertyRef_text(scope,attr) ::= <%
 <if(TREE_PARSER)>
-[[input getTokenStream] descriptionFromStart:[[input getTreeAdaptor] getTokenStartIndex:retval.start.token.startIndex]
-                                    ToEnd:[[input getTreeAdaptor] getTokenStopIndex:retval.start.token.stopIndex]]
+[[input getTokenStream] descriptionFromStart:[[input getTreeAdaptor] getTokenStartIndex:retval.start.token.startIndex] ToEnd:[[input getTreeAdaptor] getTokenStopIndex:retval.start.token.stopIndex]]
 <else>
 [input descriptionFromToken:retval.start ToToken:[input LT:-1]]
 <endif>
->>
+%>
 rulePropertyRef_st(scope,attr) ::= "retval.st"
 
 /* hideous: find a way to cut down on the number of templates to support read/write access */
