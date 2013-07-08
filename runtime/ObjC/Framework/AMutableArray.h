@@ -20,9 +20,11 @@
 
 + (id) newArray;
 + (id) arrayWithCapacity:(NSInteger)size;
++ (id) arrayWithArray:(NSArray *)array;
 
 - (id) init;
 - (id) initWithCapacity:(NSInteger)size;
+- (id) initWithArray:(NSArray *)array;
 - (id) copyWithZone:(NSZone *)aZone;
 
 - (void) addObject:(id)anObject;
@@ -43,7 +45,7 @@
 
 @property (assign) NSInteger BuffSize;
 @property (assign, getter=count, setter=setCount:) NSInteger count;
-@property (retain) NSMutableData *buffer;
-@property (assign) id *ptrBuffer;
+@property NSMutableData *buffer;
+@property (copy) id *ptrBuffer;
 
 @end

@@ -28,12 +28,17 @@
     return [[AMutableArray alloc] initWithCapacity:size];
 }
 
++ (id) arrayWithArray:(NSArray *)array
+{
+    return [[AMutableArray alloc] initWithArray:array];
+}
+
 - (id) init
 {
     self=[super init];
     if ( self != nil ) {
         BuffSize = BUFFSIZE;
-        buffer = [[NSMutableData dataWithLength:(BuffSize * sizeof(id))] retain];
+        buffer = [NSMutableData dataWithLength:(BuffSize * sizeof(id))];
         ptrBuffer = (id *)[buffer mutableBytes];
         for( int idx = 0; idx < BuffSize; idx++ ) {
             ptrBuffer[idx] = nil;
@@ -47,11 +52,26 @@
     self=[super init];
     if ( self != nil ) {
         BuffSize = (len >= BUFFSIZE) ? len : BUFFSIZE;
-        buffer = [[NSMutableData dataWithLength:(BuffSize * sizeof(id))] retain];
+        buffer = [NSMutableData dataWithLength:(BuffSize * sizeof(id))];
         ptrBuffer = (id *)[buffer mutableBytes];
         for( int idx = 0; idx < BuffSize; idx++ ) {
             ptrBuffer[idx] = nil;
         }
+    }
+    return self;
+}
+
+- (id) initWithArray:(NSArray *)array
+{
+    self=[super init];
+    if ( self != nil ) {
+        BuffSize = (array.count >= BUFFSIZE) ? array.count : BUFFSIZE;
+        buffer = [NSMutableData dataWithLength:(BuffSize * sizeof(id))];
+        ptrBuffer = (id *)[buffer mutableBytes];
+        for( int idx = 0; idx < BuffSize; idx++ ) {
+            ptrBuffer[idx] = nil;
+        }
+        [self addObjectsFromArray:array];
     }
     return self;
 }
@@ -62,8 +82,8 @@
     NSLog( @"called dealloc in AMutableArray" );
 #endif
     if ( count ) [self removeAllObjects];
-    if ( buffer ) [buffer release];
-    [super dealloc];
+    //    if ( buffer ) [buffer release];
+    //    [super dealloc];
 }
 
 - (id) copyWithZone:(NSZone *)aZone
@@ -72,7 +92,8 @@
     
     copy = [[[self class] allocWithZone:aZone] init];
     if ( buffer ) {
-        copy.buffer = [buffer copyWithZone:aZone];
+        copy.buffer = [NSMutableData dataWithCapacity:[buffer length]];
+        [copy.buffer appendData:buffer];
     }
     copy.ptrBuffer = [copy.buffer mutableBytes];
     copy.count = count;
@@ -83,7 +104,6 @@
 - (void) addObject:(id)anObject
 {
     if ( anObject == nil ) anObject = [NSNull null];
-    [anObject retain];
 	[self ensureCapacity:count];
 	ptrBuffer[count++] = anObject;
 }
@@ -106,7 +126,7 @@
     id obj;
     if ( anIdx < 0 || anIdx >= count ) {
         @throw [NSException exceptionWithName:NSRangeException
-                                       reason:[NSString stringWithFormat:@"Attempt to retrieve objectAtIndex %d past end", anIdx]
+                                       reason:[NSString stringWithFormat:@"Attempt to retrieve objectAtIndex %ld past end", anIdx]
                                      userInfo:nil];
         return nil;
     }
@@ -131,11 +151,11 @@
         [self ensureCapacity:count];
     }
     if ( anIdx < count ) {
-        for (int i = count; i > anIdx; i--) {
+        for (NSInteger i = count; i > anIdx; i--) {
             ptrBuffer[i] = ptrBuffer[i-1];
         }
     }
-    ptrBuffer[anIdx] = [anObject retain];
+    ptrBuffer[anIdx] = anObject;
     count++;
 }
 
@@ -147,8 +167,8 @@
     }
     else if (count) {
         tmp = ptrBuffer[idx];
-        if ( tmp ) [tmp release];
-        for (int i = idx; i < count; i++) {
+        //        if ( tmp ) [tmp release];
+        for (NSInteger i = idx; i < count; i++) {
             ptrBuffer[i] = ptrBuffer[i+1];
         }
         count--;
@@ -163,7 +183,7 @@
     }
     count--;
     tmp = ptrBuffer[count];
-    if ( tmp ) [tmp release];
+    //    if ( tmp ) [tmp release];
     ptrBuffer[count] = nil;
 }
 
@@ -177,7 +197,7 @@
     for ( i = 0; i < BuffSize; i++ ) {
         if (i < count) {
             tmp = ptrBuffer[i];
-            if ( tmp ) [tmp release];
+            //            if ( tmp ) [tmp release];
         }
         ptrBuffer[i] = nil;
     }
@@ -194,9 +214,7 @@
         @throw [NSException exceptionWithName:NSRangeException reason:@"Attempt to replace object past end" userInfo:nil];
    }
     if ( count ) {
-        [obj retain];
         tmp = ptrBuffer[idx];
-        if ( tmp ) [tmp release];
         ptrBuffer[idx] = obj;
     }
 }

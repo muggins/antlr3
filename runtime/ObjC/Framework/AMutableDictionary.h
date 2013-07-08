@@ -24,13 +24,13 @@
     __strong id       *ptrBuffer;
 }
 
-@property (retain) ACBTree  *root;
+@property ACBTree  *root;
 @property (assign) NSInteger nodes_av;
 @property (assign) NSInteger nodes_inuse;
 @property (assign) NSInteger nxt_nodeid;
 @property (assign, readonly, getter=count) NSUInteger count;
-@property (assign) NSMutableData *data;
-@property (assign) id       *ptrBuffer;
+@property NSMutableData *data;
+@property (copy) id       *ptrBuffer;
 
 + (AMutableDictionary *) newDictionary;
 + (AMutableDictionary *) dictionaryWithCapacity;

@@ -81,9 +81,9 @@
 #ifdef DEBUG_DEALLOC
     NSLog( @"called dealloc in AMutableDictionary" );
 #endif
-    if ( data ) [data release];
-    if ( root ) [root release];
-    [super dealloc];
+    //    if ( data ) [data release];
+    //    if ( root ) [root release];
+    //    [super dealloc];
 }
 
 - (id) objectForKey:(id)aKey
@@ -118,7 +118,7 @@
             }
         }
     }
-    if ( mustRelease ) [kp release];
+    //    if ( mustRelease ) [kp release];
     return obj;
 }
 
@@ -143,12 +143,10 @@
             obj = [NSNull null];
         }
         root = [root insertkey:kp value:obj];
-        [kp retain];
-        [obj retain];
         kp.recnum = count++;
     }
     else {
-        if ( mustRelease ) [kp release];
+        //        if ( mustRelease ) [kp release];
         @throw [NSException exceptionWithName:NSInvalidArgumentException reason:@"key alreadyExists" userInfo:nil];
     }
     return;

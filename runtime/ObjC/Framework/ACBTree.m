@@ -66,7 +66,7 @@ static NSInteger RECNUM = 0;
 
 - (NSString *) description
 {
-    return [NSString stringWithFormat:@"len =%02d\nrecnum=%04d\nkey=%@\n", [key length], recnum, key];
+    return [NSString stringWithFormat:@"len =%02ld\nrecnum=%04ld\nkey=%@\n", [key length], recnum, key];
 }
 
 @end
@@ -115,6 +115,10 @@ static NSInteger RECNUM = 0;
 #ifdef DEBUG_DEALLOC
     NSLog( @"called dealloc in ACBTree" );
 #endif
+    for (int i = 0; i < BTNODESIZE; i++) {
+        self.btNodes[i] = nil;
+    }
+    [self release];
     [super dealloc];
 }
 
@@ -736,10 +740,10 @@ ACBTree *t;
     NSMutableString *str = [NSMutableString stringWithCapacity:16];
     NSInteger i;
     for (i = 0; i < numkeys; i++ ) {
-        [str appendString:[NSString stringWithFormat:@"key[%d]=%@", i, [keys[i] description]]];
+        [str appendString:[NSString stringWithFormat:@"keys[%ld]=%@", i, [keys[i] description]]];
     }
     for (i = 0; i < numkeys; i++ ) {
-        [str appendString:[NSString stringWithFormat:@"btnodes[%d]=%@\n", i, [btNodes[i] description]]];
+        [str appendString:[NSString stringWithFormat:@"btNodes[%ld]=%@\n", i, [btNodes[i] description]]];
     }
     return str;
 }
