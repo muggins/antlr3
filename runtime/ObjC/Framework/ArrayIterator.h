@@ -50,7 +50,7 @@
      */
     NSInteger count;
     NSInteger index;
-    __strong NSArray *anArray;
+    NSArray *anArray;
     
 }
 
@@ -70,9 +70,9 @@
 - (void) setCount:(NSInteger)cnt;
 - (void) dealloc;
 
-@property (retain) id peekObj;
+@property id peekObj;
 @property (assign, getter=count, setter=setCount:) NSInteger count;
 @property (assign) NSInteger index;
-@property (retain) NSArray *anArray;
+@property NSArray *anArray;
 
 @end

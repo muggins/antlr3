@@ -82,19 +82,19 @@
 	
 }
 
-@property (retain, getter=getUp, setter=setUp:) id up;
-@property (retain, getter=getDown, setter=setDown:) id down;
-@property (retain, getter=eof, setter=setEof:) id eof;
-@property (retain) AMutableArray *nodes;
-@property (retain) id root;
-@property (retain, getter=getTokenStream, setter=setTokenStream:) id<TokenStream> tokens;
-@property (retain, getter=getAdaptor, setter=setAdaptor:) CommonTreeAdaptor *adaptor;
+@property (copy, getter=getUp, setter=setUp:) id up;
+@property (copy, getter=getDown, setter=setDown:) id down;
+@property (copy, getter=eof, setter=setEof:) id eof;
+@property (copy) AMutableArray *nodes;
+@property (copy) id root;
+@property (copy, getter=getTokenStream, setter=setTokenStream:) id<TokenStream> tokens;
+@property (copy, getter=getTreeAdaptor, setter=setTreeAdaptor:) CommonTreeAdaptor *adaptor;
 @property (assign, getter=getUniqueNavigationNodes, setter=setUniqueNavigationNodes:) BOOL uniqueNavigationNodes;
 @property (assign) NSInteger index;
 @property (assign, getter=getLastMarker, setter=setLastMarker:) NSInteger lastMarker;
-@property (retain, getter=getCalls, setter=setCalls:) IntArray *calls;
-@property (retain, getter=getEnum, setter=setEnum:) NSEnumerator *e;
-@property (retain) id currentSymbol;
+@property (copy, getter=getCalls, setter=setCalls:) IntArray *calls;
+@property (copy, getter=getEnum, setter=setEnum:) NSEnumerator *e;
+@property (copy) id currentSymbol;
 
 + (BufferedTreeNodeStream *) newBufferedTreeNodeStream:(CommonTree *)tree;
 + (BufferedTreeNodeStream *) newBufferedTreeNodeStream:(id<TreeAdaptor>)adaptor Tree:(CommonTree *)tree;
@@ -123,8 +123,8 @@
 
 - (id<TokenStream>) getTokenStream;
 - (void) setTokenStream:(id<TokenStream>) tokens;
-- (id<TreeAdaptor>) getTreeAdaptor;
-- (void) setTreeAdaptor:(id<TreeAdaptor>) anAdaptor;
+- (CommonTreeAdaptor *) getTreeAdaptor;
+- (void) setTreeAdaptor:(CommonTreeAdaptor *) anAdaptor;
 
 - (BOOL)getUniqueNavigationNodes;
 - (void) setUniqueNavigationNodes:(BOOL)aVal;

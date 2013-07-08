@@ -52,6 +52,7 @@
 //- (void) removeAllChildren;
 
 - (void) setChild:(NSInteger) i With:(id<BaseTree>)t;
+- (void) insertChild:(NSInteger) i With:(id<BaseTree>)t;
 - (id) deleteChild:(NSInteger) i;
 - (AMutableArray *) createChildrenList;
 - (void) replaceChildrenFrom:(NSInteger)startChildIndex To:(NSInteger)stopChildIndex With:(id) t;
@@ -92,8 +93,8 @@
 - (NSString *) description;
 - (NSString *) descriptionTree;
 
-@property (retain) AMutableArray *children;
-@property (retain) NSException *anException;
+@property (copy) AMutableArray *children;
+@property (copy) NSException *anException;
 
 @end
 
@@ -165,8 +166,8 @@
 - (NSString *) description;
 - (NSString *) descriptionTree;
 
-@property (retain) AMutableArray *children;
-@property (retain) NSException *anException;
+@property (copy) AMutableArray *children;
+@property (copy) NSException *anException;
 
 @end
 

@@ -172,9 +172,9 @@
 - (BOOL) evaluateSyntacticPredicate:(SEL)synpredFragment;
 // stream:(id<IntStream>)anInput;
 
-@property (retain, getter=getState, setter=setState:) RecognizerSharedState *state;
-@property (retain) NSString *grammarFileName;
-@property (retain) NSString *sourceName;
-@property (retain) AMutableArray *tokenNames;
+@property (copy, getter=getState, setter=setState:) RecognizerSharedState *state;
+@property (copy) NSString *grammarFileName;
+@property (copy) NSString *sourceName;
+@property (copy) AMutableArray *tokenNames;
 
 @end

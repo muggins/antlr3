@@ -35,11 +35,11 @@
 
 @interface CommonTokenStream : BufferedTokenStream < TokenStream >
 {
-	__strong AMutableDictionary *channelOverride;
+	AMutableDictionary *channelOverride;
 	NSUInteger channel;
 }
 
-@property (retain, getter=getChannelOverride,setter=setChannelOverride:) AMutableDictionary *channelOverride;
+@property (copy, getter=getChannelOverride,setter=setChannelOverride:) AMutableDictionary *channelOverride;
 @property (assign, getter=channel,setter=setChannel:) NSUInteger channel;
 
 + (CommonTokenStream *)newCommonTokenStream;

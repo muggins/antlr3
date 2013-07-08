@@ -34,7 +34,7 @@
  *  of data copying. 
  */
 @interface ANTLRFileStream : ANTLRStringStream {
-	__strong NSString *fileName;
+	NSString *fileName;
 }
 
 
@@ -45,6 +45,6 @@
 - (void) load:(NSString *)fileName encoding:(NSStringEncoding)encoding;
 - (NSString *) getSourceName;
 
-@property (retain) NSString *fileName;
+@property NSString *fileName;
 
 @end

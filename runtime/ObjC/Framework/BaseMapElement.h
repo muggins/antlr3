@@ -37,7 +37,7 @@
     ACNumber *index;
 }
 
-@property (retain) ACNumber *index;
+@property ACNumber *index;
 
 + (id) newBaseMapElement;
 + (id) newBaseMapElementWithIndex:(ACNumber *)anIdx;
