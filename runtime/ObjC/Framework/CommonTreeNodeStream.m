@@ -55,11 +55,11 @@
 - (id) initWithTree:(CommonTree *)theTree
 {
     if ((self = [super init]) != nil ) {
-        adaptor = [[CommonTreeAdaptor newTreeAdaptor] retain];
-        root = [theTree retain];
-        navigationNodeEOF = [[adaptor createTree:TokenTypeEOF Text:@"EOF"] retain]; // set EOF
-        it = [[TreeIterator newANTRLTreeIteratorWithAdaptor:adaptor andTree:root] retain];
-        calls = [[IntArray newArrayWithLen:INITIAL_CALL_STACK_SIZE] retain];
+        adaptor = [CommonTreeAdaptor newTreeAdaptor];
+        root = theTree;
+        navigationNodeEOF = [adaptor createTree:TokenTypeEOF Text:@"EOF"]; // set EOF
+        it = [TreeIterator newANTRLTreeIteratorWithAdaptor:adaptor andTree:root];
+        calls = [IntArray newArrayWithLen:INITIAL_CALL_STACK_SIZE];
         /** Tree (nil A B C) trees like flat A B C streams */
         hasNilRoot = NO;
         level = 0;
@@ -70,12 +70,12 @@
 - (id) initWithTreeAdaptor:(id<TreeAdaptor>)anAdaptor Tree:(CommonTree *)theTree
 {
     if ((self = [super init]) != nil ) {
-        adaptor = [anAdaptor retain];
-        root = [theTree retain];
-        navigationNodeEOF = [[adaptor createTree:TokenTypeEOF Text:@"EOF"] retain]; // set EOF
+        adaptor = anAdaptor;
+        root = theTree;
+        navigationNodeEOF = [adaptor createTree:TokenTypeEOF Text:@"EOF"]; // set EOF
         //    it = [root objectEnumerator];
-        it = [[TreeIterator newANTRLTreeIteratorWithAdaptor:adaptor andTree:root] retain];
-        calls = [[IntArray newArrayWithLen:INITIAL_CALL_STACK_SIZE] retain];
+        it = [TreeIterator newANTRLTreeIteratorWithAdaptor:adaptor andTree:root];
+        calls = [IntArray newArrayWithLen:INITIAL_CALL_STACK_SIZE];
         /** Tree (nil A B C) trees like flat A B C streams */
         hasNilRoot = NO;
         level = 0;
@@ -155,10 +155,6 @@
 
 - (void) setTokenStream:(id<TokenStream>)theTokens
 {
-    if ( tokens != theTokens ) {
-        if ( tokens ) [tokens release];
-        [theTokens retain];
-    }
     tokens = theTokens;
 }
 
@@ -169,10 +165,6 @@
 
 - (void) setTreeAdaptor:(CommonTreeAdaptor *) anAdaptor
 {
-    if ( adaptor != anAdaptor ) {
-        if ( adaptor ) [adaptor release];
-        [anAdaptor retain];
-    }
     adaptor = anAdaptor;
 }
 
@@ -193,7 +185,7 @@
 - (void) push:(NSInteger) anIndex
 {
     if ( calls == nil ) {
-        calls = [[IntArray newArrayWithLen:INITIAL_CALL_STACK_SIZE] retain];
+        calls = [IntArray newArrayWithLen:INITIAL_CALL_STACK_SIZE];
     }
     [calls push:p]; // save current anIndex
     [self seek:anIndex];
@@ -204,7 +196,7 @@
  */
 - (NSInteger) pop
 {
-    int ret = [calls pop];
+    NSInteger ret = [calls pop];
     [self seek:ret];
     return ret;
 }    
@@ -234,7 +226,7 @@
     NSInteger type = [adaptor getType:obj];
     while ( type != TokenTypeEOF ) {
         [buf appendString:@" "];
-        [buf appendString:[NSString stringWithFormat:@"%d", type]];
+        [buf appendString:[NSString stringWithFormat:@"%ld", type]];
         [self consume];
         obj = [self LT:1];
         type = [adaptor getType:obj];

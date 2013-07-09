@@ -57,11 +57,7 @@
 
 - (void) setDebugListener: (id<DebugEventListener>) aDebugListener
 {
-    if (debugListener != aDebugListener) {
-        [(id<DebugEventListener,NSObject>)aDebugListener retain];
-        [(id<DebugEventListener,NSObject>)debugListener release];
-        debugListener = aDebugListener;
-    }
+    debugListener = aDebugListener;
 }
 
 - (id<TokenStream>) input
@@ -71,17 +67,13 @@
 
 - (void) setInput: (id<TokenStream>) aTokenStream
 {
-    if (input != aTokenStream) {
-        if ( input ) [input release];
-        input = aTokenStream;
-        [input retain];
-    }
+    input = aTokenStream;
 }
 
 - (void) consumeInitialHiddenTokens
 {
-	int firstIdx = input.index;
-	for (int i = 0; i<firstIdx; i++)
+	NSInteger firstIdx = input.index;
+	for (NSInteger i = 0; i<firstIdx; i++)
 		[debugListener consumeHiddenToken:[input getToken:i]];
 	initialStreamState = NO;
 }
@@ -100,13 +92,13 @@
 {
 	if ( initialStreamState )
 		[self consumeInitialHiddenTokens];
-	int a = input.index;
+	NSInteger a = input.index;
 	id<Token> token = [input LT:1];
 	[input consume];
-	int b = input.index;
+	NSInteger b = input.index;
 	[debugListener consumeToken:token];
 	if (b > a+1) // must have consumed hidden tokens
-		for (int i = a+1; i < b; i++)
+		for (NSInteger i = a+1; i < b; i++)
 			[debugListener consumeHiddenToken:[input getToken:i]];
 }
 

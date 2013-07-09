@@ -29,10 +29,10 @@
 #import "BaseTree.h"
 
 @interface CommonTree : BaseTree <Tree> {
-	__strong CommonToken *token;
+	CommonToken *token;
 	NSInteger startIndex;
 	NSInteger stopIndex;
-    __strong CommonTree *parent;
+    CommonTree *parent;
     NSInteger childIndex;
 }
 
@@ -62,8 +62,10 @@
 - (void) setLine:(NSUInteger)aLine;
 - (NSUInteger)charPositionInLine;
 - (void) setCharPositionInLine:(NSUInteger)pos;
-//- (CommonTree *) getParent;
-//- (void) setParent:(CommonTree *) t;
+- (NSInteger) getChildIndex;
+- (void) setChildIndex:(NSInteger) anIndex;
+- (CommonTree *) getParent;
+- (void) setParent:(CommonTree *) t;
 
 - (NSString *) description;
 #ifdef DONTUSENOMO
@@ -76,17 +78,17 @@
 - (void) setTokenStopIndex: (NSInteger) aStopIndex;
 
 /*
- @property (retain, getter=getCommonToken, setter=setCommonToken:) CommonToken *token;
+ @property (copy, getter=getCommonToken, setter=setCommonToken:) CommonToken *token;
  @property (assign, getter=getTokenStartIndex, setter=setTokenStartIndex:) NSInteger startIndex;
  @property (assign, getter=getTokenStopIndex, setter=setTokenStopIndex:) NSInteger stopIndex;
- @property (retain, getter=getParent, setter=setParent:) id<BaseTree> parentparent;
+ @property (copy, getter=getParent, setter=setParent:) id<BaseTree> parentparent;
  @property (assign, getter=getChildIndex, setter=setChildIndex:) NSInteger childIndex;
  */
 
-@property (retain) CommonToken *token;
+@property (copy) CommonToken *token;
 @property (assign) NSInteger startIndex;
 @property (assign) NSInteger stopIndex;
-@property (retain) CommonTree *parent;
-@property (assign) NSInteger childIndex;
+@property (copy, getter=getParent, setter=setParent:) CommonTree *parent;
+@property (assign, getter=getChildIndex, setter=setChildIndex:) NSInteger childIndex;
 
 @end

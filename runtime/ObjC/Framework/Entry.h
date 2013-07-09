@@ -12,10 +12,10 @@
     id value;
 }
 
-@property(nonatomic, retain) HTEntry  *next;
+@property(nonatomic, copy) HTEntry  *next;
 @property(assign, getter=getHash, setter=setHash:) NSInteger  hash;
-@property(nonatomic, retain) NSString *key;
-@property(nonatomic, retain)        id value;
+@property(nonatomic, copy) NSString *key;
+@property(nonatomic, copy)        id value;
 
 + (HTEntry *)newEntry:(NSInteger)h key:(NSString *)k value:(id)v next:(HTEntry *) n;
 - (id) init:(NSInteger)h key:(NSString *)k value:(id)v next:(HTEntry *)n;
@@ -36,9 +36,9 @@
     id item;
 }
 
-@property(nonatomic, retain) LMNode *next;
-@property(nonatomic, retain) LMNode *prev;
-@property(nonatomic, retain)      id item;
+@property(nonatomic, copy) LMNode *next;
+@property(nonatomic, copy) LMNode *prev;
+@property(nonatomic, copy)      id item;
 
 + (LMNode *) newNode:(LMNode *)aPrev element:(id)anElement next:(LMNode *)aNext;
 - (id) init:(LMNode *)aPrev element:(id)anElement next:(LMNode *)aNext;

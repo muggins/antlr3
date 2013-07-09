@@ -69,7 +69,6 @@
 - (void) dealloc
 {
     [self setDebugListener: nil];
-    [super dealloc];
 }
 
 - (id<DebugEventListener>) debugListener
@@ -79,11 +78,7 @@
 
 - (void) setDebugListener: (id<DebugEventListener>) aDebugListener
 {
-    if (debugListener != aDebugListener) {
-        [(id<DebugEventListener,NSObject>)aDebugListener retain];
-        [(id<DebugEventListener,NSObject>)debugListener release];
-        debugListener = aDebugListener;
-    }
+    debugListener = aDebugListener;
 }
 
 #pragma mark -

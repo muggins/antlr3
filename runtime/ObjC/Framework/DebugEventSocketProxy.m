@@ -29,7 +29,7 @@
 #include <string.h>
 
 static NSData *newlineData = nil;
-static unsigned lengthOfUTF8Ack = 0;
+static NSUInteger lengthOfUTF8Ack = 0;
 
 @implementation DebugEventSocketProxy
 
@@ -61,9 +61,7 @@ static unsigned lengthOfUTF8Ack = 0;
 	if (serverSocket != -1) 
 		shutdown(serverSocket,SHUT_RDWR);
 	serverSocket = -1;
-	[debuggerFH release];
     [self setGrammarName:nil];
-    [super dealloc];
 }
 
 /* Java stuff
@@ -126,7 +124,7 @@ protected void transmit(String event) {
 		
 		NSAssert1(serverSocket != -1, @"Failed to create debugger socket. %s", strerror(errno));
 		
-		int yes = 1;
+		NSInteger yes = 1;
 		setsockopt(serverSocket, SOL_SOCKET, SO_KEEPALIVE|SO_REUSEPORT|SO_REUSEADDR|TCP_NODELAY, (void *)&yes, sizeof(NSInteger));
 
 		struct sockaddr_in server_addr;
@@ -205,11 +203,7 @@ protected void transmit(String event) {
 
 - (void) setGrammarName: (NSString *) aGrammarName
 {
-    if (grammarName != aGrammarName) {
-        [aGrammarName retain];
-        [grammarName release];
-        grammarName = aGrammarName;
-    }
+    grammarName = aGrammarName;
 }
 
 - (NSInteger) debuggerPort
@@ -247,7 +241,7 @@ protected void transmit(String event) {
 
 - (void) enterAlt:(NSInteger)alt
 {
-	[self sendToDebugger:[NSString stringWithFormat:@"enterAlt %d", alt]]; 
+	[self sendToDebugger:[NSString stringWithFormat:@"enterAlt %ld", alt]]; 
 }
 
 - (void) exitRule:(NSString *)ruleName
@@ -257,22 +251,22 @@ protected void transmit(String event) {
 
 - (void) enterSubRule:(NSInteger)decisionNumber
 {
-	[self sendToDebugger:[NSString stringWithFormat:@"enterSubRule %d", decisionNumber]];
+	[self sendToDebugger:[NSString stringWithFormat:@"enterSubRule %ld", decisionNumber]];
 }
 
 - (void) exitSubRule:(NSInteger)decisionNumber
 {
-	[self sendToDebugger:[NSString stringWithFormat:@"exitSubRule %d", decisionNumber]];
+	[self sendToDebugger:[NSString stringWithFormat:@"exitSubRule %ld", decisionNumber]];
 }
 
 - (void) enterDecision:(NSInteger)decisionNumber
 {
-	[self sendToDebugger:[NSString stringWithFormat:@"enterDecision %d", decisionNumber]];
+	[self sendToDebugger:[NSString stringWithFormat:@"enterDecision %ld", decisionNumber]];
 }
 
 - (void) exitDecision:(NSInteger)decisionNumber
 {
-	[self sendToDebugger:[NSString stringWithFormat:@"exitDecision %d", decisionNumber]];
+	[self sendToDebugger:[NSString stringWithFormat:@"exitDecision %ld", decisionNumber]];
 }
 
 - (void) consumeToken:(id<Token>)t
@@ -287,16 +281,16 @@ protected void transmit(String event) {
 
 - (void) LT:(NSInteger)i foundToken:(id<Token>)t
 {
-	[self sendToDebugger:[NSString stringWithFormat:@"LT %d %@", i, [self escapeNewlines:[t description]]]];
+	[self sendToDebugger:[NSString stringWithFormat:@"LT %ld %@", i, [self escapeNewlines:[t description]]]];
 }
 
 - (void) mark:(NSInteger)marker
 {
-	[self sendToDebugger:[NSString stringWithFormat:@"mark %d", marker]];
+	[self sendToDebugger:[NSString stringWithFormat:@"mark %ld", marker]];
 }
 - (void) rewind:(NSInteger)marker
 {
-	[self sendToDebugger:[NSString stringWithFormat:@"rewind %d", marker]];
+	[self sendToDebugger:[NSString stringWithFormat:@"rewind %ld", marker]];
 }
 
 - (void) rewind
@@ -306,17 +300,17 @@ protected void transmit(String event) {
 
 - (void) beginBacktrack:(NSInteger)level
 {
-	[self sendToDebugger:[NSString stringWithFormat:@"beginBacktrack %d", level]];
+	[self sendToDebugger:[NSString stringWithFormat:@"beginBacktrack %ld", level]];
 }
 
 - (void) endBacktrack:(NSInteger)level wasSuccessful:(BOOL)successful
 {
-	[self sendToDebugger:[NSString stringWithFormat:@"endBacktrack %d %d", level, successful ? 1 : 0]];
+	[self sendToDebugger:[NSString stringWithFormat:@"endBacktrack %ld %ld", level, successful ? 1 : 0]];
 }
 
 - (void) locationLine:(NSInteger)line column:(NSInteger)pos
 {
-	[self sendToDebugger:[NSString stringWithFormat:@"location %d %d", line, pos]];
+	[self sendToDebugger:[NSString stringWithFormat:@"location %ld %ld", line, pos]];
 }
 
 - (void) recognitionException:(RecognitionException *)e
@@ -364,7 +358,7 @@ protected void transmit(String event) {
 #pragma mark Tree Parsing
 - (void) consumeNode:(unsigned)nodeHash ofType:(NSInteger)type text:(NSString *)text
 {
-	[self sendToDebugger:[NSString stringWithFormat:@"consumeNode %u %d %@",
+	[self sendToDebugger:[NSString stringWithFormat:@"consumeNode %u %ld %@",
 		nodeHash,
 		type,
 		[self escapeNewlines:text]
@@ -373,7 +367,7 @@ protected void transmit(String event) {
 
 - (void) LT:(NSInteger)i foundNode:(unsigned)nodeHash ofType:(NSInteger)type text:(NSString *)text
 {
-	[self sendToDebugger:[NSString stringWithFormat:@"LN %d %u %d %@",
+	[self sendToDebugger:[NSString stringWithFormat:@"LN %ld %u %ld %@",
 		i,
 		nodeHash,
 		type,
@@ -384,38 +378,38 @@ protected void transmit(String event) {
 
 #pragma mark AST Events
 
-- (void) createNilNode:(unsigned)hash
+- (void) createNilNode:(NSUInteger)hash
 {
-	[self sendToDebugger:[NSString stringWithFormat:@"nilNode %u", hash]];
+	[self sendToDebugger:[NSString stringWithFormat:@"nilNode %lu", hash]];
 }
 
-- (void) createNode:(unsigned)hash text:(NSString *)text type:(NSInteger)type
+- (void) createNode:(NSUInteger)hash text:(NSString *)text type:(NSInteger)type
 {
-	[self sendToDebugger:[NSString stringWithFormat:@"createNodeFromToken %u %d %@", 
+	[self sendToDebugger:[NSString stringWithFormat:@"createNodeFromToken %lu %ld %@", 
 		hash,
 		type,
 		[self escapeNewlines:text]
 		]];
 }
 
-- (void) createNode:(unsigned)hash fromTokenAtIndex:(NSInteger)tokenIndex
+- (void) createNode:(NSUInteger)hash fromTokenAtIndex:(NSInteger)tokenIndex
 {
-	[self sendToDebugger:[NSString stringWithFormat:@"createNode %u %d", hash, tokenIndex]];
+	[self sendToDebugger:[NSString stringWithFormat:@"createNode %lu %ld", hash, tokenIndex]];
 }
 
-- (void) becomeRoot:(unsigned)newRootHash old:(unsigned)oldRootHash
+- (void) becomeRoot:(NSUInteger)newRootHash old:(NSUInteger)oldRootHash
 {
-	[self sendToDebugger:[NSString stringWithFormat:@"becomeRoot %u %u", newRootHash, oldRootHash]];
+	[self sendToDebugger:[NSString stringWithFormat:@"becomeRoot %lu %lu", newRootHash, oldRootHash]];
 }
 
-- (void) addChild:(unsigned)childHash toTree:(unsigned)treeHash
+- (void) addChild:(NSUInteger)childHash toTree:(NSUInteger)treeHash
 {
-	[self sendToDebugger:[NSString stringWithFormat:@"addChild %u %u", treeHash, childHash]];
+	[self sendToDebugger:[NSString stringWithFormat:@"addChild %lu %lu", treeHash, childHash]];
 }
 
-- (void) setTokenBoundariesForTree:(unsigned)nodeHash From:(NSInteger)tokenStartIndex To:(NSInteger)tokenStopIndex
+- (void) setTokenBoundariesForTree:(NSUInteger)nodeHash From:(NSInteger)tokenStartIndex To:(NSInteger)tokenStopIndex
 {
-	[self sendToDebugger:[NSString stringWithFormat:@"setTokenBoundaries %u %d %d", nodeHash, tokenStartIndex, tokenStopIndex]];
+	[self sendToDebugger:[NSString stringWithFormat:@"setTokenBoundaries %lu %ld %ld", nodeHash, tokenStartIndex, tokenStopIndex]];
 }
 
 

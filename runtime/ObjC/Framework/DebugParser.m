@@ -47,7 +47,7 @@
 	id<DebugEventListener,NSObject> debugger = nil;
 	id<TokenStream> tokenStream = nil;
 	if (theDebugListener) {
-		debugger = [(id<DebugEventListener,NSObject>)theDebugListener retain];
+		debugger = (id<DebugEventListener,NSObject>)theDebugListener;
 		debugger = theDebugListener;
 	} else {
 		debugger = [[DebugEventSocketProxy alloc] initWithGrammarName:[self grammarFileName] debuggerPort:portNumber];
@@ -55,14 +55,11 @@
 	if (theStream && ![theStream isKindOfClass:[DebugTokenStream class]]) {
 		tokenStream = [[DebugTokenStream alloc] initWithTokenStream:theStream debugListener:debugger];
 	} else {
-		tokenStream = [theStream retain];
 		tokenStream = theStream;
 	}
 	self = [super initWithTokenStream:tokenStream];
 	if (self) {
 		[self setDebugListener:debugger];
-		[debugger release];
-		[tokenStream release];
 		[debugListener waitForDebuggerConnection];
 	}
 	return self;
@@ -71,7 +68,6 @@
 - (void) dealloc
 {
     [self setDebugListener: nil];
-    [super dealloc];
 }
 
 - (id<DebugEventListener>) debugListener
@@ -81,11 +77,7 @@
 
 - (void) setDebugListener: (id<DebugEventListener>) aDebugListener
 {
-    if (debugListener != aDebugListener) {
-        [(id<DebugEventListener,NSObject>)aDebugListener retain];
-        [(id<DebugEventListener,NSObject>)debugListener release];
-        debugListener = aDebugListener;
-    }
+    debugListener = aDebugListener;
 }
 
 #pragma mark -

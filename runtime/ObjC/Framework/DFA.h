@@ -39,7 +39,7 @@
 	const NSInteger *special;
 	const NSInteger **transition;
 	
-	__strong BaseRecognizer *recognizer;
+	BaseRecognizer *recognizer;
 	NSInteger decisionNumber;
     NSInteger len;
 }
@@ -78,7 +78,7 @@
 @property const NSInteger *special;
 @property const NSInteger **transition;
 
-@property (retain, getter=getRecognizer,setter=setRecognizer:) BaseRecognizer *recognizer;
+@property (copy, getter=getRecognizer,setter=setRecognizer:) BaseRecognizer *recognizer;
 @property (assign, getter=getDecision,setter=setDecision:) NSInteger decisionNumber;
 @property (assign, getter=getLen,setter=setLen:) NSInteger len;
 @end

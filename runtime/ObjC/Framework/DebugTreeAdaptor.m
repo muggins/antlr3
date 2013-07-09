@@ -54,11 +54,7 @@
 
 - (void) setDebugListener: (id<DebugEventListener>) aDebugListener
 {
-    if (debugListener != aDebugListener) {
-        [(id<TreeAdaptor,NSObject>)aDebugListener retain];
-        [(id<TreeAdaptor,NSObject>)debugListener release];
-        debugListener = aDebugListener;
-    }
+    debugListener = aDebugListener;
 }
 
 - (CommonTreeAdaptor *) getTreeAdaptor
@@ -68,11 +64,7 @@
 
 - (void) setTreeAdaptor: (CommonTreeAdaptor *) aTreeAdaptor
 {
-    if (treeAdaptor != aTreeAdaptor) {
-        [aTreeAdaptor retain];
-        [treeAdaptor release];
-        treeAdaptor = aTreeAdaptor;
-    }
+    treeAdaptor = aTreeAdaptor;
 }
 
 #pragma mark -

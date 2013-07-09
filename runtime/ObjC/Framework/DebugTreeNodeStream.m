@@ -34,7 +34,7 @@
 	self = [super init];
 	if (self) {
 		[self setDebugListener:debugger];
-		[self setTreeAdaptor:[theStream treeAdaptor]];
+		[self setTreeAdaptor:[theStream getTreeAdaptor]];
 		[self setInput:theStream];
 	}
 	return self;
@@ -45,7 +45,6 @@
     [self setDebugListener: nil];
     [self setTreeAdaptor: nil];
     input = nil;
-    [super dealloc];
 }
 
 - (id<DebugEventListener>) debugListener
@@ -55,11 +54,7 @@
 
 - (void) setDebugListener: (id<DebugEventListener>) aDebugListener
 {
-    if (debugListener != aDebugListener) {
-        [(id<DebugEventListener,NSObject>)aDebugListener retain];
-        [(id<DebugEventListener,NSObject>)debugListener release];
-        debugListener = aDebugListener;
-    }
+    debugListener = aDebugListener;
 }
 
 
@@ -70,11 +65,7 @@
 
 - (void) setTreeAdaptor: (id<TreeAdaptor>) aTreeAdaptor
 {
-    if (treeAdaptor != aTreeAdaptor) {
-        [(id<TreeAdaptor,NSObject>)aTreeAdaptor retain];
-        [(id<TreeAdaptor,NSObject>)treeAdaptor release];
-        treeAdaptor = aTreeAdaptor;
-    }
+    treeAdaptor = aTreeAdaptor;
 }
 
 
@@ -85,10 +76,6 @@
 
 - (void) setInput:(id<TreeNodeStream>) aTreeNodeStream
 {
-    if (input != aTreeNodeStream) {
-        [input release];
-        [(id<TreeNodeStream,NSObject>)aTreeNodeStream retain];
-    }
     input = aTreeNodeStream;
 }
 

@@ -40,11 +40,11 @@
 	
 	struct sockaddr debugger_sockaddr;
 	socklen_t debugger_socklen;
-	int debuggerSocket;
+	NSInteger debuggerSocket;
 	NSFileHandle *debuggerFH;
 	
 	NSString *grammarName;
-	int debuggerPort;
+	NSInteger debuggerPort;
 }
 
 - (id) init;
@@ -102,11 +102,11 @@
 
 #pragma mark AST Events
 
-- (void) createNilNode:(unsigned)hash;
-- (void) createNode:(unsigned)hash text:(NSString *)text type:(NSInteger)type;
-- (void) createNode:(unsigned)hash fromTokenAtIndex:(NSInteger)tokenIndex;
-- (void) makeNode:(unsigned)newRootHash parentOf:(unsigned)oldRootHash;
-- (void) addChild:(unsigned)childHash toTree:(unsigned)treeHash;
-- (void) setTokenBoundariesForTree:(unsigned)nodeHash From:(NSInteger)tokenStartIndex To:(NSInteger)tokenStopIndex;
+- (void) createNilNode:(NSUInteger)hash;
+- (void) createNode:(NSUInteger)hash text:(NSString *)text type:(NSInteger)type;
+- (void) createNode:(NSUInteger)hash fromTokenAtIndex:(NSInteger)tokenIndex;
+- (void) makeNode:(NSUInteger)newRootHash parentOf:(unsigned)oldRootHash;
+- (void) addChild:(NSUInteger)childHash toTree:(unsigned)treeHash;
+- (void) setTokenBoundariesForTree:(NSUInteger)nodeHash From:(NSInteger)tokenStartIndex To:(NSInteger)tokenStopIndex;
 
 @end
