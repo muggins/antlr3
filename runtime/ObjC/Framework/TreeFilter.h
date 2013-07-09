@@ -155,8 +155,8 @@ public class TreeFilter extends TreeParser {
     TreeFilter *treeFilter;
 }
 
-@property (assign) SEL whichRule;
-@property (assign) TreeFilter *treeFilter;
+@property (copy) SEL whichRule;
+@property (copy) TreeFilter *treeFilter;
 
 + (fptr *) newfptr:(TreeFilter *)aTreeFilter Rule:(SEL) aRule;
 
@@ -194,10 +194,10 @@ fptr *bottomup_fptr;
 - (void) topdown;
 - (void) bottomup;
 
-@property (retain) id<TokenStream> originalTokenStream;
-@property (retain) id<TreeAdaptor> originalAdaptor;
-@property (retain, setter=settopdown_fptr:) fptr *topdown_fptr;
-@property (retain, setter=setbottomdown_fptr:) fptr *bottomup_fptr;
+@property (copy) id<TokenStream> originalTokenStream;
+@property (copy) id<TreeAdaptor> originalAdaptor;
+@property (copy, setter=settopdown_fptr:) fptr *topdown_fptr;
+@property (copy, setter=setbottomdown_fptr:) fptr *bottomup_fptr;
 
 @end
 // end TreeFilter.h

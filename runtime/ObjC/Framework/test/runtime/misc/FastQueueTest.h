@@ -1,5 +1,5 @@
 //
-//  ANTLRFastQueueTest.h
+//  FastQueueTest.h
 //  ANTLR
 //
 //  Created by Ian Michell on 13/05/2010.

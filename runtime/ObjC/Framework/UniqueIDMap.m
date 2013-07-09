@@ -147,7 +147,6 @@
 {
     if ( np.fNext != nil )
 		[self delete_chain:np.fNext];
-	[np release];
 }
 
 - (id)getNode:(id<BaseTree>)aNode
@@ -173,7 +172,7 @@
     
     idx = [(id<BaseTree>)aNode type];
     idx %= HASHSIZE;
-    np = [[NodeMapElement newNodeMapElementWithIndex:anID Node:aNode] retain];
+    np = [NodeMapElement newNodeMapElementWithIndex:anID Node:aNode];
     np1 = ptrBuffer[idx];
     np.fNext = np1;
     ptrBuffer[idx] = np;

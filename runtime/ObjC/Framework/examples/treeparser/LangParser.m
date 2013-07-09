@@ -47,7 +47,7 @@ static const unsigned long long FOLLOW_10_in_decl54_data[] = { 0x000000000000000
 @synthesize tree; /* start of synthesize -- OBJC-Line 1837 */
 + (LangParser_start_return *)newLangParser_start_return
 {
-return [[[LangParser_start_return alloc] init] retain];
+return [[LangParser_start_return alloc] init];
 }
 
 - (id) init

@@ -9,6 +9,6 @@
 #import "RecognizerTest.h"
 
 
-@implementation ANTLRRecognizerTest
+@implementation RecognizerTest
 
 @end

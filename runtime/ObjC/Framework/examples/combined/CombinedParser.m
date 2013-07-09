@@ -53,11 +53,11 @@ static const unsigned long long FOLLOW_ID_in_identifier35_data[] = { 0x000000000
 + (void) initialize
 {
     #pragma mark Bitsets
-    FOLLOW_identifier_in_stat20 = [[ANTLRBitSet newBitSetWithBits:(const unsigned long long *)FOLLOW_identifier_in_stat20_data Count:(NSUInteger)1] retain];
-    FOLLOW_ID_in_identifier35 = [[ANTLRBitSet newBitSetWithBits:(const unsigned long long *)FOLLOW_ID_in_identifier35_data Count:(NSUInteger)1] retain];
+    FOLLOW_identifier_in_stat20 = [ANTLRBitSet newBitSetWithBits:(const unsigned long long *)FOLLOW_identifier_in_stat20_data Count:(NSUInteger)1];
+    FOLLOW_ID_in_identifier35 = [ANTLRBitSet newBitSetWithBits:(const unsigned long long *)FOLLOW_ID_in_identifier35_data Count:(NSUInteger)1];
 
-    [BaseRecognizer setTokenNames:[[AMutableArray arrayWithObjects:@"<invalid>", @"<EOR>", @"<DOWN>", @"<UP>", 
- @"ID", @"INT", @"WS", nil] retain]];
+    [BaseRecognizer setTokenNames:[AMutableArray arrayWithObjects:@"<invalid>", @"<EOR>", @"<DOWN>", @"<UP>", 
+ @"ID", @"INT", @"WS", nil]];
     [BaseRecognizer setGrammarFileName:@"/Users/acondit/source/antlr/code/antlr3/runtime/ObjC/Framework/examples/combined/Combined.g"];
 }
 
@@ -68,7 +68,7 @@ static const unsigned long long FOLLOW_ID_in_identifier35_data[] = { 0x000000000
 
 - (id) initWithTokenStream:(id<TokenStream>)aStream
 {
-    self = [super initWithTokenStream:aStream State:[[RecognizerSharedState newRecognizerSharedStateWithRuleLen:2+1] retain]];
+    self = [super initWithTokenStream:aStream State:[RecognizerSharedState newRecognizerSharedStateWithRuleLen:2+1]];
     if ( self != nil ) {
         /* start of actions-actionScope-init */
         /* start of init */
@@ -78,7 +78,6 @@ static const unsigned long long FOLLOW_ID_in_identifier35_data[] = { 0x000000000
 
 - (void) dealloc
 {
-    [super dealloc];
 }
 
 /* ObjC start actions.(actionScope).methods */

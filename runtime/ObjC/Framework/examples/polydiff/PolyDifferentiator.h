@@ -47,7 +47,7 @@ CommonTree *tree; /* ObjC start of memVars() */
 }
 /* start property declarations */
 /* AST returnScopeInterface.properties */
-@property (retain, getter=getTree, setter=setTree:) CommonTree *tree;
+@property (copy, getter=getTree, setter=setTree:) CommonTree *tree;
 
 /* start of method declarations */
 
@@ -87,7 +87,7 @@ id<TreeAdaptor> treeAdaptor;   /* AST parserMemVars */
 /* AST parserHeaderFile.properties */
   /* AST super.properties */
 /* AST parserProperties */
-@property (retain, getter=getTreeAdaptor, setter=setTreeAdaptor:) id<TreeAdaptor> treeAdaptor;   /* AST parserproperties */
+@property (copy, getter=getTreeAdaptor, setter=setTreeAdaptor:) id<TreeAdaptor> treeAdaptor;   /* AST parserproperties */
 /* ObjC end of properties */
 
 + (void) initialize;

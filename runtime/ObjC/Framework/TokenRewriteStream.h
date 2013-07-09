@@ -49,7 +49,7 @@ NSString *text;
 
 @property (getter=getInstructionIndex, setter=setInstructionIndex:) NSInteger instructionIndex;
 @property (assign) NSInteger rwIndex;
-@property (retain, getter=text, setter=setText:) NSString *text;
+@property (copy, getter=text, setter=setText:) NSString *text;
 
 + (RewriteOperation *) newRewriteOperation:(NSInteger)anIndex Text:(NSString *)text;
 
@@ -111,8 +111,8 @@ HashMap *programs;
 HashMap *lastRewriteTokenIndexes;
 }
 
-@property (retain, getter=getPrograms, setter=setPrograms:) HashMap *programs;
-@property (retain, getter=getLastRewriteTokenIndexes, setter=setLastRewriteTokenIndexes:) HashMap *lastRewriteTokenIndexes;
+@property (copy, getter=getPrograms, setter=setPrograms:) HashMap *programs;
+@property (copy, getter=getLastRewriteTokenIndexes, setter=setLastRewriteTokenIndexes:) HashMap *lastRewriteTokenIndexes;
 
 + (TokenRewriteStream *)newTokenRewriteStream;
 + (TokenRewriteStream *)newTokenRewriteStream:(id<TokenSource>) aTokenSource;

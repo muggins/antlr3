@@ -48,7 +48,7 @@ static const unsigned long long FOLLOW_ID_in_declarator95_data[] = { 0x000000000
  /* start of synthesize -- OBJC-Line 1837 */
 + (LangDumpDecl_declarator_return *)newLangDumpDecl_declarator_return
 {
-return [[[LangDumpDecl_declarator_return alloc] init] retain];
+return [[LangDumpDecl_declarator_return alloc] init];
 }
 
 - (id) init
@@ -77,14 +77,14 @@ return self;
 + (void) initialize
 {
     #pragma mark Bitsets
-    FOLLOW_DECL_in_decl45 = [[ANTLRBitSet newBitSetWithBits:(const unsigned long long *)FOLLOW_DECL_in_decl45_data Count:(NSUInteger)1] retain];
-    FOLLOW_type_in_decl47 = [[ANTLRBitSet newBitSetWithBits:(const unsigned long long *)FOLLOW_type_in_decl47_data Count:(NSUInteger)1] retain];
-    FOLLOW_declarator_in_decl49 = [[ANTLRBitSet newBitSetWithBits:(const unsigned long long *)FOLLOW_declarator_in_decl49_data Count:(NSUInteger)1] retain];
-    FOLLOW_INTTYPE_in_type81 = [[ANTLRBitSet newBitSetWithBits:(const unsigned long long *)FOLLOW_INTTYPE_in_type81_data Count:(NSUInteger)1] retain];
-    FOLLOW_ID_in_declarator95 = [[ANTLRBitSet newBitSetWithBits:(const unsigned long long *)FOLLOW_ID_in_declarator95_data Count:(NSUInteger)1] retain];
+    FOLLOW_DECL_in_decl45 = [ANTLRBitSet newBitSetWithBits:(const unsigned long long *)FOLLOW_DECL_in_decl45_data Count:(NSUInteger)1];
+    FOLLOW_type_in_decl47 = [ANTLRBitSet newBitSetWithBits:(const unsigned long long *)FOLLOW_type_in_decl47_data Count:(NSUInteger)1];
+    FOLLOW_declarator_in_decl49 = [ANTLRBitSet newBitSetWithBits:(const unsigned long long *)FOLLOW_declarator_in_decl49_data Count:(NSUInteger)1];
+    FOLLOW_INTTYPE_in_type81 = [ANTLRBitSet newBitSetWithBits:(const unsigned long long *)FOLLOW_INTTYPE_in_type81_data Count:(NSUInteger)1];
+    FOLLOW_ID_in_declarator95 = [ANTLRBitSet newBitSetWithBits:(const unsigned long long *)FOLLOW_ID_in_declarator95_data Count:(NSUInteger)1];
 
-    [BaseRecognizer setTokenNames:[[AMutableArray arrayWithObjects:@"<invalid>", @"<EOR>", @"<DOWN>", @"<UP>", 
- @"DECL", @"FLOATTYPE", @"ID", @"INT", @"INTTYPE", @"WS", @"';'", nil] retain]];
+    [BaseRecognizer setTokenNames:[AMutableArray arrayWithObjects:@"<invalid>", @"<EOR>", @"<DOWN>", @"<UP>",
+ @"DECL", @"FLOATTYPE", @"ID", @"INT", @"INTTYPE", @"WS", @"';'", nil]];
     [BaseRecognizer setGrammarFileName:@"/Users/acondit/source/antlr/code/antlr3/runtime/ObjC/Framework/examples/treeparser/LangDumpDecl.g"];
 }
 
@@ -95,7 +95,7 @@ return self;
 
 - (id) initWithStream:(id<TreeNodeStream>)aStream
 {
-    self = [super initWithStream:aStream State:[[RecognizerSharedState newRecognizerSharedStateWithRuleLen:3+1] retain]];
+    self = [super initWithStream:aStream State:[RecognizerSharedState newRecognizerSharedStateWithRuleLen:3+1]];
     if ( self != nil ) {
         /* start of actions-actionScope-init */
         /* start of init */

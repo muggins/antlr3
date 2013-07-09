@@ -1,5 +1,5 @@
 //
-//  ANTLRCommonErrorNodeTest.m
+//  CommonErrorNodeTest.m
 //  ANTLR
 //
 //  Created by Ian Michell on 10/06/2010.
@@ -9,6 +9,6 @@
 #import "CommonErrorNodeTest.h"
 
 
-@implementation ANTLRCommonErrorNodeTest
+@implementation CommonErrorNodeTest
 
 @end

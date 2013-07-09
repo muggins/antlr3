@@ -45,7 +45,7 @@ static const unsigned long long FOLLOW_INT_in_subrule53_data[] = { 0x00000000000
 @synthesize tree; /* start of synthesize -- OBJC-Line 1837 */
 + (TreeRewriteParser_rule_return *)newTreeRewriteParser_rule_return
 {
-return [[[TreeRewriteParser_rule_return alloc] init] retain];
+return [[TreeRewriteParser_rule_return alloc] init];
 }
 
 - (id) init
@@ -62,17 +62,12 @@ return self;
 
 - (void) setTree:(CommonTree *)aTree
 {
-    if (tree != aTree) {
-        if (tree != nil) [tree release];
-        if (aTree != nil) [aTree retain];
-        tree = aTree;
-    }
+    tree = aTree;
 }
 
 - (void) dealloc
 {
     self.tree = nil;
-    [super dealloc];
 }
 
 
@@ -100,17 +95,12 @@ return self;
 
 - (void) setTree:(CommonTree *)aTree
 {
-    if (tree != aTree) {
-        if (tree != nil) [tree release];
-        if (aTree != nil) [aTree retain];
-        tree = aTree;
-    }
+    tree = aTree;
 }
 
 - (void) dealloc
 {
     self.tree = nil;
-    [super dealloc];
 }
 
 

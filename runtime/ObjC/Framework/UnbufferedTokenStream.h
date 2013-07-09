@@ -41,7 +41,7 @@
     NSInteger channel;
 }
 
-@property (retain, getter=getTokenSource, setter=setTokenSource:) id<TokenSource> tokenSource;
+@property (copy, getter=getTokenSource, setter=setTokenSource:) id<TokenSource> tokenSource;
 @property (getter=getTokenIndex, setter=setTokenIndex:) NSInteger tokenIndex;
 @property (getter=channel, setter=setChannel:) NSInteger channel;
 

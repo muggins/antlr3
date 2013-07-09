@@ -1,5 +1,5 @@
 //
-//  ANTLRRecognizerTest.h
+//  RecognizerTest.h
 //  ANTLR
 //
 //  Created by Ian Michell on 02/07/2010.
@@ -9,7 +9,7 @@
 #import <SenTestingKit/SenTestingKit.h>
 
 
-@interface ANTLRRecognizerTest : SenTestCase {
+@interface RecognizerTest : SenTestCase {
 
 }
 

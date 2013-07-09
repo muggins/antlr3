@@ -160,7 +160,7 @@
         NSInteger nameStart31 = input.index;
         [self mQIDStar]; if ( state.failed ) return ;
 
-        name = [[CommonToken newToken:input Type:TokenTypeInvalid Channel:TokenChannelDefault Start:nameStart31 Stop:input.index-1] retain];
+        name = [CommonToken newToken:input Type:TokenTypeInvalid Channel:TokenChannelDefault Start:nameStart31 Stop:input.index-1];
         name.line = self.line;
 
          
@@ -306,7 +306,7 @@
         NSInteger nameStart81 = input.index;
         [self mID]; if ( state.failed ) return ;
 
-        name = [[CommonToken newToken:input Type:TokenTypeInvalid Channel:TokenChannelDefault Start:nameStart81 Stop:input.index-1] retain];
+        name = [CommonToken newToken:input Type:TokenTypeInvalid Channel:TokenChannelDefault Start:nameStart81 Stop:input.index-1];
         name.line = self.line;
 
          
@@ -580,7 +580,7 @@
         NSInteger nameStart158 = input.index;
         [self mID]; if ( state.failed ) return ;
 
-        name = [[CommonToken newToken:input Type:TokenTypeInvalid Channel:TokenChannelDefault Start:nameStart158 Stop:input.index-1] retain];
+        name = [CommonToken newToken:input Type:TokenTypeInvalid Channel:TokenChannelDefault Start:nameStart158 Stop:input.index-1];
         name.line = self.line;
 
          
@@ -954,7 +954,7 @@
         NSInteger nameStart261 = input.index;
         [self mID]; if ( state.failed ) return ;
 
-        name = [[CommonToken newToken:input Type:TokenTypeInvalid Channel:TokenChannelDefault Start:nameStart261 Stop:input.index-1] retain];
+        name = [CommonToken newToken:input Type:TokenTypeInvalid Channel:TokenChannelDefault Start:nameStart261 Stop:input.index-1];
         name.line = self.line;
 
          
@@ -1199,7 +1199,7 @@
         NSInteger nameStart326 = input.index;
         [self mQID]; if ( state.failed ) return ;
 
-        name = [[CommonToken newToken:input Type:TokenTypeInvalid Channel:TokenChannelDefault Start:nameStart326 Stop:input.index-1] retain];
+        name = [CommonToken newToken:input Type:TokenTypeInvalid Channel:TokenChannelDefault Start:nameStart326 Stop:input.index-1];
         name.line = self.line;
 
          

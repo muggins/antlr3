@@ -43,5 +43,5 @@
 - (void) dealloc;
 - (id<BaseTree>)visit:(id<BaseTree>)t Action:(TreeVisitorAction *)action;
 
-@property (retain) id<TreeAdaptor> adaptor;
+@property (copy) id<TreeAdaptor> adaptor;
 @end

@@ -101,7 +101,6 @@ static const unsigned long long FOLLOW_7_in_enumAsID100_data[] = { 0x00000000000
 
 - (void) dealloc
 {
-    [super dealloc];
 }
 
 /* ObjC start actions.(actionScope).methods */
