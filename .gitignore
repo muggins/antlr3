@@ -1,0 +1,48 @@
+# git ls-files --others --exclude-from=.git/info/exclude
+# Lines that start with '#' are comments.
+# For a project mostly in C, the following would be a good set of
+# exclude patterns (uncomment them if you want to use them):
+ *.[oa]
+# *~
+.DS_Store
+ANTLRErrorListener.class
+antlr-ant
+antlr.configurability
+antlr3-maven-archetype
+antlr3-maven-plugin
+antlrjar.xml
+antlrsources.xml
+BUILD.txt
+build.xml
+gunit
+gunit-maven-plugin
+lib
+tool/target/classes
+tool/target/generated-sources
+tool/target/maven-archiver
+tool/antlr.config
+tool/CHANGES.txt
+tool/LICENSE.txt
+tool/pom.xml
+tool/README.txt
+tool/src/main/antlr3
+tool/src/main/Java
+tool/test
+tool/resources/org/antlr/antlr.properties
+tool/resources/org/antlr/tool
+target
+runtime/ActionScript
+runtime/C
+runtime/CSharp2
+runtime/CSharp3
+runtime/Delphi
+runtime/Java
+runtime/JavaScript
+runtime/Perl5
+runtime/Python
+runtime/Ruby
+runtime/ObjC/Framework/examples/polydiff/output1
+runtime/ObjC/Framework/test/java
+runtime/ObjC/ANTLR.framework
+runtime/ObjC/Framework/ANTLR/ANTLR.xcodeproj.sav
+ANTLRBitsetTest-all-target-headers.hmap
