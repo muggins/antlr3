@@ -53,10 +53,10 @@
     id value;
 }
 
-@property(nonatomic, retain) HMEntry  *next;
+@property(nonatomic, copy) HMEntry  *next;
 @property(assign)            NSInteger  hash;
-@property(nonatomic, retain) NSString *key;
-@property(nonatomic, retain) id value;
+@property(nonatomic, copy) NSString *key;
+@property(nonatomic, copy) id value;
 
 + (HMEntry *)newEntry:(NSInteger)h key:(NSString *)k value:(id)v next:(HMEntry *) n;
 - (id) init:(NSInteger)h key:(NSString *)k value:(id)v next:(HMEntry *)n;
@@ -120,8 +120,8 @@
     AMutableArray *anArray;
 }
 
-@property (retain) HashMap *hm;
-@property (retain) AMutableArray *anArray;
+@property (copy) HashMap *hm;
+@property (copy) AMutableArray *anArray;
 
 + (HMKeySet *)newKeySet:(HashMap *)aHM;
 
@@ -140,8 +140,8 @@
     AMutableArray *anArray;
 }
 
-@property (retain) HashMap *hm;
-@property (retain) AMutableArray *anArray;
+@property (copy) HashMap *hm;
+@property (copy) AMutableArray *anArray;
 
 + (Values *)newValueSet:(HashMap *)aHM;
 
@@ -159,8 +159,8 @@
     AMutableArray *anArray;
 }
 
-@property (retain) HashMap *hm;
-@property (retain) AMutableArray *anArray;
+@property (copy) HashMap *hm;
+@property (copy) AMutableArray *anArray;
 
 + (HMEntrySet *)newEntrySet:(HashMap *)aHM;
 
@@ -184,8 +184,8 @@
      */
     NSUInteger count;
     NSUInteger ptr;
-    __strong NSMutableData *buffer;
-    __strong MapElement **ptrBuffer;
+    NSMutableData *buffer;
+    MapElement **ptrBuffer;
     NSInteger mode;
     /**
      * The table, resized as necessary. Length MUST Always be a power of two.
@@ -227,15 +227,15 @@
 @property (assign) NSInteger Capacity;
 @property (getter=getCount, setter=setCount:) NSUInteger count;
 @property (assign) NSUInteger ptr;
-@property (retain, getter=getBuffer, setter=setBuffer:) NSMutableData *buffer;
-@property (assign, getter=getPtrBuffer, setter=setPtrBuffer:) MapElement **ptrBuffer;
+@property (copy, getter=getBuffer, setter=setBuffer:) NSMutableData *buffer;
+@property (copy, getter=getPtrBuffer, setter=setPtrBuffer:) MapElement **ptrBuffer;
 @property (assign) NSInteger threshold;
 @property (assign, getter=getLoadFactor, setter=setLoadFactor:) float loadFactor;
 @property (assign) NSInteger modCount;
-@property (retain, getter=getEntrySet, setter=setEntrySet:) HMEntrySet *entrySet;
+@property (copy, getter=getEntrySet, setter=setEntrySet:) HMEntrySet *entrySet;
 @property (nonatomic, readonly) BOOL empty;
-@property (retain, getter=getKeySet, setter=setKeySet:) HMKeySet *keySet;
-@property (retain, getter=getValues, setter=setValues:) Values *values;
+@property (copy, getter=getKeySet, setter=setKeySet:) HMKeySet *keySet;
+@property (copy, getter=getValues, setter=setValues:) Values *values;
 
 // Contruction/Destruction
 + (id) newHashMap;
@@ -293,7 +293,6 @@
 - (BOOL) hasNext;
 - (MapElement *)nextObject;
 
-- (NSUInteger) count;
 - (id) get:(NSString *)key;
 - (id) getForNullKey;
 - (BOOL) containsKey:(NSString *)key;

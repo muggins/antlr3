@@ -37,7 +37,7 @@
     NSUInteger count;
     NSInteger idx;
     NSMutableData *buffer;
-    __strong NSInteger *intBuffer;
+    NSInteger *intBuffer;
     BOOL SPARSE;
 }
 
@@ -67,7 +67,7 @@
 @property (assign) NSUInteger BuffSize;
 @property (assign, getter=getCount, setter=setCount:) NSUInteger count;
 @property (assign) NSInteger idx;
-@property (retain) NSMutableData *buffer;
+@property (copy) NSMutableData *buffer;
 @property (assign) NSInteger *intBuffer;
 @property (assign) BOOL SPARSE;
 

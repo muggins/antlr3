@@ -129,8 +129,8 @@
     BOOL accessOrder;
 }
 
-@property (retain) LHMEntry *before;
-@property (retain) LHMEntry *after;
+@property (copy) LHMEntry *before;
+@property (copy) LHMEntry *after;
 @property (assign) BOOL accessOrder;
 
 - (id) newEntry:(NSInteger)aHash key:(NSString *)aKey value:(id)aValue next:(LHMEntry *)aNext;
@@ -152,9 +152,9 @@
     LinkedHashMap *lhm;
 }
 
-@property (retain, getter=getNextEntry, setter=setNextEntry:) LHMEntry *nextEntry;
-@property (retain) LHMEntry *lastReturned;
-@property (retain) LinkedHashMap *lhm;
+@property (copy, getter=getNextEntry, setter=setNextEntry:) LHMEntry *nextEntry;
+@property (copy) LHMEntry *lastReturned;
+@property (copy) LinkedHashMap *lhm;
 
 + (LinkedHashIterator *) newIterator:(LinkedHashMap *)aLHM;
 
@@ -212,7 +212,7 @@
     
 }
 
-@property (retain) LHMEntry *header;
+@property (copy) LHMEntry *header;
 @property (assign) BOOL accessOrder;
 
 + (id) newLinkedHashMap:(NSInteger)anInitialCapacity;

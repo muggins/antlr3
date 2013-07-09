@@ -34,12 +34,12 @@
 
 @interface FastQueue : NSObject <NSCopying>
 {
-    __strong AMutableArray *data;
+    AMutableArray *data;
     NSUInteger p;
     NSUInteger range;
 }
 
-@property (retain) AMutableArray *data;
+@property (copy) AMutableArray *data;
 @property (assign) NSUInteger p;
 @property (assign, getter=getRange, setter=setRange:) NSUInteger range;
 

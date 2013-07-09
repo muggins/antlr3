@@ -198,7 +198,7 @@
 	} else {
 		[desc appendFormat:@" char:%c", c];
 	}
-	[desc appendFormat:@" line:%d position:%d", line, charPositionInLine];
+	[desc appendFormat:@" line:%ld position:%ld", line, charPositionInLine];
 	return desc;
 }
 
@@ -212,11 +212,7 @@
 
 - (void) setStream: (id<IntStream>) aStream
 {
-    if ( input != aStream ) {
-        if ( input ) [input release];
-        if ( aStream ) [aStream retain];
-        input = aStream;
-    }
+    input = aStream;
 }
 
 //---------------------------------------------------------- 
@@ -229,11 +225,7 @@
 
 - (void) setToken: (id<Token>) aToken
 {
-    if (token != aToken) {
-        if ( token ) [token release];
-        if ( aToken ) [aToken retain];
-        token = aToken;
-    }
+    token = aToken;
 }
 
 //---------------------------------------------------------- 
@@ -246,11 +238,7 @@
 
 - (void) setNode: (id<BaseTree>) aNode
 {
-    if (node != aNode) {
-        if ( node ) [node release];
-        if ( aNode ) [aNode retain];
-        node = aNode;
-    }
+    node = aNode;
 }
 
 - (NSString *)getMessage

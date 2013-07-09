@@ -43,6 +43,6 @@
 -(BOOL) hasNext;
 
 @property NSInteger i;
-@property (retain) id eof;
-@property (retain) AMutableArray *nodes;
+@property (copy) id eof;
+@property (copy) AMutableArray *nodes;
 @end

@@ -35,8 +35,8 @@
 #import "AMutableArray.h"
 
 @interface ParseTree : BaseTree <BaseTree> {
-	__strong id<Token> payload;
-	__strong AMutableArray *hiddenTokens;
+	id<Token> payload;
+	AMutableArray *hiddenTokens;
 }
 /** A record of the rules used to match a token sequence.  The tokens
  *  end up as the leaves of this tree and rule nodes are the interior nodes.
@@ -58,6 +58,6 @@
 - (NSString *)toInputString;
 - (void)_descriptionLeaves:(NSMutableString *)buf;
 
-@property (retain) id<Token> payload;
-@property (retain) AMutableArray *hiddenTokens;
+@property (copy) id<Token> payload;
+@property (copy) AMutableArray *hiddenTokens;
 @end

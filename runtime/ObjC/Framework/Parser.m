@@ -68,8 +68,7 @@
 #ifdef DEBUG_DEALLOC
     NSLog( @"called dealloc in Parser" );
 #endif
-    [input release];
-	[super dealloc];
+    input = nil;
 }
 
 //---------------------------------------------------------- 
@@ -82,10 +81,6 @@
 
 - (void) setInput: (id<TokenStream>) anInput
 {
-    if (input != anInput) {
-        if ( input ) [input release];
-        [anInput retain];
-    }
     input = anInput;
 }
 
@@ -105,7 +100,7 @@
         tokenText = @"<missing EOF>";
     else
         tokenText = [NSString stringWithFormat:@"<missing %@>",[[BaseRecognizer getTokenNames] objectAtIndex:expectedTokenType]];
-    CommonToken *t = [[CommonToken newToken:expectedTokenType Text:tokenText] retain];
+    CommonToken *t = [CommonToken newToken:expectedTokenType Text:tokenText];
     CommonToken *current = [anInput LT:1];
     if ( current.type == TokenTypeEOF ) {
         current = [anInput LT:-1];

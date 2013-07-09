@@ -64,7 +64,7 @@
     if ( self != nil ) {
         BuffSize  = BUFFSIZE;
         ptr = 0;
-        buffer = [[NSMutableData dataWithLength:(NSUInteger)BuffSize * sizeof(id)] retain];
+        buffer = [NSMutableData dataWithLength:(NSUInteger)BuffSize * sizeof(id)];
         ptrBuffer = (id *) [buffer mutableBytes];
         for( idx = 0; idx < BuffSize; idx++ ) {
             ptrBuffer[idx] = nil;
@@ -82,7 +82,7 @@
     if ( self != nil ) {
         BuffSize  = cnt;
         ptr = 0;
-        buffer = [[NSMutableData dataWithLength:(NSUInteger)BuffSize * sizeof(id)] retain];
+        buffer = [NSMutableData dataWithLength:(NSUInteger)BuffSize * sizeof(id)];
         ptrBuffer = (id *)[buffer mutableBytes];
         for( idx = 0; idx < BuffSize; idx++ ) {
             ptrBuffer[idx] = nil;
@@ -192,7 +192,6 @@
 - (void) addObject:(id) v
 {
     [self ensureCapacity:ptr];
-    if ( v ) [v retain];
     ptrBuffer[ptr++] = v;
     count++;
 }
@@ -202,7 +201,6 @@
     if ( ptr >= BuffSize - 1 ) {
         [self ensureCapacity:ptr];
     }
-    if ( v ) [v retain];
     ptrBuffer[ptr++] = v;
     count++;
 }
@@ -215,7 +213,6 @@
         ptrBuffer[ptr] = nil;
     }
     count--;
-    if ( v ) [v release];
     return v;
 }
 
@@ -264,10 +261,6 @@
     if ( idx >= BuffSize ) {
         [self ensureCapacity:idx];
     }
-    if ( aRule != ptrBuffer[idx] ) {
-        if ( ptrBuffer[idx] ) [ptrBuffer[idx] release];
-        if ( aRule ) [aRule retain];
-    }
     ptrBuffer[idx] = aRule;
     count++;
 }
@@ -286,7 +279,6 @@
     cnt = [anArray count];
     for( i = 0; i < cnt; i++) {
         id tmp = [anArray objectAtIndex:i];
-        if ( tmp ) [tmp retain];
         [self insertObject:tmp atIndex:i];
     }
     count += cnt;
@@ -295,7 +287,7 @@
 
 - (void)removeAllObjects
 {
-    int i;
+    NSInteger i;
     for ( i = 0; i < BuffSize; i++ ) {
         if ( ptrBuffer[i] ) [ptrBuffer[i] release];
         ptrBuffer[i] = nil;
@@ -306,7 +298,7 @@
 
 - (void)removeObjectAtIndex:(NSInteger)idx
 {
-    int i;
+    NSInteger i;
     if ( idx >= 0 && idx < count ) {
         if ( ptrBuffer[idx] ) [ptrBuffer[idx] release];
         for ( i = idx; i < count-1; i++ ) {

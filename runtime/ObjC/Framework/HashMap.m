@@ -277,7 +277,7 @@ static NSInteger itIndex;
     self = [super init];
     if ( self ) {
         hm = aHM;
-        anArray = [[AMutableArray arrayWithCapacity:16] retain];
+        anArray = [AMutableArray arrayWithCapacity:16];
         HMKeyIterator *it = [hm newKeyIterator];
         while ( [it hasNext] ) {
             NSString *aKey = [it next];
@@ -333,7 +333,7 @@ static NSInteger itIndex;
     self = [super init];
     if ( self ) {
         hm = aHM;
-        anArray = [[AMutableArray arrayWithCapacity:16] retain];
+        anArray = [AMutableArray arrayWithCapacity:16];
         HMValueIterator *it = [hm newValueIterator];
         while ( [it hasNext] ) {
             id aValue = [it next];
@@ -384,7 +384,7 @@ static NSInteger itIndex;
     self = [super init];
     if ( self ) {
         hm = aHM;
-        anArray = [[AMutableArray arrayWithCapacity:16] retain];
+        anArray = [AMutableArray arrayWithCapacity:16];
         HMEntryIterator *it = [hm newEntryIterator];
         while ( [it hasNext] ) {
             HMEntry *entry = [it next];
@@ -515,7 +515,7 @@ float const DEFAULT_LOAD_FACTOR = 0.75f;
         fNext = nil;
         Scope = 0;
         ptr = 0;
-        buffer = [[NSMutableData dataWithLength:(NSUInteger)BuffSize * sizeof(id)] retain];
+        buffer = [NSMutableData dataWithLength:(NSUInteger)BuffSize * sizeof(id)];
         ptrBuffer = (MapElement **) [buffer mutableBytes];
         if ( fNext != nil ) {
             Scope = ((HashMap *)fNext)->Scope+1;
@@ -551,7 +551,7 @@ float const DEFAULT_LOAD_FACTOR = 0.75f;
         Capacity = capacity;
         Scope = 0;
         ptr = 0;
-        buffer = [[NSMutableData dataWithLength:(NSUInteger)BuffSize] retain];
+        buffer = [NSMutableData dataWithLength:(NSUInteger)BuffSize];
         ptrBuffer = (MapElement **) [buffer mutableBytes];
         if ( fNext != nil ) {
             Scope = ((HashMap *)fNext)->Scope+1;
@@ -581,11 +581,11 @@ float const DEFAULT_LOAD_FACTOR = 0.75f;
     if ( self ) {
         entrySet = nil;
         if (initialCapacity < 0)
-            @throw [[IllegalArgumentException alloc] init:[NSString stringWithFormat:@"Illegal initial capacity: %d", initialCapacity]];
+            @throw [[IllegalArgumentException alloc] init:[NSString stringWithFormat:@"Illegal initial capacity: %ld", initialCapacity]];
         if (initialCapacity > MAXIMUM_CAPACITY)
             initialCapacity = MAXIMUM_CAPACITY;
         if (aLoadFactor <= 0 /* || [Float isNaN:loadFactor] */)
-            @throw [[IllegalArgumentException alloc] init:[NSString stringWithFormat:@"Illegal load factor:%d ", aLoadFactor]];
+            @throw [[IllegalArgumentException alloc] init:[NSString stringWithFormat:@"Illegal load factor:%f ", aLoadFactor]];
         NSInteger capacity = 1;
         
         while (capacity < initialCapacity)
@@ -602,7 +602,7 @@ float const DEFAULT_LOAD_FACTOR = 0.75f;
         values = nil;
         Scope = 0;
         ptr = 0;
-        buffer = [[NSMutableData dataWithLength:(NSUInteger)BuffSize] retain];
+        buffer = [NSMutableData dataWithLength:(NSUInteger)BuffSize];
         ptrBuffer = (MapElement **) [buffer mutableBytes];
     }
     return self;
@@ -635,7 +635,7 @@ float const DEFAULT_LOAD_FACTOR = 0.75f;
         values = nil;
         Scope = 0;
         ptr = 0;
-        buffer = [[NSMutableData dataWithLength:(NSUInteger)BuffSize] retain];
+        buffer = [NSMutableData dataWithLength:(NSUInteger)BuffSize];
         ptrBuffer = (MapElement **) [buffer mutableBytes];
     }
     return self;
@@ -671,7 +671,7 @@ float const DEFAULT_LOAD_FACTOR = 0.75f;
         values = nil;
         Scope = 0;
         ptr = 0;
-        buffer = [[NSMutableData dataWithLength:(NSUInteger)BuffSize] retain];
+        buffer = [NSMutableData dataWithLength:(NSUInteger)BuffSize];
         ptrBuffer = (MapElement **) [buffer mutableBytes];
         [self putAllForCreate:m];
     }
@@ -913,7 +913,6 @@ float const DEFAULT_LOAD_FACTOR = 0.75f;
     
     np = [self lookup:[sym getName] Scope:scope ];
     if ( np == nil ) {
-        [sym retain];
         [sym setFNext:self->ptrBuffer[ self->LastHash ]];
         self->ptrBuffer[ self->LastHash ] = sym;
         return( self->ptrBuffer[ self->LastHash ] );
@@ -986,7 +985,6 @@ float const DEFAULT_LOAD_FACTOR = 0.75f;
 -(void)setptrBuffer:(MapElement *)np Index:(NSInteger)idx
 {
     if ( idx < Capacity ) {
-        [np retain];
         ptrBuffer[idx] = np;
     }
 }
@@ -1067,10 +1065,6 @@ float const DEFAULT_LOAD_FACTOR = 0.75f;
 {
     if ( idx >= Capacity ) {
         idx %= Capacity;
-    }
-    if ( aRule != ptrBuffer[idx] ) {
-        if ( ptrBuffer[idx] ) [ptrBuffer[idx] release];
-        [aRule retain];
     }
     ptrBuffer[idx] = aRule;
 }
@@ -1564,8 +1558,8 @@ float const DEFAULT_LOAD_FACTOR = 0.75f;
  */
 - (void) addEntry:(NSInteger)hash key:(NSString *)key value:(id)value bucketIndex:(NSInteger)bucketIndex
 {
-    HMEntry *e = (HMEntry *)ptrBuffer[bucketIndex];
-    ptrBuffer[bucketIndex] = [[HMEntry alloc] init:hash key:key value:value next:e];
+    id e = (id)ptrBuffer[bucketIndex];
+    ptrBuffer[bucketIndex] = (MapElement *)[[HMEntry alloc] init:hash key:key value:value next:e];
     if (count++ >= threshold)
         [self resize:2 * BuffSize];
 }
@@ -1580,8 +1574,8 @@ float const DEFAULT_LOAD_FACTOR = 0.75f;
  */
 - (void) createEntry:(NSInteger)hash key:(NSString *)key value:(id)value bucketIndex:(NSInteger)bucketIndex
 {
-    HMEntry *e = (HMEntry *)ptrBuffer[bucketIndex];
-    ptrBuffer[bucketIndex] = [[HMEntry alloc] init:hash key:key value:value next:e];
+    id e = (id)ptrBuffer[bucketIndex];
+    ptrBuffer[bucketIndex] = (MapElement *) [[HMEntry alloc] init:hash key:key value:value next:e];
     count++;
 }
 
@@ -1737,10 +1731,6 @@ float const DEFAULT_LOAD_FACTOR = 0.75f;
     if ( idx >= Capacity ) {
         idx %= Capacity;
     }
-    if ( aRule != ptrBuffer[idx] ) {
-        if ( ptrBuffer[idx] ) [ptrBuffer[idx] release];
-        [aRule retain];
-    }
     ptrBuffer[idx] = aRule;
 }
 
@@ -1751,9 +1741,6 @@ float const DEFAULT_LOAD_FACTOR = 0.75f;
     np = [self lookup:name Scope:0 ];
     if ( np == nil ) {
         np = [MapElement newMapElementWithName:name Node:aNode];
-        if ( ptrBuffer[LastHash] )
-            [ptrBuffer[LastHash] release];
-        [np retain];
         np.fNext = ptrBuffer[ LastHash ];
         ptrBuffer[ LastHash ] = np;
     }
@@ -1763,7 +1750,7 @@ float const DEFAULT_LOAD_FACTOR = 0.75f;
 - (NSEnumerator *)objectEnumerator
 {
 #pragma mark fix this its broken
-    NSEnumerator *anEnumerator;
+    NSEnumerator *anEnumerator = nil;
 
     itIndex = 0;
     return anEnumerator;

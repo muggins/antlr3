@@ -110,12 +110,8 @@ extern NSInteger debug;
 - (void) insertObject:(HashRule *)aRule atIndex:(NSInteger)idx
 {
     if ( idx >= BuffSize ) {
-        if ( debug > 2 ) NSLog( @"In RuleStack attempting to insert aRule at Index %d, but Buffer is only %d long\n", idx, BuffSize );
+        if ( debug > 2 ) NSLog( @"In RuleStack attempting to insert aRule at Index %ld, but Buffer is only %ld long\n", idx, BuffSize );
         [self ensureCapacity:idx];
-    }
-    if ( aRule != ptrBuffer[idx] ) {
-        if ( ptrBuffer[idx] ) [ptrBuffer[idx] release];
-        [aRule retain];
     }
     ptrBuffer[idx] = aRule;
 }
@@ -134,15 +130,15 @@ extern NSInteger debug;
     RuleMemo *aRuleMemo;
 
     if (aRuleIndex >= BuffSize) {
-        if ( debug) NSLog( @"putHashRuleAtRuleIndex attempting to insert aRule at Index %d, but Buffer is only %d long\n", aRuleIndex, BuffSize );
+        if ( debug) NSLog( @"putHashRuleAtRuleIndex attempting to insert aRule at Index %ld, but Buffer is only %ld long\n", aRuleIndex, BuffSize );
         [self ensureCapacity:aRuleIndex];
     }
     if ((aHashRule = ptrBuffer[aRuleIndex]) == nil) {
-        aHashRule = [[HashRule newHashRuleWithLen:17] retain];
+        aHashRule = [HashRule newHashRuleWithLen:17];
         ptrBuffer[aRuleIndex] = aHashRule;
     }
     if (( aRuleMemo = [aHashRule objectAtIndex:aStartIndex] ) == nil ) {
-        aRuleMemo = [[RuleMemo newRuleMemo] retain];
+        aRuleMemo = [RuleMemo newRuleMemo];
         [aHashRule insertObject:aRuleMemo atIndex:aStartIndex];
     }
     [aRuleMemo setStartIndex:[ACNumber numberWithInteger:aStartIndex]];

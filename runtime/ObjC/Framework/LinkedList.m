@@ -720,7 +720,7 @@
  */
 - (NSString *) outOfBoundsMsg:(NSInteger)index
 {
-    return [NSString stringWithFormat:@"Index: %d, Size: %d", index, count];
+    return [NSString stringWithFormat:@"Index: %ld, Size: %ld", index, count];
 }
 
 - (void) checkElementIndex:(NSInteger)index

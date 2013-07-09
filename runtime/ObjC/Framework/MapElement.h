@@ -37,8 +37,8 @@
     NSString *name;
     id        node;
 }
-@property (retain, getter=getName, setter=setName:) NSString *name;
-@property (retain, getter=getNode, setter=setNode:) id node;
+@property (copy, getter=getName, setter=setName:) NSString *name;
+@property (copy, getter=getNode, setter=setNode:) id node;
 
 + (id) newMapElement;
 + (id) newMapElementWithName:(NSString *)aName Type:(NSInteger)aTType;

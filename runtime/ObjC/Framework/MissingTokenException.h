@@ -48,5 +48,5 @@
 
 - (NSString *)description;
 
-@property (retain) id<Token> inserted;
+@property (copy) id<Token> inserted;
 @end

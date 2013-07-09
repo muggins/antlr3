@@ -36,7 +36,7 @@
     ACNumber *ruleNum;
 }
 
-@property (retain, getter=getRuleNum, setter=setRuleNum:) ACNumber *ruleNum;
+@property (copy, getter=getRuleNum, setter=setRuleNum:) ACNumber *ruleNum;
 
 + (RuleMapElement *) newRuleMapElement;
 + (RuleMapElement *) newRuleMapElementWithIndex:(ACNumber *)anIdx;

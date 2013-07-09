@@ -41,7 +41,7 @@
 	NSUInteger ruleNestingLevel;
 }
 
-@property (retain, getter=input, setter=setInput:) id<CharStream> input;
+@property (copy, getter=input, setter=setInput:) id<CharStream> input;
 @property (getter=getRuleNestingLevel, setter=setRuleNestingLevel:) NSUInteger ruleNestingLevel;
 
 #pragma mark Initializer
@@ -58,6 +58,7 @@
 - (id<Token>)getToken;
 - (void) setToken: (id<Token>) aToken;
 - (id<Token>) nextToken;
+- (id<Token>) getEOFToken;
 - (void) mTokens;		// abstract, defined in generated sources
 - (void) skip;
 - (id<CharStream>) input;

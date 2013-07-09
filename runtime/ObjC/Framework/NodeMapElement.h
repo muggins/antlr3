@@ -37,7 +37,7 @@
     id<BaseTree> node;
 }
 
-@property (retain, getter=getNode, setter=setNode:) id<BaseTree> node;
+@property (copy, getter=getNode, setter=setNode:) id<BaseTree> node;
 
 + (void)initialize;
 

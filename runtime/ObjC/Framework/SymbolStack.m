@@ -86,7 +86,7 @@
 #ifdef DEBUG_DEALLOC
     NSLog( @"called dealloc in SymbolStack" );
 #endif
-	[super dealloc];
+    //	[super dealloc];
 }
 
 - (id) copyWithZone:(NSZone *)aZone
@@ -111,10 +111,6 @@
 
 - (void) insertObject:(SymbolsScope *)aRule atIndex:(NSInteger)idx
 {
-    if ( aRule != ptrBuffer[idx] ) {
-        if ( ptrBuffer[idx] ) [ptrBuffer[idx] release];
-        [aRule retain];
-    }
     ptrBuffer[idx] = aRule;
 }
 

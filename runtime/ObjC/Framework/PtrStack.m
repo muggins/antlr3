@@ -137,7 +137,7 @@
     np = [self lookup:[sym getName]];
     if ( np == nil ) {
         [sym setFNext:ptrBuffer[ LastHash ]];
-        ptrBuffer[ LastHash ] = [sym retain];
+        ptrBuffer[ LastHash ] = sym;
         return( ptrBuffer[ LastHash ] );
     }
     return( nil );            /*   not found      */

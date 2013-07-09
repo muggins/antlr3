@@ -50,8 +50,8 @@
 - (id<LinkList>)getfPrev;
 - (void) setFPrev:(id<LinkList>)pp;
 
-@property (retain) id<LinkList> fPrev;
-@property (retain) id<LinkList> fNext;
+@property (copy) id<LinkList> fPrev;
+@property (copy) id<LinkList> fNext;
 @end
 
 @interface LinkBase : NSObject <LinkList> {
@@ -59,8 +59,8 @@
 	id<LinkList> fNext;
 }
 
-@property (retain) id<LinkList> fPrev;
-@property (retain) id<LinkList> fNext;
+@property (copy) id<LinkList> fPrev;
+@property (copy) id<LinkList> fNext;
 
 + (id<LinkList>)newLinkBase;
 + (id<LinkList>)newLinkBase:(id<LinkList>)np Prev:(id<LinkList>)pp;

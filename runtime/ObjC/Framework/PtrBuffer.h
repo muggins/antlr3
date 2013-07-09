@@ -40,15 +40,15 @@
     NSUInteger BuffSize;
     NSUInteger count;
     NSUInteger ptr;
-    __strong NSMutableData *buffer;
-    __strong id *ptrBuffer;
+    NSMutableData *buffer;
+    id *ptrBuffer;
 }
 
 @property (getter=getBuffSize, setter=setBuffSize:) NSUInteger BuffSize;
 @property (getter=getCount, setter=setCount:) NSUInteger count;
 @property (getter=getPtr, setter=setPtr:) NSUInteger ptr;
-@property (retain, getter=getBuffer, setter=setBuffer:) NSMutableData *buffer;
-@property (assign, getter=getPtrBuffer, setter=setPtrBuffer:) id *ptrBuffer;
+@property (copy, getter=getBuffer, setter=setBuffer:) NSMutableData *buffer;
+@property (copy, getter=getPtrBuffer, setter=setPtrBuffer:) id *ptrBuffer;
 
 // Contruction/Destruction
 +(PtrBuffer *)newPtrBuffer;
