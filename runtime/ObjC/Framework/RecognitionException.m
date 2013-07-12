@@ -121,10 +121,9 @@
 #ifdef DEBUG_DEALLOC
     NSLog( @"called dealloc in RecognitionException" );
 #endif
-	if ( input ) [input release];
-	if ( token ) [token release];
-	if ( node ) [node release];
-	[super dealloc];
+	input = nil;
+	token = nil;
+	node = nil;
 }
 
 - (void) extractInformationFromTreeNodeStream:(id<TreeNodeStream>)anInput

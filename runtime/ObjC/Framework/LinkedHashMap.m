@@ -138,9 +138,8 @@ extern float const DEFAULT_LOAD_FACTOR;
 
 - (void) dealloc
 {
-    [nextEntry release];
-    [lastReturned release];
-    [super dealloc];
+    nextEntry = nil;
+    lastReturned = nil;
 }
 
 @end
@@ -410,8 +409,7 @@ extern float const DEFAULT_LOAD_FACTOR;
 }
 
 - (void) dealloc {
-    [header release];
-    [super dealloc];
+    header = nil;
 }
 
 - (LHMEntryIterator *) newEntryIterator
@@ -444,7 +442,7 @@ extern float const DEFAULT_LOAD_FACTOR;
     }
     else {
         if (count >= threshold)
-            [self resize:2 * [buffer length]];
+            [self resize:2 * BuffSize];
     }
 }
 

@@ -30,11 +30,16 @@
 #import "TreeNodeStream.h"
 
 @interface DebugTreeNodeStream : NSObject <TreeNodeStream> {
-	id<DebugEventListener> debugListener;
-	id<TreeAdaptor> treeAdaptor;
-	id<TreeNodeStream> input;
-	BOOL initialStreamState;
+	// id<DebugEventListener> debugListener;
+	// id<TreeAdaptor> treeAdaptor;
+	// id<TreeNodeStream> input;
+	// BOOL initialStreamState;
 }
+
+@property id<DebugEventListener> debugListener;
+@property id<TreeAdaptor> treeAdaptor;
+@property id<TreeNodeStream> input;
+@property BOOL initialStreamState;
 
 - (id) initWithTreeNodeStream:(id<TreeNodeStream>)theStream debugListener:(id<DebugEventListener>)debugger;
 
@@ -49,8 +54,8 @@
 
 #pragma mark TreeNodeStream conformance
 
+- (id<Tree>)get:(NSInteger) i;
 - (id) LT:(NSInteger)k;
-- (id<TreeAdaptor>) getTreeAdaptor;
 - (void) setUniqueNavigationNodes:(BOOL)flag;
 
 #pragma mark IntStream conformance
@@ -63,5 +68,8 @@
 - (void) release:(NSUInteger) marker;
 - (void) seek:(NSUInteger) index;
 - (NSUInteger) size;
+- (void) reset;
+- (void)replaceChildren:(id<Tree>)parent From:(NSInteger)startChildIndex To:(NSInteger)stopChildIndex With:(id<Tree>)t;
+- (NSString *) descriptionFromNode:(id)startNode ToNode:(id)stopNode;
 
 @end

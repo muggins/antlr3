@@ -29,13 +29,18 @@
 
 @implementation DebugTreeNodeStream
 
+@synthesize debugListener;
+@synthesize treeAdaptor;
+@synthesize input;
+@synthesize initialStreamState;
+
 - (id) initWithTreeNodeStream:(id<TreeNodeStream>)theStream debugListener:(id<DebugEventListener>)debugger
 {
 	self = [super init];
 	if (self) {
-		[self setDebugListener:debugger];
-		[self setTreeAdaptor:[theStream getTreeAdaptor]];
-		[self setInput:theStream];
+		debugListener = debugger;
+		treeAdaptor = [theStream getTreeAdaptor];
+		input = theStream;
 	}
 	return self;
 }
@@ -81,20 +86,19 @@
 
 
 #pragma mark TreeNodeStream conformance
+- (id<Tree>)get:(NSInteger) i
+{
+    return nil;
+}
 
 - (id) LT:(NSInteger)k
 {
 	id node = [input LT:k];
-	unsigned hash = [treeAdaptor uniqueIdForTree:node];
-	NSString *text = [treeAdaptor textForNode:node];
-	int type = [treeAdaptor tokenTypeForNode:node];
+	NSUInteger hash = [treeAdaptor getUniqueID:node];
+	NSString *text = [treeAdaptor getText:node];
+	NSInteger type = [treeAdaptor getType:node];
 	[debugListener LT:k foundNode:hash ofType:type text:text];
 	return node;
-}
-
-- (void) setUniqueNavigationNodes:(BOOL)flag
-{
-	[input setUniqueNavigationNodes:flag];
 }
 
 #pragma mark IntStream conformance
@@ -102,9 +106,9 @@
 {
 	id node = [input LT:1];
 	[input consume];
-	unsigned hash = [treeAdaptor uniqueIdForTree:node];
-	NSString *theText = [treeAdaptor textForNode:node];
-	int aType = [treeAdaptor tokenTypeForNode:node];
+	NSUInteger hash = [treeAdaptor getUniqueID:node];
+	NSString *theText = [treeAdaptor getText:node];
+	NSInteger aType = [treeAdaptor getType:node];
 	[debugListener consumeNode:hash ofType:aType text:theText];
 }
 
@@ -154,9 +158,44 @@
 	return [input size];
 }
 
-- (NSString *) descriptionFromToken:(id)startNode ToToken:(id)stopNode
+- (void) reset
 {
-    return [input descriptionFromToken:(id<Token>)startNode ToToken:(id<Token>)stopNode];
+    return;
+}
+
+- (id<Tree>)getTreeSource
+{
+    return input;
+}
+
+- (NSString *)getSourceName
+{
+    return [input getSourceName];
+}
+
+- (id<TokenStream >)getTokenStream
+{
+    return [input getTokenStream];
+}
+
+/** It is normally this object that instructs the node stream to
+ *  create unique nav nodes, but to satisfy interface, we have to
+ *  define it.  It might be better to ignore the parameter but
+ *  there might be a use for it later, so I'll leave.
+ */
+- (void) setUniqueNavigationNodes:(BOOL)flag
+{
+	[input setUniqueNavigationNodes:flag];
+}
+
+- (void)replaceChildren:(id<Tree>)parent From:(NSInteger)startChildIndex To:(NSInteger)stopChildIndex With:(id<Tree>)t
+{
+    [input replaceChildren:parent From:startChildIndex To:stopChildIndex With:t];
+}
+
+- (NSString *) descriptionFromNode:(id)startNode ToNode:(id)stopNode
+{
+    return [input descriptionFromNode:(id<Token>)startNode ToNode:(id<Token>)stopNode];
 }
 
 @end

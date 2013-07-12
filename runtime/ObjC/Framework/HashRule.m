@@ -84,11 +84,11 @@
                     tmp = (RuleMemo *)tmp.fNext;
                 else
                     tmp = nil;
-                //                [rtmp release];
+                // [rtmp release];
             }
         }
     }
-    //    [super dealloc];
+    // [super dealloc];
 }
 
 - (NSUInteger)count
@@ -135,7 +135,7 @@
                     tmp = (RuleMemo *)tmp.fNext;
                 else
                     tmp = nil;
-                //                [rtmp release];
+                // [rtmp release];
             }
         }
     }
@@ -148,12 +148,12 @@
     //    [np release];
 }
 
--(RuleMemo **)getPtrBuffer
+-(__strong RuleMemo **)getPtrBuffer
 {
     return( ptrBuffer );
 }
 
--(void)setPtrBuffer:(RuleMemo **)np
+-(void)setPtrBuffer:(__strong RuleMemo **)np
 {
     ptrBuffer = np;
 }

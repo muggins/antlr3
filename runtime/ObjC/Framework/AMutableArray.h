@@ -14,7 +14,7 @@
 @interface AMutableArray : NSMutableArray {
     NSInteger BuffSize;
     NSInteger count;
-    __strong NSMutableData *buffer;
+    //    NSMutableData *buffer;
     __strong id *ptrBuffer;
 }
 
@@ -45,7 +45,7 @@
 
 @property (assign) NSInteger BuffSize;
 @property (assign, getter=count, setter=setCount:) NSInteger count;
-@property NSMutableData *buffer;
-@property (copy) id *ptrBuffer;
+// @property (copy) NSMutableData *buffer;
+@property (assign) __strong id *ptrBuffer;
 
 @end

@@ -124,13 +124,13 @@
 
 @interface LHMEntry : HMEntry
 {
-    LHMEntry *before;
-    LHMEntry *after;
+    __strong LHMEntry *before;
+    __strong LHMEntry *after;
     BOOL accessOrder;
 }
 
-@property (copy) LHMEntry *before;
-@property (copy) LHMEntry *after;
+@property LHMEntry *before;
+@property LHMEntry *after;
 @property (assign) BOOL accessOrder;
 
 - (id) newEntry:(NSInteger)aHash key:(NSString *)aKey value:(id)aValue next:(LHMEntry *)aNext;
@@ -147,14 +147,14 @@
 
 @interface LinkedHashIterator : HashIterator
 {
-    LHMEntry *nextEntry;
-    LHMEntry *lastReturned;
-    LinkedHashMap *lhm;
+    __strong LHMEntry *nextEntry;
+    __strong LHMEntry *lastReturned;
+    __strong LinkedHashMap *lhm;
 }
 
-@property (copy, getter=getNextEntry, setter=setNextEntry:) LHMEntry *nextEntry;
-@property (copy) LHMEntry *lastReturned;
-@property (copy) LinkedHashMap *lhm;
+@property (getter=getNextEntry, setter=setNextEntry:) LHMEntry *nextEntry;
+@property LHMEntry *lastReturned;
+@property LinkedHashMap *lhm;
 
 + (LinkedHashIterator *) newIterator:(LinkedHashMap *)aLHM;
 
@@ -201,7 +201,7 @@
     /**
      * The head of the doubly linked list.
      */
-    LHMEntry *header;
+    __strong LHMEntry *header;
     /**
      * The iteration ordering method for this linked hash map: <tt>true</tt>
      * for access-order, <tt>false</tt> for insertion-order.
@@ -212,7 +212,7 @@
     
 }
 
-@property (copy) LHMEntry *header;
+@property LHMEntry *header;
 @property (assign) BOOL accessOrder;
 
 + (id) newLinkedHashMap:(NSInteger)anInitialCapacity;

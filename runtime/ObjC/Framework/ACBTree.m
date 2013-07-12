@@ -61,7 +61,6 @@ static NSInteger RECNUM = 0;
 #ifdef DEBUG_DEALLOC
     NSLog( @"called dealloc in ACBKey" );
 #endif
-    [super dealloc];
 }
 
 - (NSString *) description
@@ -118,8 +117,8 @@ static NSInteger RECNUM = 0;
     for (int i = 0; i < BTNODESIZE; i++) {
         self.btNodes[i] = nil;
     }
-    [self release];
-    [super dealloc];
+    // [self release];
+    // [super dealloc];
 }
 
 - (ACBTree *)createnode:(ACBKey *)kp
@@ -137,7 +136,7 @@ static NSInteger RECNUM = 0;
     tmp.numrecs = ((nodeType == LEAF)?1:numrecs);
     updtd = YES;
     tmp.numkeys = 1;
-    [tmp retain];
+    // [tmp retain];
     return(tmp);
 }
 
@@ -157,7 +156,7 @@ static NSInteger RECNUM = 0;
         @throw [IllegalArgumentException newException:[NSString stringWithFormat:@"Don't understand this key:\"%@\"", dkey]];
     sNode = [self search:dkp.key];
     if ( sNode == nil || [sNode searchnode:dkp.key match:YES] == FAILURE ) {
-        if ( mustRelease ) [dkp release];
+        // if ( mustRelease ) [dkp release];
         return(self);
     }
     told = dict.root;
@@ -173,7 +172,7 @@ static NSInteger RECNUM = 0;
 #ifdef DONTUSENOMO
     if (debug == 'd') [self printtree];
 #endif
-    if ( mustRelease ) [dkp release];
+    // if ( mustRelease ) [dkp release];
     return(told);
 }
 
@@ -191,7 +190,8 @@ static NSInteger RECNUM = 0;
     q = [self internalinsert:kp value:value split:&h];
     /*  check for growth at the root  */
     if ( q != nil ) {
-        tnew = [[ACBTree newNodeWithDictionary:dict] retain];
+        tnew = [ACBTree newNodeWithDictionary:dict];
+        // tnew = [[ACBTree newNodeWithDictionary:dict] retain];
         tnew.nodeType = BTNODE;
         nodeNum = tnew.nodeid;
         tnew.nodeid = 0;
@@ -474,8 +474,8 @@ static NSInteger RECNUM = 0;
     [self rotateleft:j];
     self.numkeys--;
     numrecs -= ((self.nodeType == LEAF)?1:btNodes[j].numrecs);
-    if ( k0 ) [k0 release];
-    if ( n0 ) [n0 release];
+    // if ( k0 ) [k0 release];
+    // if ( n0 ) [n0 release];
     updtd = TRUE;
     return(SUCCESS);
 }
@@ -691,8 +691,9 @@ ACBTree *t;
         return 0; // maybe I need to throw an exception here
     }
     t = self;
-    self.dict.data = [[NSMutableData dataWithLength:(numkeys * sizeof(id))] retain];
-    self.dict.ptrBuffer = [self.dict.data mutableBytes];
+    // self.dict.data = [NSMutableData dataWithLength:(numkeys * sizeof(id))];
+    // self.dict.ptrBuffer = [self.dict.data mutableBytes];
+    self.dict.ptrBuffer = (__strong id *)calloc(sizeof(id), numkeys);
     while ( t != nil && t.nodeType != LEAF ) {
         t = t.btNodes[0];
     }
@@ -718,8 +719,9 @@ ACBTree *t;
         return 0; // maybe I need to throw an exception here
     }
     t = self;
-    self.dict.data = [[NSMutableData dataWithLength:(numrecs * sizeof(id))] retain];
-    self.dict.ptrBuffer = [self.dict.data mutableBytes];
+    // self.dict.data = [NSMutableData dataWithLength:(numrecs * sizeof(id))];
+    // self.dict.ptrBuffer = [self.dict.data mutableBytes];
+    self.dict.ptrBuffer = (__strong id *)calloc(sizeof(id), numrecs);
     while ( t != nil && t.nodeType != LEAF ) {
         t = t.btNodes[0];
     }

@@ -92,9 +92,11 @@ extern NSInteger debug;
 #ifdef DEBUG_DEALLOC
     NSLog( @"called dealloc in BufferedTokenStream" );
 #endif
-    if ( tokens ) [tokens release];
-    if ( tokenSource ) [tokenSource release];
-	[super dealloc];
+    tokens = nil;
+    tokenSource = nil;
+    // if ( tokens ) [tokens release];
+    // if ( tokenSource ) [tokenSource release];
+	// [super dealloc];
 }
 
 - (NSUInteger)line

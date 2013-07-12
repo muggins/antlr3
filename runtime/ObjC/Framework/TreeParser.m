@@ -62,8 +62,7 @@
 #ifdef DEBUG_DEALLOC
     NSLog( @"called dealloc in TreeParser" );
 #endif
-	if ( input ) [input release];
-	[super dealloc];
+	input = nil;
 }
 
 - (void) reset

@@ -29,13 +29,21 @@
 
 @implementation DebugTreeAdaptor
 
+@synthesize dbg;
+@synthesize adaptor;
+
++ (DebugTreeAdaptor *)newDebugTreeAdaptor:(CommonTreeAdaptor *)aTreeAdaptor debugListener:(id<DebugEventListener>)aDebugListener
+{
+    return [[DebugTreeAdaptor alloc] initWithTreeAdaptor:aTreeAdaptor debugListener:aDebugListener];
+}
+
 
 - (id) initWithTreeAdaptor:(CommonTreeAdaptor *)aTreeAdaptor debugListener:(id<DebugEventListener>)aDebugListener
 {
 	self = [super init];
 	if (self) {
-		[self setDebugListener:aDebugListener];
-		[self setTreeAdaptor:aTreeAdaptor];
+		self.dbg = aDebugListener;
+		self.adaptor = aTreeAdaptor;
 	}
 	return self;
 }
@@ -44,27 +52,42 @@
 {
     [self setDebugListener: nil];
     [self setTreeAdaptor: nil];
-    [super dealloc];
 }
 
-- (id<DebugEventListener>) debugListener
+- (id) create:(CommonToken *)payload
 {
-    return debugListener; 
+    if ( payload.index < 0 ) {
+        // could be token conjured up during error recovery
+        return [self createToken:payload.type Text:payload.text];
+    }
+    id node = [adaptor create:payload];
+    [dbg createTree:node token:payload];
+    return node;
+}
+         
+- (CommonToken *)createToken:(NSInteger) tokenType Text:(NSString *)text
+{
+    return [CommonToken newToken:tokenType Text:text];
+}
+
+- (id<DebugEventListener>)getDebugListener
+{
+    return dbg;
 }
 
 - (void) setDebugListener: (id<DebugEventListener>) aDebugListener
 {
-    debugListener = aDebugListener;
+    dbg = aDebugListener;
 }
 
-- (CommonTreeAdaptor *) getTreeAdaptor
+- (CommonTreeAdaptor *) getAdaptor
 {
-    return treeAdaptor; 
+    return adaptor; 
 }
 
-- (void) setTreeAdaptor: (CommonTreeAdaptor *) aTreeAdaptor
+- (void) setAdaptor: (CommonTreeAdaptor *) aTreeAdaptor
 {
-    treeAdaptor = aTreeAdaptor;
+    adaptor = aTreeAdaptor;
 }
 
 #pragma mark -
@@ -84,14 +107,7 @@
 - (id<BaseTree>) newTreeWithToken:(id<Token>) payload
 {
 	id<BaseTree> newTree = [CommonTree newTreeWithToken:payload];
-	[debugListener createNode:[treeAdaptor uniqueIdForTree:newTree] fromTokenAtIndex:[payload getTokenIndex]];
-	return newTree;
-}
-
-- (id<BaseTree>) emptyTree
-{
-	id<BaseTree> newTree = [treeAdaptor newEmptyTree];
-	[debugListener createNilNode:[treeAdaptor uniqueIdForTree:newTree]];
+	[dbg createNode:[adaptor uniqueIdForTree:newTree] fromTokenAtIndex:[payload getTokenIndex]];
 	return newTree;
 }
 
@@ -106,14 +122,14 @@
 
 - (void) addChild:(id<BaseTree>)child toTree:(id<BaseTree>)aTree
 {
-	[treeAdaptor addChild:child toTree:aTree];
-	[debugListener addChild:[treeAdaptor uniqueIdForTree:child] toTree:[self uniqueIdForTree:aTree]];
+	[adaptor addChild:child toTree:aTree];
+	[dbg addChild:[adaptor uniqueIdForTree:child] toTree:[self uniqueIdForTree:aTree]];
 }
 
 - (id<BaseTree>) becomeRoot:(id<BaseTree>)newRoot old:(id<BaseTree>)oldRoot
 {
-	id<BaseTree> newTree = [treeAdaptor becomeRoot:newRoot old:oldRoot];
-	[debugListener becomeRoot:[treeAdaptor uniqueIdForTree:newTree] old:[self uniqueIdForTree:oldRoot]];
+	id<BaseTree> newTree = [adaptor becomeRoot:newRoot old:oldRoot];
+	[dbg becomeRoot:[self uniqueIdForTree:newTree] old:[self uniqueIdForTree:oldRoot]];
 	return newTree;
 }
 
@@ -139,35 +155,35 @@
 
 - (id<BaseTree>) newTreeWithTokenType:(NSInteger)tokenType
 {
-	id<BaseTree> newTree = [treeAdaptor newTreeWithTokenType:tokenType];
-	[debugListener createNode:[treeAdaptor uniqueIdForTree:newTree] text:nil type:tokenType];
+	id<BaseTree> newTree = [CommonTree newTreeWithTokenType:tokenType];
+	[dbg createNode:[adaptor uniqueIdForTree:newTree] text:nil type:tokenType];
 	return newTree;
 }
 
 - (id<BaseTree>) newTreeWithTokenType:(NSInteger)tokenType text:(NSString *)tokenText
 {
-	id<BaseTree> newTree = [treeAdaptor newTreeWithTokenType:tokenType text:tokenText];
-	[debugListener createNode:[treeAdaptor uniqueIdForTree:newTree] text:tokenText type:tokenType];
+	id<BaseTree> newTree = [adaptor newTreeWithTokenType:tokenType text:tokenText];
+	[dbg createNode:[adaptor uniqueIdForTree:newTree] text:tokenText type:tokenType];
 	return newTree;
 }
 - (id<BaseTree>) newTreeWithToken:(id<Token>)fromToken tokenType:(NSInteger)tokenType
 {
-	id<BaseTree> newTree = [treeAdaptor newTreeWithToken:fromToken tokenType:tokenType];
-	[debugListener createNode:[treeAdaptor uniqueIdForTree:newTree] text:fromToken.text type:tokenType];
+	id<BaseTree> newTree = [adaptor newTreeWithToken:fromToken tokenType:tokenType];
+	[dbg createNode:[adaptor uniqueIdForTree:newTree] text:fromToken.text type:tokenType];
 	return newTree;
 }
 
 - (id<BaseTree>) newTreeWithToken:(id<Token>)fromToken tokenType:(NSInteger)tokenType text:(NSString *)tokenText
 {
-	id<BaseTree> newTree = [treeAdaptor newTreeWithToken:fromToken tokenType:tokenType text:tokenText];
-	[debugListener createNode:[treeAdaptor uniqueIdForTree:newTree] text:tokenText type:tokenType];
+	id<BaseTree> newTree = [adaptor newTreeWithToken:fromToken tokenType:tokenType text:tokenText];
+	[dbg createNode:[adaptor uniqueIdForTree:newTree] text:tokenText type:tokenType];
 	return newTree;
 }
 
 - (id<BaseTree>) newTreeWithToken:(id<Token>)fromToken text:(NSString *)tokenText
 {
-	id<BaseTree> newTree = [treeAdaptor newTreeWithToken:fromToken text:tokenText];
-	[debugListener createNode:[treeAdaptor uniqueIdForTree:newTree] text:tokenText type:fromToken.type];
+	id<BaseTree> newTree = [adaptor newTreeWithToken:fromToken text:tokenText];
+	[dbg createNode:[adaptor uniqueIdForTree:newTree] text:tokenText type:fromToken.type];
 	return newTree;
 }
 
@@ -192,9 +208,9 @@
 */
 - (void) setBoundariesForTree:(id<BaseTree>)aTree fromToken:(id<Token>)startToken toToken:(id<Token>)stopToken
 {
-	[treeAdaptor setBoundariesForTree:aTree fromToken:startToken toToken:stopToken];
+	[adaptor setBoundariesForTree:aTree fromToken:startToken toToken:stopToken];
 	if (aTree && startToken && stopToken) {
-		[debugListener setTokenBoundariesForTree:[aTree hash] From:[startToken getTokenIndex] To:[stopToken getTokenIndex]];
+		[dbg setTokenBoundariesForTree:[aTree hash] From:[startToken getTokenIndex] To:[stopToken getTokenIndex]];
 	}
 }
 /* handled by forwardInvocation:

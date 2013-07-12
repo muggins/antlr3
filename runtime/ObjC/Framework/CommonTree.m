@@ -138,14 +138,11 @@
 - (void) dealloc
 {
     if ( token ) {
-        [token release];
         token = nil;
     }
     if ( parent ) {
-        [parent release];
         parent = nil;
     }
-	[super dealloc];
 }
 
 - (id) copyWithZone:(NSZone *)aZone

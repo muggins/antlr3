@@ -17,7 +17,7 @@
 @synthesize nodes_inuse;
 @synthesize nxt_nodeid;
 //@synthesize count;
-@synthesize data;
+// @synthesize data;
 @synthesize ptrBuffer;
 
 + (AMutableDictionary *) newDictionary
@@ -195,7 +195,7 @@
 // 1) Use the stack based array provided by stackbuf. If you do this, then you must respect the value of 'len'.
 // 2) Return your own array of objects. If you do this, return the full length of the array returned until you run out of objects, then return 0. For example, a linked-array implementation may return each array in order until you iterate through all arrays.
 // In either case, state->itemsPtr MUST be a valid array (non-nil). This sample takes approach #1, using stackbuf to store results.
-- (NSUInteger)countByEnumeratingWithState:(NSFastEnumerationState *)state objects:(id *)stackbuf count:(NSUInteger)len
+- (NSUInteger)countByEnumeratingWithState:(NSFastEnumerationState *)state objects:(id __unsafe_unretained [])stackbuf count:(NSUInteger)len
 {
     NSUInteger cnt = 0;
     // This is the initialization condition, so we'll do one-time setup here.

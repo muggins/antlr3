@@ -105,8 +105,8 @@
 - (void) createNilNode:(NSUInteger)hash;
 - (void) createNode:(NSUInteger)hash text:(NSString *)text type:(NSInteger)type;
 - (void) createNode:(NSUInteger)hash fromTokenAtIndex:(NSInteger)tokenIndex;
-- (void) makeNode:(NSUInteger)newRootHash parentOf:(unsigned)oldRootHash;
-- (void) addChild:(NSUInteger)childHash toTree:(unsigned)treeHash;
+- (void) makeNode:(NSUInteger)newRootHash parentOf:(NSUInteger)oldRootHash;
+- (void) addChild:(NSUInteger)childHash toTree:(NSUInteger)treeHash;
 - (void) setTokenBoundariesForTree:(NSUInteger)nodeHash From:(NSInteger)tokenStartIndex To:(NSInteger)tokenStopIndex;
 
 @end

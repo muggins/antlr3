@@ -131,7 +131,7 @@ extern NSInteger debug;
         //		tokens = aTree;
         adaptor = [[CommonTreeAdaptor alloc] init];
         nodes = [AMutableArray arrayWithCapacity:DEFAULT_INITIAL_BUFFER_SIZE];
-        down = [[adaptor createTree:TokenTypeDOWN Text:@"DOWN"];
+        down = [adaptor createTree:TokenTypeDOWN Text:@"DOWN"];
         up = [adaptor createTree:TokenTypeUP Text:@"UP"];
         eof = [adaptor createTree:TokenTypeEOF Text:@"EOF"];
     }
@@ -180,13 +180,12 @@ extern NSInteger debug;
 #ifdef DEBUG_DEALLOC
     NSLog( @"called dealloc in BufferedTreeNodeStream" );
 #endif
-    if ( adaptor ) [adaptor release];
-    if ( nodes ) [nodes release];
-    if ( root ) [root release];
-    if ( down ) [down release];
-    if ( up ) [up release];
-    if ( eof ) [eof release];
-	[super dealloc];
+    adaptor = nil;
+    nodes = nil;
+    root = nil;
+    down = nil;
+    up = nil;
+    eof = nil;
 }
 
 - (id) copyWithZone:(NSZone *)aZone

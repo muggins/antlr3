@@ -71,7 +71,6 @@ extern NSInteger debug;
 #ifdef DEBUG_DEALLOC
     NSLog( @"called dealloc in RuleStack" );
 #endif
-	[super dealloc];
 }
 
 - (id) copyWithZone:(NSZone *)aZone

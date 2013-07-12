@@ -119,8 +119,7 @@
 #ifdef DEBUG_DEALLOC
     NSLog( @"called dealloc in TreePattern" );
 #endif
-    if ( label ) [label release];
-    [super dealloc];
+    label = nil;
 }
 
 - (NSString *)description

@@ -13,7 +13,7 @@
 @implementation AMutableArray
 
 @synthesize BuffSize;
-@synthesize buffer;
+// @synthesize buffer;
 @synthesize ptrBuffer;
 //@synthesize count;
 
@@ -38,8 +38,9 @@
     self=[super init];
     if ( self != nil ) {
         BuffSize = BUFFSIZE;
-        buffer = [NSMutableData dataWithLength:(BuffSize * sizeof(id))];
-        ptrBuffer = (id *)[buffer mutableBytes];
+        ptrBuffer = (__strong id *)calloc(sizeof(id), BuffSize);
+        // buffer = [NSMutableData dataWithLength:(BuffSize * sizeof(id))];
+        // ptrBuffer = (id *)[buffer mutableBytes];
         for( int idx = 0; idx < BuffSize; idx++ ) {
             ptrBuffer[idx] = nil;
         }
@@ -52,8 +53,9 @@
     self=[super init];
     if ( self != nil ) {
         BuffSize = (len >= BUFFSIZE) ? len : BUFFSIZE;
-        buffer = [NSMutableData dataWithLength:(BuffSize * sizeof(id))];
-        ptrBuffer = (id *)[buffer mutableBytes];
+        ptrBuffer = (__strong id *)calloc(sizeof(id), BuffSize);
+        // buffer = [NSMutableData dataWithLength:(BuffSize * sizeof(id))];
+        // ptrBuffer = (id *)[buffer mutableBytes];
         for( int idx = 0; idx < BuffSize; idx++ ) {
             ptrBuffer[idx] = nil;
         }
@@ -66,8 +68,9 @@
     self=[super init];
     if ( self != nil ) {
         BuffSize = (array.count >= BUFFSIZE) ? array.count : BUFFSIZE;
-        buffer = [NSMutableData dataWithLength:(BuffSize * sizeof(id))];
-        ptrBuffer = (id *)[buffer mutableBytes];
+        ptrBuffer = (__strong id *)calloc(sizeof(id), BuffSize);
+        // buffer = [NSMutableData dataWithLength:(BuffSize * sizeof(id))];
+        // ptrBuffer = (id *)[buffer mutableBytes];
         for( int idx = 0; idx < BuffSize; idx++ ) {
             ptrBuffer[idx] = nil;
         }
@@ -82,6 +85,10 @@
     NSLog( @"called dealloc in AMutableArray" );
 #endif
     if ( count ) [self removeAllObjects];
+    for (NSInteger i = 0; i < BuffSize; i++) {
+        ptrBuffer[i] = nil;
+    }
+    free(ptrBuffer);
     //    if ( buffer ) [buffer release];
     //    [super dealloc];
 }
@@ -91,11 +98,7 @@
     AMutableArray *copy;
     
     copy = [[[self class] allocWithZone:aZone] init];
-    if ( buffer ) {
-        copy.buffer = [NSMutableData dataWithCapacity:[buffer length]];
-        [copy.buffer appendData:buffer];
-    }
-    copy.ptrBuffer = [copy.buffer mutableBytes];
+    copy.ptrBuffer = ptrBuffer;
     copy.count = count;
     copy.BuffSize = BuffSize;
     return copy;
@@ -130,7 +133,6 @@
                                      userInfo:nil];
         return nil;
     }
-    ptrBuffer = [buffer mutableBytes];
     obj = ptrBuffer[anIdx];
     if ( obj == [NSNull null] ) {
         obj = nil;
@@ -244,7 +246,7 @@
 // 1) Use the stack based array provided by stackbuf. If you do this, then you must respect the value of 'len'.
 // 2) Return your own array of objects. If you do this, return the full length of the array returned until you run out of objects, then return 0. For example, a linked-array implementation may return each array in order until you iterate through all arrays.
 // In either case, state->itemsPtr MUST be a valid array (non-nil). This sample takes approach #1, using stackbuf to store results.
-- (NSUInteger)countByEnumeratingWithState:(NSFastEnumerationState *)state objects:(id *)stackbuf count:(NSUInteger)len
+- (NSUInteger)countByEnumeratingWithState:(NSFastEnumerationState *)state objects:(id __unsafe_unretained [])stackbuf count:(NSUInteger)len
 {
     NSUInteger cnt = 0;
     // This is the initialization condition, so we'll do one-time setup here.
@@ -298,18 +300,25 @@
     return str;
 }
 
-- (void) ensureCapacity:(NSInteger) index
+- (void) ensureCapacity:(NSInteger) anIndex
 {
-	if ((index * sizeof(id)) >= [buffer length])
-	{
-		NSInteger newSize = ([buffer length] / sizeof(id)) * 2;
-		if (index > newSize) {
-			newSize = index + 1;
-		}
-        BuffSize = newSize;
-		[buffer setLength:(BuffSize * sizeof(id))];
-        ptrBuffer = [buffer mutableBytes];
-	}
+    __strong id *newPtrBuffer;
+    
+    if ( anIndex >= BuffSize ) {
+        NSInteger newBuffSize = BuffSize * 2;
+        if (anIndex > newBuffSize) {
+            newBuffSize = anIndex + 1;
+        }
+        newPtrBuffer = (__strong id *)calloc(sizeof(id), newBuffSize);
+        for (NSInteger i = 0; i < BuffSize; i++) {
+            newPtrBuffer[i] = ptrBuffer[i];
+        }
+        for (NSInteger i = BuffSize; i < newBuffSize; i++) {
+            newPtrBuffer[i] = nil;
+        }
+        BuffSize = newBuffSize;
+        ptrBuffer = newPtrBuffer;
+    }
 }
 
 @end

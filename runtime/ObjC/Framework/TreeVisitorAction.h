@@ -34,8 +34,8 @@
 
 @interface TreeVisitorAction : NSObject
 {
-    SEL preAction;
-    SEL postAction;
+    // SEL preAction;
+    // SEL postAction;
 
 }
 
@@ -68,12 +68,14 @@
 
 @interface TreeVisitorActionFiltered : TreeVisitorAction
 {
-    TreeFilter *aTFilter;
-    fptr *TDRule;
-    fptr *BURule;
+    // __strong TreeFilter *aTFilter;
+    // __strong fptr *TDRule;
+    // __strong fptr *BURule;
 }
 
 @property (assign, setter=setATFilter:) TreeFilter *aTFilter;
+@property __strong fptr *TDRule;
+@property __strong fptr *BURule;
 
 + (TreeVisitorAction *)newTreeVisitorActionFiltered:(TreeFilter *)aFilter RuleD:(fptr *)aTDRule RuleU:(fptr *)aBURule;
 - (id) initWithFilter:(TreeFilter *)aFilter RuleD:(fptr *)aTDRule RuleU:(fptr *)aBURule;

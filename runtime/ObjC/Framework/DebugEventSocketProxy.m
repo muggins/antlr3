@@ -159,7 +159,7 @@ protected void transmit(String event) {
 		NSLog(@"socket died or debugger misbehaved: %@ read <%@>", e, response);
 	}
 	@finally {
-		[response release];
+		response = nil;
 	}
 }
 
@@ -305,7 +305,7 @@ protected void transmit(String event) {
 
 - (void) endBacktrack:(NSInteger)level wasSuccessful:(BOOL)successful
 {
-	[self sendToDebugger:[NSString stringWithFormat:@"endBacktrack %ld %ld", level, successful ? 1 : 0]];
+	[self sendToDebugger:[NSString stringWithFormat:@"endBacktrack %ld %d", level, successful ? 1 : 0]];
 }
 
 - (void) locationLine:(NSInteger)line column:(NSInteger)pos
@@ -404,7 +404,7 @@ protected void transmit(String event) {
 
 - (void) addChild:(NSUInteger)childHash toTree:(NSUInteger)treeHash
 {
-	[self sendToDebugger:[NSString stringWithFormat:@"addChild %lu %lu", treeHash, childHash]];
+	[self sendToDebugger:[NSString stringWithFormat:@"addChild %lu %lu", (unsigned long)treeHash, childHash]];
 }
 
 - (void) setTokenBoundariesForTree:(NSUInteger)nodeHash From:(NSInteger)tokenStartIndex To:(NSInteger)tokenStopIndex

@@ -76,34 +76,29 @@
 #ifdef DEBUG_DEALLOC
     NSLog( @"called dealloc in UniqueIDMap" );
 #endif
-    NodeMapElement *tmp, *rtmp;
+    NodeMapElement *tmp;
     NSInteger idx;
 	
     if ( self.fNext != nil ) {
         for( idx = 0; idx < HASHSIZE; idx++ ) {
             tmp = ptrBuffer[idx];
             while ( tmp ) {
-                rtmp = tmp;
                 tmp = (NodeMapElement *)tmp.fNext;
-                [rtmp release];
             }
         }
     }
-	[super dealloc];
 }
 
 -(void)deleteUniqueIDMap:(NodeMapElement *)np
 {
-    NodeMapElement *tmp, *rtmp;
+    NodeMapElement *tmp;
     NSInteger idx;
     
     if ( self.fNext != nil ) {
         for( idx = 0; idx < HASHSIZE; idx++ ) {
             tmp = ptrBuffer[idx];
             while ( tmp ) {
-                rtmp = tmp;
                 tmp = tmp.fNext;
-                [rtmp release];
             }
         }
     }
@@ -111,15 +106,13 @@
 
 - (void)clear
 {
-    NodeMapElement *tmp, *rtmp;
+    NodeMapElement *tmp;
     NSInteger idx;
     
     for( idx = 0; idx < HASHSIZE; idx++ ) {
         tmp = ptrBuffer[idx];
         while ( tmp ) {
-            rtmp = tmp;
             tmp = [tmp getfNext];
-            [rtmp release];
         }
         ptrBuffer[idx] = nil;
     }

@@ -189,7 +189,7 @@
     } else if ( fFloat ) {
         [encoder encodeBool:u.f forKey:[NSString stringWithCString:type encoding:NSASCIIStringEncoding]];;
     } else if ( fInt ) {
-        [encoder encodeInt:(NSInteger)u.i forKey:[NSString stringWithCString:type encoding:NSASCIIStringEncoding]];;
+        [encoder encodeInt:(int)u.i forKey:[NSString stringWithCString:type encoding:NSASCIIStringEncoding]];;
     } else if ( fNSInt ) {
         [encoder encodeInteger:u.i forKey:[NSString stringWithCString:type encoding:NSASCIIStringEncoding]];;
     } else {

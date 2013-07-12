@@ -30,8 +30,10 @@
 #import "DebugTreeNodeStream.h"
 
 @interface DebugTreeParser : TreeParser {
-	id<DebugEventListener> debugListener;
+	// __strong id<DebugEventListener> debugListener;
 }
+
+@property __strong id<DebugEventListener> debugListener;
 
 - (id) initWithTreeNodeStream:(id<TreeNodeStream>)theStream;
 - (id) initWithTreeNodeStream:(id<TreeNodeStream>)theStream

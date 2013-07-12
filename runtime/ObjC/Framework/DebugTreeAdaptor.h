@@ -30,12 +30,18 @@
 #import "DebugEventListener.h"
 
 @interface DebugTreeAdaptor : BaseTreeAdaptor {
-	id<DebugEventListener> debugListener;
-	CommonTreeAdaptor *treeAdaptor;
+	id<DebugEventListener> dbg;
+	CommonTreeAdaptor *adaptor;
 }
+
+@property id<DebugEventListener> dbg;
+@property CommonTreeAdaptor *adaptor;
+
++ (DebugTreeAdaptor *)newDebugTreeAdaptor:(CommonTreeAdaptor *)aTreeAdaptor debugListener:(id<DebugEventListener>)aDebugListener;
 
 - (id) initWithTreeAdaptor:(CommonTreeAdaptor *)aTreeAdaptor debugListener:(id<DebugEventListener>)aDebugListener;
 
+- (id) create:(id<Token>)payload;
 - (id<DebugEventListener>)debugListener;
 - (void) setDebugListener:(id<DebugEventListener>)aDebugListener;
 

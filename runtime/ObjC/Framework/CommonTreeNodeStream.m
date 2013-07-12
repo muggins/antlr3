@@ -89,12 +89,11 @@
 #ifdef DEBUG_DEALLOC
     NSLog( @"called dealloc in CommonTreeNodeStream" );
 #endif
-    if ( root ) [root release];
-    if ( tokens ) [tokens release];
-    if ( adaptor ) [adaptor release];
-    if ( it ) [it release];
-    if ( calls ) [calls release];    
-    [super dealloc];
+    root = nil;
+    tokens = nil;
+    adaptor = nil;
+    it = nil;
+    calls = nil;
 }
 
 - (void) reset

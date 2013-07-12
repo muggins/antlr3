@@ -47,21 +47,18 @@
 #ifdef DEBUG_DEALLOC
     NSLog( @"called dealloc in PtrStack" );
 #endif
-	[super dealloc];
 }
 
 -(void)deletePtrStack:(PtrStack *)np
 {
-    LinkBase *tmp, *rtmp;
+    LinkBase *tmp;
     NSInteger idx;
     
     if ( self.fNext != nil ) {
         for( idx = 0; idx < BuffSize; idx++ ) {
             tmp = ptrBuffer[idx];
             while ( tmp ) {
-                rtmp = tmp;
                 tmp = [tmp getfNext];
-                [rtmp release];
             }
         }
     }
@@ -149,12 +146,12 @@
 	return( ptrBuffer[idx] );
 }
 
--(id *)getptrBuffer
+-(__strong id *)getptrBuffer
 {
 	return( ptrBuffer );
 }
 
--(void)setptrBuffer:(id *)np
+-(void)setptrBuffer:(__strong id *)np
 {
     ptrBuffer = np;
 }

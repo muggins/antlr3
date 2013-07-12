@@ -184,15 +184,15 @@ static NSInteger INITIAL_BUFFER_SIZE = 1024;
             NSError *theError = [stream streamError];
             NSAlert *theAlert = [[NSAlert alloc] init]; // modal delegate releases
             [theAlert setMessageText:@"Error reading stream!"];
-            [theAlert setInformativeText:[NSString stringWithFormat:@"Error %i: %@",
-                                          [theError code], [theError localizedDescription]]];
+            [theAlert setInformativeText:[NSString stringWithFormat:@"Error %li: %@",
+                                          (long)[theError code], [theError localizedDescription]]];
             [theAlert addButtonWithTitle:@"OK"];
             [theAlert beginSheetModalForWindow:[NSApp mainWindow]
                                  modalDelegate:self
                                 didEndSelector:@selector(alertDidEnd:returnCode:contextInfo:)
                                    contextInfo:nil];
             [stream close];
-            [stream release];
+            // [stream release];
             break;
         }
         case NSStreamEventEndEncountered:
@@ -200,7 +200,7 @@ static NSInteger INITIAL_BUFFER_SIZE = 1024;
             [stream close];
             [stream removeFromRunLoop:[NSRunLoop currentRunLoop]
                               forMode:NSDefaultRunLoopMode];
-            [stream release];
+            // [stream release];
             stream = nil; // stream is ivar, so reinit it
             break;
         }

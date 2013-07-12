@@ -184,8 +184,8 @@
      */
     NSUInteger count;
     NSUInteger ptr;
-    NSMutableData *buffer;
-    MapElement **ptrBuffer;
+    // NSMutableData *buffer;
+    __strong MapElement **ptrBuffer;
     NSInteger mode;
     /**
      * The table, resized as necessary. Length MUST Always be a power of two.
@@ -212,10 +212,10 @@
      * the HashMap fail-fast.  (See ConcurrentModificationException).
      */
     NSInteger modCount;
-    HMEntrySet *entrySet;
+    __strong HMEntrySet *entrySet;
     BOOL empty;
-    HMKeySet *keySet;
-    Values *values;
+    __strong HMKeySet *keySet;
+    __strong Values *values;
 }
 
 //@property (copy) TStringPool *fPool;
@@ -228,14 +228,14 @@
 @property (getter=getCount, setter=setCount:) NSUInteger count;
 @property (assign) NSUInteger ptr;
 @property (copy, getter=getBuffer, setter=setBuffer:) NSMutableData *buffer;
-@property (copy, getter=getPtrBuffer, setter=setPtrBuffer:) MapElement **ptrBuffer;
+@property (assign, getter=getPtrBuffer, setter=setPtrBuffer:) __strong MapElement **ptrBuffer;
 @property (assign) NSInteger threshold;
 @property (assign, getter=getLoadFactor, setter=setLoadFactor:) float loadFactor;
 @property (assign) NSInteger modCount;
-@property (copy, getter=getEntrySet, setter=setEntrySet:) HMEntrySet *entrySet;
+@property (copy, getter=getEntrySet, setter=setEntrySet:) __strong HMEntrySet *entrySet;
 @property (nonatomic, readonly) BOOL empty;
-@property (copy, getter=getKeySet, setter=setKeySet:) HMKeySet *keySet;
-@property (copy, getter=getValues, setter=setValues:) Values *values;
+@property (copy, getter=getKeySet, setter=setKeySet:) __strong HMKeySet *keySet;
+@property (copy, getter=getValues, setter=setValues:) __strong Values *values;
 
 // Contruction/Destruction
 + (id) newHashMap;
@@ -248,8 +248,8 @@
 - (id) init:(NSInteger)anInitialCapacity loadFactor:(float)loadFactor;
 - (id) initWithM:(HashMap *)m;
 - (void)dealloc;
-- (HashMap *)PushScope:( HashMap **)map;
-- (HashMap *)PopScope:( HashMap **)map;
+- (__strong HashMap *)PushScope:(__strong HashMap **)map;
+- (__strong HashMap *)PopScope:(__strong HashMap **)map;
 
 - (NSUInteger)count;
 - (NSInteger)size;
@@ -272,26 +272,26 @@
 #ifdef DONTUSEYET
 - (int)bld_symtab:(KW_TABLE *)toknams;
 #endif
-- (MapElement **)getptrBuffer;
-- (MapElement *)getptrBufferEntry:(NSInteger)idx;
+- (__strong MapElement **)getptrBuffer;
+- (__strong MapElement *)getptrBufferEntry:(NSInteger)idx;
 - (void)setptrBuffer:(MapElement *)np Index:(NSInteger)idx;
 - (NSInteger)getScope;
 - (void)setScope:(NSInteger)i;
-- (MapElement *)getTType:(NSString *)name;
-- (MapElement *)getNameInList:(NSInteger)ttype;
+- (__strong MapElement *)getTType:(NSString *)name;
+- (__strong MapElement *)getNameInList:(NSInteger)ttype;
 - (void)putNode:(NSString *)name TokenType:(NSInteger)ttype;
 - (NSInteger)getMode;
 - (void)setMode:(NSInteger)aMode;
-- (void) insertObject:(id)aRule atIndex:(NSInteger)idx;
-- (id) objectAtIndex:(NSInteger)idx;
-- (void) setObject:(id)aRule atIndex:(NSInteger)idx;
-- (void)addObject:(id)anObject;
-- (MapElement *) getName:(NSString *)aName;
-- (void) putName:(NSString *)name Node:(id)aNode;
+- (void) insertObject:(__strong id)aRule atIndex:(NSInteger)idx;
+- (__strong id) objectAtIndex:(NSInteger)idx;
+- (void) setObject:(__strong id)aRule atIndex:(NSInteger)idx;
+- (void)addObject:(__strong id)anObject;
+- (__strong MapElement *) getName:(NSString *)aName;
+- (void) putName:(NSString *)name Node:(__strong id)aNode;
 
 - (NSEnumerator *)objectEnumerator;
 - (BOOL) hasNext;
-- (MapElement *)nextObject;
+- (__strong MapElement *)nextObject;
 
 - (id) get:(NSString *)key;
 - (id) getForNullKey;
@@ -305,20 +305,20 @@
 - (void) transfer:(NSArray *)newTable;
 - (void) putAll:(HashMap *)m;
 - (id) remove:(NSString *)key;
-- (HMEntry *) removeEntryForKey:(NSString *)key;
-- (HMEntry *) removeMapping:(id)o;
+- (__strong HMEntry *) removeEntryForKey:(NSString *)key;
+- (__strong HMEntry *) removeMapping:(__strong id)o;
 - (void) clear;
-- (BOOL) containsValue:(id)value;
+- (BOOL) containsValue:(__strong id)value;
 - (id) copyWithZone:(NSZone *)zone;
 - (NSString *) description;
-- (void) addEntry:(NSInteger)hash key:(NSString *)key value:(id)value bucketIndex:(NSInteger)bucketIndex;
-- (void) createEntry:(NSInteger)hash key:(NSString *)key value:(id)value bucketIndex:(NSInteger)bucketIndex;
-- (HMKeyIterator *) newKeyIterator;
-- (HMValueIterator *) newValueIterator;
-- (HMEntryIterator *) newEntryIterator;
-- (HMKeySet *) keySet;
-- (Values *) values;
-- (HMEntrySet *) entrySet;
+- (void) addEntry:(NSInteger)hash key:(NSString *)key value:(__strong id)value bucketIndex:(NSInteger)bucketIndex;
+- (void) createEntry:(NSInteger)hash key:(NSString *)key value:(__strong id)value bucketIndex:(NSInteger)bucketIndex;
+- (__strong HMKeyIterator *) newKeyIterator;
+- (__strong HMValueIterator *) newValueIterator;
+- (__strong HMEntryIterator *) newEntryIterator;
+- (__strong HMKeySet *) keySet;
+- (__strong Values *) values;
+- (__strong HMEntrySet *) entrySet;
 - (NSInteger) capacity;
 - (float) loadFactor;
 

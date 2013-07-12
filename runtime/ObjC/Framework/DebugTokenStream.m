@@ -46,7 +46,6 @@
 {
     [self setDebugListener:nil];
     self.input = nil;
-    [super dealloc];
 }
 
 

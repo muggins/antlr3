@@ -39,7 +39,7 @@
 		1A048D3F134E8C1100005F57 /* FailedPredicateException.h in Headers */ = {isa = PBXBuildFile; fileRef = 1A048D1F134E8C1100005F57 /* FailedPredicateException.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1A048D40134E8C1100005F57 /* FastQueue.h in Headers */ = {isa = PBXBuildFile; fileRef = 1A048D20134E8C1100005F57 /* FastQueue.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1A15C8EE136C849300D758CE /* ACBTree.h in Headers */ = {isa = PBXBuildFile; fileRef = 1A15C8E8136C849300D758CE /* ACBTree.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		1A15C8EF136C849300D758CE /* ACBTree.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A15C8E9136C849300D758CE /* ACBTree.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		1A15C8EF136C849300D758CE /* ACBTree.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A15C8E9136C849300D758CE /* ACBTree.m */; };
 		1A15C8F0136C849300D758CE /* AMutableArray.h in Headers */ = {isa = PBXBuildFile; fileRef = 1A15C8EA136C849300D758CE /* AMutableArray.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1A15C8F1136C849300D758CE /* AMutableArray.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A15C8EB136C849300D758CE /* AMutableArray.m */; };
 		1A15C8F2136C849300D758CE /* AMutableDictionary.h in Headers */ = {isa = PBXBuildFile; fileRef = 1A15C8EC136C849300D758CE /* AMutableDictionary.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -285,6 +285,8 @@
 		1AE723EF134E8AB6001C3F35 /* TreeWizard.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AE72399134E8AB4001C3F35 /* TreeWizard.m */; };
 		1AE723F3134E8AB6001C3F35 /* UniqueIDMap.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AE7239D134E8AB4001C3F35 /* UniqueIDMap.m */; };
 		1AE723F4134E8AB6001C3F35 /* UnwantedTokenException.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AE7239E134E8AB4001C3F35 /* UnwantedTokenException.m */; };
+		1AEB7784178D135B00A33FDC /* IDPtr.h in Headers */ = {isa = PBXBuildFile; fileRef = 1AEB7782178D135B00A33FDC /* IDPtr.h */; };
+		1AEB7785178D135B00A33FDC /* IDPtr.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AEB7783178D135B00A33FDC /* IDPtr.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXBuildRule section */
@@ -1040,6 +1042,8 @@
 		1AE7239C134E8AB4001C3F35 /* UnbufferedTokenStream.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = UnbufferedTokenStream.m; path = ../UnbufferedTokenStream.m; sourceTree = SOURCE_ROOT; };
 		1AE7239D134E8AB4001C3F35 /* UniqueIDMap.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = UniqueIDMap.m; path = ../UniqueIDMap.m; sourceTree = SOURCE_ROOT; };
 		1AE7239E134E8AB4001C3F35 /* UnwantedTokenException.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = UnwantedTokenException.m; path = ../UnwantedTokenException.m; sourceTree = SOURCE_ROOT; };
+		1AEB7782178D135B00A33FDC /* IDPtr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IDPtr.h; path = ../IDPtr.h; sourceTree = "<group>"; };
+		1AEB7783178D135B00A33FDC /* IDPtr.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IDPtr.m; path = ../IDPtr.m; sourceTree = "<group>"; };
 		1AF74A2914D2702800861179 /* TreeFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TreeFilter.h; path = ../TreeFilter.h; sourceTree = "<group>"; };
 		1AF74A2D14D2706300861179 /* TreeFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TreeFilter.m; path = ../TreeFilter.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -1212,6 +1216,8 @@
 				1AE72361134E8AB4001C3F35 /* FailedPredicateException.m */,
 				1A6B1C99134E8CF70016A47D /* HashRule.h */,
 				1AE72365134E8AB4001C3F35 /* HashRule.m */,
+				1AEB7782178D135B00A33FDC /* IDPtr.h */,
+				1AEB7783178D135B00A33FDC /* IDPtr.m */,
 				1AE72368134E8AB4001C3F35 /* IntStream.h */,
 				1A6B1C9C134E8CF70016A47D /* Lexer.h */,
 				1AE72369134E8AB4001C3F35 /* Lexer.m */,
@@ -2036,6 +2042,7 @@
 				1A6B1D15134E8CF90016A47D /* UniqueIDMap.h in Headers */,
 				1A6B1D16134E8CF90016A47D /* UnwantedTokenException.h in Headers */,
 				1AAC3C82136C890300EB094D /* ArrayIterator.h in Headers */,
+				1AEB7784178D135B00A33FDC /* IDPtr.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2551,6 +2558,7 @@
 				1AB8961E153099210099B63F /* Entry.m in Sources */,
 				1AB896221530AC350099B63F /* LinkedHashMap.m in Sources */,
 				1AB896261530AC750099B63F /* LinkedList.m in Sources */,
+				1AEB7785178D135B00A33FDC /* IDPtr.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
