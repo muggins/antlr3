@@ -29,6 +29,8 @@
 
 @implementation Parser
 
+@synthesize input;
+
 + (Parser *)newParser:(id<TokenStream>)anInput
 {
     return [[Parser alloc] initWithTokenStream:anInput];

@@ -61,7 +61,7 @@
         return [self createToken:payload.type Text:payload.text];
     }
     id node = [adaptor create:payload];
-    [dbg createTree:node token:payload];
+    [dbg createNode:node token:payload];
     return node;
 }
          
@@ -107,7 +107,7 @@
 - (id<BaseTree>) newTreeWithToken:(id<Token>) payload
 {
 	id<BaseTree> newTree = [CommonTree newTreeWithToken:payload];
-	[dbg createNode:[adaptor uniqueIdForTree:newTree] fromTokenAtIndex:[payload getTokenIndex]];
+	[dbg createNode:newTree token:payload];
 	return newTree;
 }
 
@@ -123,13 +123,13 @@
 - (void) addChild:(id<BaseTree>)child toTree:(id<BaseTree>)aTree
 {
 	[adaptor addChild:child toTree:aTree];
-	[dbg addChild:[adaptor uniqueIdForTree:child] toTree:[self uniqueIdForTree:aTree]];
+	[dbg addChild:aTree child:child];
 }
 
 - (id<BaseTree>) becomeRoot:(id<BaseTree>)newRoot old:(id<BaseTree>)oldRoot
 {
 	id<BaseTree> newTree = [adaptor becomeRoot:newRoot old:oldRoot];
-	[dbg becomeRoot:[self uniqueIdForTree:newTree] old:[self uniqueIdForTree:oldRoot]];
+	[dbg becomeRoot:newTree old:oldRoot];
 	return newTree;
 }
 
@@ -140,77 +140,47 @@
 */
 
 #pragma mark Rewrite Rules
-
- - (void) addTokenAsChild:(id<Token>)child toTree:(id<BaseTree>)aTree
+- (void) addTokenAsChild:(id<Token>)child toTree:(id<BaseTree>)aTree;
 {
 	id<BaseTree> newChild = [self newTreeWithToken:child];
 	[self addChild:newChild toTree:aTree];
 }
 
-- (id<BaseTree>) makeToken:(id<Token>)newRoot parentOf:(id<BaseTree>)oldRoot
+- (id<BaseTree>) becomeRootfromToken:(id<Token>)aNewRoot old:(id<BaseTree>)oldRoot
 {
-	id<BaseTree> newNode = [self newTreeWithToken:newRoot];
-	return [self becomeRoot:newNode old:oldRoot];
-}
-
-- (id<BaseTree>) newTreeWithTokenType:(NSInteger)tokenType
-{
-	id<BaseTree> newTree = [CommonTree newTreeWithTokenType:tokenType];
-	[dbg createNode:[adaptor uniqueIdForTree:newTree] text:nil type:tokenType];
+	id<BaseTree> newTree = [adaptor becomeRoot:aNewRoot old:oldRoot];
+	[dbg becomeRoot:newTree old:oldRoot];
 	return newTree;
 }
 
-- (id<BaseTree>) newTreeWithTokenType:(NSInteger)tokenType text:(NSString *)tokenText
+- (id<BaseTree>) create:(NSInteger)tokenType token:(id<Token>)fromToken
 {
-	id<BaseTree> newTree = [adaptor newTreeWithTokenType:tokenType text:tokenText];
-	[dbg createNode:[adaptor uniqueIdForTree:newTree] text:tokenText type:tokenType];
-	return newTree;
-}
-- (id<BaseTree>) newTreeWithToken:(id<Token>)fromToken tokenType:(NSInteger)tokenType
-{
-	id<BaseTree> newTree = [adaptor newTreeWithToken:fromToken tokenType:tokenType];
-	[dbg createNode:[adaptor uniqueIdForTree:newTree] text:fromToken.text type:tokenType];
-	return newTree;
+    id<BaseTree> node = [adaptor createTree:tokenType FromToken:fromToken];
+    [dbg createNode:node];
+    return node;
 }
 
-- (id<BaseTree>) newTreeWithToken:(id<Token>)fromToken tokenType:(NSInteger)tokenType text:(NSString *)tokenText
+- (id<BaseTree>) create:(NSInteger)tokenType FromToken:(id<Token>)fromToken text:(NSString *) text
 {
-	id<BaseTree> newTree = [adaptor newTreeWithToken:fromToken tokenType:tokenType text:tokenText];
-	[dbg createNode:[adaptor uniqueIdForTree:newTree] text:tokenText type:tokenType];
-	return newTree;
+    id<BaseTree> node = [adaptor createTree:tokenType FromToken:fromToken Text:text];
+    [dbg createNode:node];
+    return node;
 }
 
-- (id<BaseTree>) newTreeWithToken:(id<Token>)fromToken text:(NSString *)tokenText
+- (id<BaseTree>) create:(NSInteger)tokenType Text:(NSString *)text
 {
-	id<BaseTree> newTree = [adaptor newTreeWithToken:fromToken text:tokenText];
-	[dbg createNode:[adaptor uniqueIdForTree:newTree] text:tokenText type:fromToken.type];
-	return newTree;
+    id<BaseTree> node = [adaptor createTree:tokenType Text:text];
+    [dbg createNode:node];
+    return node;
 }
 
 #pragma mark Content
 
-/* handled by forwardInvocation:
-- (NSInteger) tokenTypeForNode:(id<BaseTree>)aNode
+- (void) setTokenBoundaries:(id<BaseTree>)aTree From:(id<Token>)startToken To:(id<Token>)stopToken
 {
-}
- 
-- (void) setTokenType:(NSInteger)tokenType forNode:(id)aNode
-{
-}
-
-- (NSString *) textForNode:(id<BaseTree>)aNode
-{
-}
- 
-- (void) setText:(NSString *)tokenText forNode:(id<BaseTree>)aNode
-{
-}
-*/
-- (void) setBoundariesForTree:(id<BaseTree>)aTree fromToken:(id<Token>)startToken toToken:(id<Token>)stopToken
-{
-	[adaptor setBoundariesForTree:aTree fromToken:startToken toToken:stopToken];
+	[adaptor setTokenBoundaries:aTree From:startToken To:stopToken];
 	if (aTree && startToken && stopToken) {
-		[dbg setTokenBoundariesForTree:[aTree hash] From:[startToken getTokenIndex] To:[stopToken getTokenIndex]];
+		[dbg setTokenBoundaries:aTree From:startToken To:stopToken];
 	}
 }
 /* handled by forwardInvocation:

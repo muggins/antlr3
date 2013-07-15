@@ -30,25 +30,55 @@
 #import "DebugTreeNodeStream.h"
 
 @interface DebugTreeParser : TreeParser {
-	// __strong id<DebugEventListener> debugListener;
+	__strong id<DebugEventListener> dbg;
+	BOOL isCyclicDecision;
 }
 
-@property __strong id<DebugEventListener> debugListener;
+@property (getter = getDBG, setter = setDBG:) __strong id<DebugEventListener> dbg;
+@property (assign) BOOL isCyclicDecision;
 
-- (id) initWithTreeNodeStream:(id<TreeNodeStream>)theStream;
-- (id) initWithTreeNodeStream:(id<TreeNodeStream>)theStream
-				 debuggerPort:(NSInteger)portNumber;
+/** Create a normal parser except wrap the token stream in a debug
+ *  proxy that fires consume events.
+ */
+
++ (DebugTreeParser *)newDebugTreeParser:(id<TreeNodeStream>) input State:(RecognizerSharedState *)state DebugListener:(id<DebugEventListener>)dbg;
++ (DebugTreeParser *)newDebugTreeParser:(id<TreeNodeStream>) input State:(RecognizerSharedState *)state;
++ (DebugTreeParser *)newDebugTreeParser:(id<TreeNodeStream>) input DebugListener:(id<DebugEventListener>)dbg;
+
 	// designated initializer
 - (id) initWithTreeNodeStream:(id<TreeNodeStream>)theStream
-				debugListener:(id<DebugEventListener>)theDebugListener
-				 debuggerPort:(NSInteger)portNumber;
+                        State:(RecognizerSharedState *)state
+				debugListener:(id<DebugEventListener>)theDebugListener;
+- (id) initWithStream:(id<TreeNodeStream>)theInput
+                State:(RecognizerSharedState *)state;
+- (id) initWithTreeNodeStream:(id<TreeNodeStream>)theStream
+				debugListener:(id<DebugEventListener>)theDebugListener;
 
-- (id<DebugEventListener>) debugListener;
+- (id<DebugEventListener>) getDebugListener;
+#ifdef DONTUSEYET
+/** Provide a new debug event listener for this parser.  Notify the
+ *  input stream too that it should send events to this listener.
+ */
+public void setDebugListener(DebugEventListener dbg) {
+    if ( input instanceof DebugTreeNodeStream ) {
+        [(DebugTreeNodeStream)input setDebugListener:dbg];
+    }
+    this.dbg = dbg;
+}
+
+#endif
 - (void) setDebugListener: (id<DebugEventListener>) aDebugListener;
 
-- (void) recoverFromMismatchedToken:(id<IntStream>)inputStream 
+- (void)reportErrorIO:(NSException *)e;
+- (void)reportError:(RecognitionException *)e;
+
+- (void) recoverFromMismatchedToken:(id<IntStream>)inputStream
 						  exception:(NSException *)e 
 						  tokenType:(TokenType)ttype 
 							 follow:(ANTLRBitSet *)follow;
 
+- (id<Tree>)getMissingSymbol:(id<IntStream>)input
+                   Exception:(RecognitionException *)e
+                   TokenType:(NSInteger)expectedTokenType
+                      Follow:(ANTLRBitSet *)follow;
 @end

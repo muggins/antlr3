@@ -25,27 +25,51 @@
 // THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #import <Foundation/Foundation.h>
-#import "Parser.h"
-#import "CommonTreeAdaptor.h"
 #import "DebugEventListener.h"
+#import "TreeAdaptor.h"
+#import "TreeNodeStream.h"
 
-@interface DebugTreeAdaptor : BaseTreeAdaptor {
-	id<DebugEventListener> dbg;
-	CommonTreeAdaptor *adaptor;
+@interface DebugTreeNodeStream : NSObject <TreeNodeStream> {
+	// id<DebugEventListener> debugListener;
+	// id<TreeAdaptor> treeAdaptor;
+	// id<TreeNodeStream> input;
+	// BOOL initialStreamState;
 }
 
 @property id<DebugEventListener> dbg;
-@property CommonTreeAdaptor *adaptor;
+@property id<TreeAdaptor> adaptor;
+@property id<TreeNodeStream> input;
+@property BOOL initialStreamState;
 
-+ (DebugTreeAdaptor *)newDebugTreeAdaptor:(CommonTreeAdaptor *)aTreeAdaptor debugListener:(id<DebugEventListener>)aDebugListener;
+- (id) initWithTree:(id<TreeNodeStream>)theStream DebugListener:(id<DebugEventListener>)debugger;
 
-- (id) initWithTreeAdaptor:(CommonTreeAdaptor *)aTreeAdaptor debugListener:(id<DebugEventListener>)aDebugListener;
+- (id<DebugEventListener>) debugListener;
+- (void) setDebugListener: (id<DebugEventListener>) aDebugListener;
 
-- (id) create:(id<Token>)payload;
-- (id<DebugEventListener>)debugListener;
-- (void) setDebugListener:(id<DebugEventListener>)aDebugListener;
+- (id<TreeNodeStream>) input;
+- (void) setInput: (id<TreeNodeStream>) aTreeNodeStream;
 
-- (CommonTreeAdaptor *) getTreeAdaptor;
-- (void) setTreeAdaptor:(CommonTreeAdaptor *)aTreeAdaptor;
+- (id<TreeAdaptor>) getTreeAdaptor;
+- (void) setTreeAdaptor: (id<TreeAdaptor>) aTreeAdaptor;
+
+#pragma mark TreeNodeStream conformance
+
+- (id<TreeNodeStream>)get:(NSInteger) i;
+- (id) LT:(NSInteger)k;
+- (void) setUniqueNavigationNodes:(BOOL)flag;
+
+#pragma mark IntStream conformance
+- (void) consume;
+- (NSInteger) LA:(NSInteger) i;
+- (NSUInteger) mark;
+- (NSUInteger) getIndex;
+- (void) rewind:(NSUInteger) marker;
+- (void) rewind;
+- (void) release:(NSUInteger) marker;
+- (void) seek:(NSUInteger) index;
+- (NSUInteger) size;
+- (void) reset;
+- (void)replaceChildren:(id<Tree>)parent From:(NSInteger)startChildIndex To:(NSInteger)stopChildIndex With:(id<Tree>)t;
+- (NSString *) descriptionFromNode:(id)startNode ToNode:(id)stopNode;
 
 @end

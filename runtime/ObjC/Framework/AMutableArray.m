@@ -284,7 +284,7 @@
 
 - (NSString *) description
 {
-    NSMutableString *str;
+    __strong NSMutableString *str;
     NSInteger idx, cnt;
     id tmp;
     cnt = [self count];

@@ -624,14 +624,14 @@
 		1A048D10134E8C1000005F57 /* CommonTreeAdaptor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CommonTreeAdaptor.h; path = ../CommonTreeAdaptor.h; sourceTree = "<group>"; };
 		1A048D11134E8C1000005F57 /* CommonTreeNodeStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CommonTreeNodeStream.h; path = ../CommonTreeNodeStream.h; sourceTree = "<group>"; };
 		1A048D12134E8C1100005F57 /* ANTLRCommonTreeTest-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "ANTLRCommonTreeTest-Info.plist"; path = "../ANTLRCommonTreeTest-Info.plist"; sourceTree = "<group>"; };
-		1A048D13134E8C1100005F57 /* Debug.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Debug.h; path = ../Debug.h; sourceTree = "<group>"; };
-		1A048D14134E8C1100005F57 /* DebugEventListener.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DebugEventListener.h; path = ../DebugEventListener.h; sourceTree = "<group>"; };
-		1A048D15134E8C1100005F57 /* DebugEventSocketProxy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DebugEventSocketProxy.h; path = ../DebugEventSocketProxy.h; sourceTree = "<group>"; };
-		1A048D16134E8C1100005F57 /* DebugParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DebugParser.h; path = ../DebugParser.h; sourceTree = "<group>"; };
-		1A048D17134E8C1100005F57 /* DebugTokenStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DebugTokenStream.h; path = ../DebugTokenStream.h; sourceTree = "<group>"; };
-		1A048D18134E8C1100005F57 /* DebugTreeAdaptor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DebugTreeAdaptor.h; path = ../DebugTreeAdaptor.h; sourceTree = "<group>"; };
-		1A048D19134E8C1100005F57 /* DebugTreeNodeStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DebugTreeNodeStream.h; path = ../DebugTreeNodeStream.h; sourceTree = "<group>"; };
-		1A048D1A134E8C1100005F57 /* DebugTreeParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DebugTreeParser.h; path = ../DebugTreeParser.h; sourceTree = "<group>"; };
+		1A048D13134E8C1100005F57 /* Debug.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Debug.h; sourceTree = "<group>"; };
+		1A048D14134E8C1100005F57 /* DebugEventListener.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DebugEventListener.h; sourceTree = "<group>"; };
+		1A048D15134E8C1100005F57 /* DebugEventSocketProxy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DebugEventSocketProxy.h; sourceTree = "<group>"; };
+		1A048D16134E8C1100005F57 /* DebugParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DebugParser.h; sourceTree = "<group>"; };
+		1A048D17134E8C1100005F57 /* DebugTokenStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DebugTokenStream.h; sourceTree = "<group>"; };
+		1A048D18134E8C1100005F57 /* DebugTreeAdaptor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DebugTreeAdaptor.h; sourceTree = "<group>"; };
+		1A048D19134E8C1100005F57 /* DebugTreeNodeStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DebugTreeNodeStream.h; sourceTree = "<group>"; };
+		1A048D1A134E8C1100005F57 /* DebugTreeParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DebugTreeParser.h; sourceTree = "<group>"; };
 		1A048D1B134E8C1100005F57 /* DFA.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DFA.h; path = ../DFA.h; sourceTree = "<group>"; };
 		1A048D1C134E8C1100005F57 /* DoubleKeyMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DoubleKeyMap.h; path = ../DoubleKeyMap.h; sourceTree = "<group>"; };
 		1A048D1D134E8C1100005F57 /* EarlyExitException.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EarlyExitException.h; path = ../EarlyExitException.h; sourceTree = "<group>"; };
@@ -975,12 +975,12 @@
 		1AE72355134E8AB4001C3F35 /* CommonTree.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = CommonTree.m; path = ../CommonTree.m; sourceTree = SOURCE_ROOT; };
 		1AE72356134E8AB4001C3F35 /* CommonTreeAdaptor.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = CommonTreeAdaptor.m; path = ../CommonTreeAdaptor.m; sourceTree = SOURCE_ROOT; };
 		1AE72357134E8AB4001C3F35 /* CommonTreeNodeStream.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = CommonTreeNodeStream.m; path = ../CommonTreeNodeStream.m; sourceTree = SOURCE_ROOT; };
-		1AE72358134E8AB4001C3F35 /* DebugEventSocketProxy.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = DebugEventSocketProxy.m; path = ../DebugEventSocketProxy.m; sourceTree = SOURCE_ROOT; };
-		1AE72359134E8AB4001C3F35 /* DebugParser.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = DebugParser.m; path = ../DebugParser.m; sourceTree = SOURCE_ROOT; };
-		1AE7235A134E8AB4001C3F35 /* DebugTokenStream.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = DebugTokenStream.m; path = ../DebugTokenStream.m; sourceTree = SOURCE_ROOT; };
-		1AE7235B134E8AB4001C3F35 /* DebugTreeAdaptor.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = DebugTreeAdaptor.m; path = ../DebugTreeAdaptor.m; sourceTree = SOURCE_ROOT; };
-		1AE7235C134E8AB4001C3F35 /* DebugTreeNodeStream.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = DebugTreeNodeStream.m; path = ../DebugTreeNodeStream.m; sourceTree = SOURCE_ROOT; };
-		1AE7235D134E8AB4001C3F35 /* DebugTreeParser.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = DebugTreeParser.m; path = ../DebugTreeParser.m; sourceTree = SOURCE_ROOT; };
+		1AE72358134E8AB4001C3F35 /* DebugEventSocketProxy.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = DebugEventSocketProxy.m; path = ../debug/DebugEventSocketProxy.m; sourceTree = SOURCE_ROOT; };
+		1AE72359134E8AB4001C3F35 /* DebugParser.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = DebugParser.m; path = ../debug/DebugParser.m; sourceTree = SOURCE_ROOT; };
+		1AE7235A134E8AB4001C3F35 /* DebugTokenStream.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = DebugTokenStream.m; path = ../debug/DebugTokenStream.m; sourceTree = SOURCE_ROOT; };
+		1AE7235B134E8AB4001C3F35 /* DebugTreeAdaptor.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = DebugTreeAdaptor.m; path = ../debug/DebugTreeAdaptor.m; sourceTree = SOURCE_ROOT; };
+		1AE7235C134E8AB4001C3F35 /* DebugTreeNodeStream.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = DebugTreeNodeStream.m; path = ../debug/DebugTreeNodeStream.m; sourceTree = SOURCE_ROOT; };
+		1AE7235D134E8AB4001C3F35 /* DebugTreeParser.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = DebugTreeParser.m; path = ../debug/DebugTreeParser.m; sourceTree = SOURCE_ROOT; };
 		1AE7235E134E8AB4001C3F35 /* DFA.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = DFA.m; path = ../DFA.m; sourceTree = SOURCE_ROOT; };
 		1AE7235F134E8AB4001C3F35 /* DoubleKeyMap.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = DoubleKeyMap.m; path = ../DoubleKeyMap.m; sourceTree = SOURCE_ROOT; };
 		1AE72360134E8AB4001C3F35 /* EarlyExitException.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = EarlyExitException.m; path = ../EarlyExitException.m; sourceTree = SOURCE_ROOT; };
@@ -1760,6 +1760,7 @@
 				1AE7235D134E8AB4001C3F35 /* DebugTreeParser.m */,
 			);
 			name = debug;
+			path = ../debug;
 			sourceTree = "<group>";
 		};
 		1A9A846614D120E000B0D044 /* tree */ = {
@@ -2700,6 +2701,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = /Library/Frameworks;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -2717,6 +2719,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				FRAMEWORK_SEARCH_PATHS = /Library/Frameworks;
@@ -3104,12 +3107,13 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = "$(DEVELOPER_LIBRARY_DIR)/Frameworks";
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
-				GCC_ENABLE_OBJC_GC = unsupported;
+				GCC_ENABLE_OBJC_GC = "";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ANTLRTests/Tests-Prefix.pch";
 				INFOPLIST_FILE = "ANTLRTests/Tests-Info.plist";
@@ -3131,12 +3135,13 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				FRAMEWORK_SEARCH_PATHS = "$(DEVELOPER_LIBRARY_DIR)/Frameworks";
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
-				GCC_ENABLE_OBJC_GC = unsupported;
+				GCC_ENABLE_OBJC_GC = "";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ANTLRTests/Tests-Prefix.pch";
 				INFOPLIST_FILE = "ANTLRTests/Tests-Info.plist";

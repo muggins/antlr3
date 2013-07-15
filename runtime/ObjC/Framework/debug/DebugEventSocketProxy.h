@@ -80,7 +80,7 @@
 - (void) exitDecision:(NSInteger)decisionNumber;
 - (void) consumeToken:(id<Token>)t;
 - (void) consumeHiddenToken:(id<Token>)t;
-- (void) LT:(NSInteger)i foundToken:(id<Token>)t;
+- (void) LT:(NSInteger)i Token:(id<Token>)t;
 - (void) mark:(NSInteger)marker;
 - (void) rewind:(NSInteger)marker;
 - (void) rewind;
@@ -96,15 +96,15 @@
 
 
 #pragma mark Tree Parsing
-- (void) consumeNode:(unsigned)nodeHash ofType:(NSInteger)type text:(NSString *)text;
-- (void) LT:(NSInteger)i foundNode:(unsigned)nodeHash ofType:(NSInteger)type text:(NSString *)text;
+- (void) consumeNode:(id<Tree>)aNode;
+- (void) LT:(NSInteger)i Node:(id<Tree>)aNode;
 
 
 #pragma mark AST Events
 
 - (void) createNilNode:(NSUInteger)hash;
-- (void) createNode:(NSUInteger)hash text:(NSString *)text type:(NSInteger)type;
-- (void) createNode:(NSUInteger)hash fromTokenAtIndex:(NSInteger)tokenIndex;
+- (void) createNode:(id<BaseTree>) t;
+- (void) createNode:(id<BaseTree>)node token:(id<Token>)token;
 - (void) makeNode:(NSUInteger)newRootHash parentOf:(NSUInteger)oldRootHash;
 - (void) addChild:(NSUInteger)childHash toTree:(NSUInteger)treeHash;
 - (void) setTokenBoundariesForTree:(NSUInteger)nodeHash From:(NSInteger)tokenStartIndex To:(NSInteger)tokenStopIndex;

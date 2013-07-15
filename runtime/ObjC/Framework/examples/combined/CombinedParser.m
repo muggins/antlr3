@@ -78,6 +78,7 @@ static const unsigned long long FOLLOW_ID_in_identifier35_data[] = { 0x000000000
 
 - (void) dealloc
 {
+    ;
 }
 
 /* ObjC start actions.(actionScope).methods */
@@ -108,7 +109,7 @@ static const unsigned long long FOLLOW_ID_in_identifier35_data[] = { 0x000000000
         do {
             NSInteger alt1 = 2;
             NSInteger LA1_0 = [input LA:1];
-            if ( (LA1_0==ID) ) {
+            if ( LA1_0 == ID ) {
                 alt1=1;
             }
 

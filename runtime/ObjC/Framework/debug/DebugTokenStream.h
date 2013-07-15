@@ -26,32 +26,42 @@
 
 #import <Foundation/Foundation.h>
 #import "Parser.h"
-#import "DebugEventSocketProxy.h"
+#import "TokenStream.h"
+#import "TokenSource.h"
 #import "DebugTokenStream.h"
+#import "DebugEventListener.h"
 
-@interface DebugParser : Parser {
-	id<DebugEventListener> debugListener;
+@interface DebugTokenStream : NSObject <TokenStream>
+{
+	id<DebugEventListener> dbg;
+	id<TokenStream> input;
+	BOOL initialStreamState;
+    NSInteger lastMarker;
 }
 
-+ (id) newDebugParser:(id<TokenStream>)theStream
-        debugListener:(id<DebugEventListener>)debugListener;
+@property id<DebugEventListener> dbg;
+@property id<TokenStream> input;
+@property BOOL initialStreamState;
+@property NSInteger lastMarker;
 
-+ (id) newDebugParser:(id<TokenStream>)theStream
-                state:(RecognizerSharedState *)state;
-
-+ (id) newDebugParser:(id<TokenStream>)theStream
-        debugListener:(id<DebugEventListener>)debugListener
-                state:(RecognizerSharedState *)state;
-
-- (id) initWithTokenStream:(id<TokenStream>)theStream;
-- (id) initWithTokenStream:(id<TokenStream>)theStream
-			  debuggerPort:(NSInteger)portNumber;
-// designated initializer
-- (id) initWithTokenStream:(id<TokenStream>)theStream
-			 debugListener:(id<DebugEventListener>)theDebugListener
-			  debuggerPort:(NSInteger)portNumber;
+- (id) initWithTokenStream:(id<TokenStream>)theStream debugListener:(id<DebugEventListener>)debugger;
 
 - (id<DebugEventListener>) debugListener;
 - (void) setDebugListener: (id<DebugEventListener>) aDebugListener;
+
+- (id<TokenStream>) input;
+- (void) setInput:(id<TokenStream>)aTokenStream;
+
+- (void) consume;
+- (id<Token>) getToken:(NSInteger)index;
+- (NSInteger) getIndex;
+- (void) release:(NSInteger)marker;
+- (void) seek:(NSInteger)index;
+- (NSInteger) size;
+- (id<TokenSource>) getTokenSource;
+- (NSString *) getSourceName;
+- (NSString *) description;
+- (NSString *) descriptionFromStart:(NSInteger)aStart ToEnd:(NSInteger)aStop;
+- (NSString *) descriptionFromToken:(CommonToken *)startToken ToToken:(CommonToken *)stopToken;
 
 @end

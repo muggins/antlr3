@@ -20,7 +20,6 @@
 	NSString *subString = [stream substring:0 To:10];
 	NSLog(@"The first ten chars are '%@'", subString);
 	STAssertTrue([@"This is a " isEqualToString:subString], @"The strings do not match");
-	[stream release];
 }
 
 -(void) testConsumeAndReset
@@ -30,7 +29,6 @@
 	STAssertTrue(stream.index > 0, @"Index should be greater than 0 after consume");
 	[stream reset];
 	STAssertTrue(stream.index == 0, @"Index should be 0 after reset");
-	[stream release];
 }
 
 -(void) testConsumeWithNewLine
@@ -42,7 +40,6 @@
 	}
 	STAssertTrue(stream.line == 2, @"Line number is incorrect, should be 2, was %d!", stream.line);
 	STAssertTrue(stream.charPositionInLine == 0, @"Char position in line should be 0, it was: %d!", stream.charPositionInLine);
-	[stream release];
 }
 
 -(void) testLAEOF
@@ -58,7 +55,6 @@
 		}
 	}
 	STAssertTrue(eofFound, @"EOF Was not found in stream, Length =%d, index = %d, i = %d", [stream size], stream.index, i);
-	[stream release];
 }
 
 -(void) testLTEOF
@@ -74,7 +70,6 @@
 		}
 	}
 	STAssertTrue(eofFound, @"EOF Was not found in stream, Length =%d, index = %d, i = %d", [stream size], stream.index, i);
-	[stream release];
 }
 
 -(void) testSeek
@@ -84,7 +79,6 @@
 	STAssertTrue(stream.index == 10, @"Index should be 10");
 	// Get char 10 which is s (with 0 being T)
 	STAssertTrue([stream LA:1] > -1 && (char)[stream LA:1] == 's', @"Char returned should be s");
-	[stream release];
 }
 
 -(void) testSeekMarkAndRewind
@@ -102,7 +96,6 @@
 	STAssertTrue(stream.index == 10, @"Index should be 10");
 	[stream rewind]; // should be marked to 5.
 	STAssertTrue(stream.index == 5, @"Index should be 5");
-	[stream release];
 }
 
 @end

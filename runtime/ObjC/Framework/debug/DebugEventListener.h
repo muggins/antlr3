@@ -83,7 +83,7 @@
 *  ahead into a file it doesn't have so LT events must pass the token
 *  even if the info is redundant.
 */
-- (void) LT:(NSInteger)i foundToken:(id<Token>)t;
+- (void) LT:(NSInteger)i Token:(id<Token>)t;
 
 /** The parser is going to look arbitrarily ahead; mark this location,
 *  the token stream's marker is sent in case you need it.
@@ -223,13 +223,13 @@
 *  the ID is not really meaningful as it's fixed--there is
 *  just one UP node and one DOWN navigation node.
 */
-- (void) consumeNode:(NSInteger)nodeHash ofType:(NSInteger)type text:(NSString *)text;
+- (void) consumeNode:(id<Tree>)t;
 
 /** The tree parser lookedahead.  If the type is UP or DOWN,
 *  then the ID is not really meaningful as it's fixed--there is
 *  just one UP node and one DOWN navigation node.
 */
-- (void) LT:(NSInteger)i foundNode:(unsigned)nodeHash ofType:(NSInteger)type text:(NSString *)text;
+- (void) LT:(NSInteger)i Node:(id<Tree>)t;
 
 
 // A S T  E v e n t s
@@ -242,33 +242,51 @@
 */
 - (void) createNilNode:(unsigned)hash;
 
-/** Announce a new node built from text */
-- (void) createNode:(unsigned)hash text:(NSString *)text type:(NSInteger)type;
+/** Announce a new node built from token elements such as type etc...
+ *
+ *  If you are receiving this event over a socket via
+ *  RemoteDebugEventSocketListener then only t.ID, type, text are
+ *  set.
+ */
+- (void) createNode:(id<BaseTree>) t;
 
-/** Announce a new node built from an existing token */
-- (void) createNode:(unsigned)hash fromTokenAtIndex:(NSInteger)tokenIndex;
+/** Announce a new node built from an existing token.
+ *
+ *  If you are receiving this event over a socket via
+ *  RemoteDebugEventSocketListener then only node.ID and token.tokenIndex
+ *  are set.
+ */
+- (void) createNode:(id<BaseTree>)node token:(id<Token>)token;
 
 /** Make a node the new root of an existing root.  See
-*
-*  Note: the newRootID parameter is possibly different
-*  than the TreeAdaptor.becomeRoot() newRoot parameter.
-*  In our case, it will always be the result of calling
-*  TreeAdaptor.becomeRoot() and not root_n or whatever.
-*
-*  The listener should assume that this event occurs
-*  only when the current subrule (or rule) subtree is
-*  being reset to newRootID.
-*
-*/
-- (void) makeNode:(unsigned)newRootHash parentOf:(unsigned)oldRootHash;
+ *
+ *  Note: the newRootID parameter is possibly different
+ *  than the TreeAdaptor.becomeRoot() newRoot parameter.
+ *  In our case, it will always be the result of calling
+ *  TreeAdaptor.becomeRoot() and not root_n or whatever.
+ *
+ *  The listener should assume that this event occurs
+ *  only when the current subrule (or rule) subtree is
+ *  being reset to newRootID.
+ *
+ *  If you are receiving this event over a socket via
+ *  RemoteDebugEventSocketListener then only IDs are set.
+ *
+ *  @see org.antlr.runtime.tree.TreeAdaptor.becomeRoot()
+ */
+- (void) becomeRoot:(id<BaseTree>)newRoot old:(id<BaseTree>)oldRoot;
 
 /** Make childID a child of rootID.
-*  @see org.antlr.runtime.tree.TreeAdaptor.addChild()
-*/
-- (void) addChild:(unsigned)childHash toTree:(unsigned)treeHash;
+ *
+ *  If you are receiving this event over a socket via
+ *  RemoteDebugEventSocketListener then only IDs are set.
+ *
+ *  @see org.antlr.runtime.tree.TreeAdaptor.addChild()
+ */
+- (void) addChild:(id<BaseTree>)root child:(id<BaseTree>)child;
 
 /** Set the token start/stop token index for a subtree root or node */
-- (void) setTokenBoundariesForTree:(unsigned)nodeHash From:(NSUInteger)tokenStartIndex To:(NSUInteger)tokenStopIndex;
+- (void) setTokenBoundaries:(id<BaseTree>)t From:(NSInteger)tokenStartIndex To:(NSInteger)tokenStopIndex;
 
 - (void) waitForDebuggerConnection;
 

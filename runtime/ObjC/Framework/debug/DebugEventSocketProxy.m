@@ -279,7 +279,7 @@ protected void transmit(String event) {
 	[self sendToDebugger:[NSString stringWithFormat:@"consumeHiddenToken %@", [self escapeNewlines:[t description]]]];
 }
 
-- (void) LT:(NSInteger)i foundToken:(id<Token>)t
+- (void) LT:(NSInteger)i Token:(id<Token>)t
 {
 	[self sendToDebugger:[NSString stringWithFormat:@"LT %ld %@", i, [self escapeNewlines:[t description]]]];
 }
@@ -356,23 +356,14 @@ protected void transmit(String event) {
 
 
 #pragma mark Tree Parsing
-- (void) consumeNode:(unsigned)nodeHash ofType:(NSInteger)type text:(NSString *)text
+- (void) consumeNode:(id<Tree>)node
 {
-	[self sendToDebugger:[NSString stringWithFormat:@"consumeNode %u %ld %@",
-		nodeHash,
-		type,
-		[self escapeNewlines:text]
-		]];
+	//[self sendToDebugger:[NSString stringWithFormat:@"consumeNode %u %ld %@", nodeHash, type, [self escapeNewlines:text]]];
 }
 
-- (void) LT:(NSInteger)i foundNode:(unsigned)nodeHash ofType:(NSInteger)type text:(NSString *)text
+- (void) LT:(NSInteger)i Node:(id<Tree>)node
 {
-	[self sendToDebugger:[NSString stringWithFormat:@"LN %ld %u %ld %@",
-		i,
-		nodeHash,
-		type,
-		[self escapeNewlines:text]
-		]];
+	//[self sendToDebugger:[NSString stringWithFormat:@"LN %ld %u %ld %@", i, nodeHash, type, [self escapeNewlines:text]]];
 }
 
 
@@ -382,6 +373,36 @@ protected void transmit(String event) {
 {
 	[self sendToDebugger:[NSString stringWithFormat:@"nilNode %lu", hash]];
 }
+
+/*
+public void createNode(Object t) {
+    int ID = adaptor.getUniqueID(t);
+    String text = adaptor.getText(t);
+    int type = adaptor.getType(t);
+    StringBuffer buf = new StringBuffer(50);
+    buf.append("createNodeFromTokenElements\t");
+    buf.append(ID);
+    buf.append("\t");
+    buf.append(type);
+    serializeText(buf, text);
+    transmit(buf.toString());
+}
+
+public void createNode(Object node, Token token) {
+    int ID = adaptor.getUniqueID(node);
+    int tokenIndex = token.getTokenIndex();
+    transmit("createNode\t"+ID+"\t"+tokenIndex);
+}
+
+- (void) createNode:(id<BaseTree>) t
+ {
+ }
+
+- (void) createNode:(id<BaseTree>)node token:(id<Token>)token
+ {
+ }
+
+ */
 
 - (void) createNode:(NSUInteger)hash text:(NSString *)text type:(NSInteger)type
 {
@@ -397,9 +418,9 @@ protected void transmit(String event) {
 	[self sendToDebugger:[NSString stringWithFormat:@"createNode %lu %ld", hash, tokenIndex]];
 }
 
-- (void) becomeRoot:(NSUInteger)newRootHash old:(NSUInteger)oldRootHash
+- (void) becomeRoot:(id<BaseTree>)newRoot old:(id<BaseTree>)oldRoot
 {
-	[self sendToDebugger:[NSString stringWithFormat:@"becomeRoot %lu %lu", newRootHash, oldRootHash]];
+	[self sendToDebugger:[NSString stringWithFormat:@"becomeRoot %lu %lu", (NSUInteger)newRoot, (NSUInteger)oldRoot]];
 }
 
 - (void) addChild:(NSUInteger)childHash toTree:(NSUInteger)treeHash

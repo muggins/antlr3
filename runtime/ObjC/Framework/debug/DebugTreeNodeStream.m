@@ -29,17 +29,28 @@
 
 @implementation DebugTreeNodeStream
 
-@synthesize debugListener;
-@synthesize treeAdaptor;
+@synthesize dbg;
+@synthesize adaptor;
 @synthesize input;
 @synthesize initialStreamState;
 
-- (id) initWithTreeNodeStream:(id<TreeNodeStream>)theStream debugListener:(id<DebugEventListener>)debugger
+- (id) initWithTree:(id<TreeNodeStream>)theStream
 {
 	self = [super init];
 	if (self) {
-		debugListener = debugger;
-		treeAdaptor = [theStream getTreeAdaptor];
+		dbg = nil;
+		adaptor = [theStream getTreeAdaptor];
+		input = theStream;
+	}
+	return self;
+}
+
+- (id) initWithTree:(id<TreeNodeStream>)theStream DebugListener:(id<DebugEventListener>)debugger
+{
+	self = [super init];
+	if (self) {
+		dbg = debugger;
+		adaptor = [theStream getTreeAdaptor];
 		input = theStream;
 	}
 	return self;
@@ -47,30 +58,30 @@
 
 - (void) dealloc
 {
-    [self setDebugListener: nil];
-    [self setTreeAdaptor: nil];
+    dbg = nil;
+    adaptor = nil;
     input = nil;
 }
 
 - (id<DebugEventListener>) debugListener
 {
-    return debugListener; 
+    return dbg; 
 }
 
 - (void) setDebugListener: (id<DebugEventListener>) aDebugListener
 {
-    debugListener = aDebugListener;
+    dbg = aDebugListener;
 }
 
 
 - (id<TreeAdaptor>) getTreeAdaptor
 {
-    return treeAdaptor; 
+    return adaptor; 
 }
 
 - (void) setTreeAdaptor: (id<TreeAdaptor>) aTreeAdaptor
 {
-    treeAdaptor = aTreeAdaptor;
+    adaptor = aTreeAdaptor;
 }
 
 
@@ -94,10 +105,7 @@
 - (id) LT:(NSInteger)k
 {
 	id node = [input LT:k];
-	NSUInteger hash = [treeAdaptor getUniqueID:node];
-	NSString *text = [treeAdaptor getText:node];
-	NSInteger type = [treeAdaptor getType:node];
-	[debugListener LT:k foundNode:hash ofType:type text:text];
+	[dbg LT:k Node:node];
 	return node;
 }
 
@@ -106,13 +114,10 @@
 {
 	id node = [input LT:1];
 	[input consume];
-	NSUInteger hash = [treeAdaptor getUniqueID:node];
-	NSString *theText = [treeAdaptor getText:node];
-	NSInteger aType = [treeAdaptor getType:node];
-	[debugListener consumeNode:hash ofType:aType text:theText];
+	[dbg consumeNode:node];
 }
 
-- (NSInteger) LA:(NSUInteger) i
+- (NSInteger) LA:(NSInteger) i
 {
 	id<BaseTree> node = [self LT:1];
 	return node.type;
@@ -120,8 +125,8 @@
 
 - (NSUInteger) mark
 {
-	unsigned lastMarker = [input mark];
-	[debugListener mark:lastMarker];
+	NSUInteger lastMarker = [input mark];
+	[dbg mark:lastMarker];
 	return lastMarker;
 }
 
@@ -133,13 +138,13 @@
 - (void) rewind:(NSUInteger) marker
 {
 	[input rewind:marker];
-	[debugListener rewind:marker];
+	[dbg rewind:marker];
 }
 
 - (void) rewind
 {
 	[input rewind];
-	[debugListener rewind];
+	[dbg rewind];
 }
 
 - (void) release:(NSUInteger) marker
@@ -163,7 +168,7 @@
     return;
 }
 
-- (id<Tree>)getTreeSource
+- (id<TreeNodeStream>)getTreeSource
 {
     return input;
 }

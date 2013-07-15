@@ -33,6 +33,9 @@
 @interface Parser : BaseRecognizer {
 	id<TokenStream> input;
 }
+
+@property id<TokenStream> input;
+
 + (Parser *)newParser:(id<TokenStream>)anInput;
 + (Parser *)newParser:(id<TokenStream>)anInput State:(RecognizerSharedState *)aState;
 

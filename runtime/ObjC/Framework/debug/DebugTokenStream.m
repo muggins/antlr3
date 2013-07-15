@@ -29,6 +29,10 @@
 
 @implementation DebugTokenStream
 
+@synthesize dbg;
+@synthesize input;
+@synthesize initialStreamState;
+@synthesize lastMarker;
 
 - (id) initWithTokenStream:(id<TokenStream>)theStream debugListener:(id<DebugEventListener>)debugger
 {
@@ -51,12 +55,12 @@
 
 - (id<DebugEventListener>) debugListener
 {
-    return debugListener; 
+    return dbg;
 }
 
 - (void) setDebugListener: (id<DebugEventListener>) aDebugListener
 {
-    debugListener = aDebugListener;
+    dbg = aDebugListener;
 }
 
 - (id<TokenStream>) input
@@ -73,7 +77,7 @@
 {
 	NSInteger firstIdx = input.index;
 	for (NSInteger i = 0; i<firstIdx; i++)
-		[debugListener consumeHiddenToken:[input getToken:i]];
+		[dbg consumeHiddenToken:[input getToken:i]];
 	initialStreamState = NO;
 }
 
@@ -95,28 +99,28 @@
 	id<Token> token = [input LT:1];
 	[input consume];
 	NSInteger b = input.index;
-	[debugListener consumeToken:token];
+	[dbg consumeToken:token];
 	if (b > a+1) // must have consumed hidden tokens
 		for (NSInteger i = a+1; i < b; i++)
-			[debugListener consumeHiddenToken:[input getToken:i]];
+			[dbg consumeHiddenToken:[input getToken:i]];
 }
 
 - (NSInteger) mark
 {
 	lastMarker = [input mark];
-	[debugListener mark:lastMarker];
+	[dbg mark:lastMarker];
 	return lastMarker;
 }
 
 - (void) rewind
 {
-	[debugListener rewind];
+	[dbg rewind];
 	[input rewind];
 }
 
 - (void) rewind:(NSInteger)marker
 {
-	[debugListener rewind:marker];
+	[dbg rewind:marker];
 	[input rewind:marker];
 }
 
@@ -124,7 +128,7 @@
 {
 	if ( initialStreamState )
 		[self consumeInitialHiddenTokens];
-	[debugListener LT:k foundToken:[input LT:k]];
+	[dbg LT:k Token:[input LT:k]];
 	return [input LT:k];
 }
 
@@ -132,7 +136,7 @@
 {
 	if ( initialStreamState )
 		[self consumeInitialHiddenTokens];
-	[debugListener LT:k foundToken:[input LT:k]];
+	[dbg LT:k Token:[input LT:k]];
 	return [input LA:k];
 }
 

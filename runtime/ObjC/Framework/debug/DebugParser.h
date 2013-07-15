@@ -26,37 +26,45 @@
 
 #import <Foundation/Foundation.h>
 #import "Parser.h"
-#import "TokenStream.h"
-#import "TokenSource.h"
+#import "DebugEventSocketProxy.h"
 #import "DebugTokenStream.h"
-#import "DebugEventListener.h"
 
-@interface DebugTokenStream : NSObject <TokenStream>
-{
-	id<DebugEventListener> debugListener;
-	id<TokenStream> input;
-	BOOL initialStreamState;
-    NSInteger lastMarker;
+@interface DebugParser : Parser {
+	id<DebugEventListener> dbg;
 }
 
-- (id) initWithTokenStream:(id<TokenStream>)theStream debugListener:(id<DebugEventListener>)debugger;
++ (DebugParser *)newDebugParser:(id<TokenStream>)input State:(RecognizerSharedState *)state DebugListener:(id<DebugEventListener>)debugger;
+
++ (DebugParser *)newDebugParser:(id<TokenStream>)input State:(RecognizerSharedState *)state;
+
++ (DebugParser *)newDebugParser:(id<TokenStream>)input DebugListener:(id<DebugEventListener>)debugger;
+
+// designated initializer
+- (id) initWithTokenStream:(id<TokenStream>)theStream State:(RecognizerSharedState *)aState DebugListener:(id<DebugEventListener>)theDebugListener;
+- (id) initWithTokenStream:(id<TokenStream>)theStream State:(RecognizerSharedState *)aState;
+- (id) initWithTokenStream:(id<TokenStream>)theStream
+			 DebugListener:(id<DebugEventListener>)theDebugListener;
 
 - (id<DebugEventListener>) debugListener;
+- (id<DebugEventListener>)getDebugListener;
 - (void) setDebugListener: (id<DebugEventListener>) aDebugListener;
 
-- (id<TokenStream>) input;
-- (void) setInput:(id<TokenStream>)aTokenStream;
+- (void) beginResync;
+- (void) endResync;
+- (void)beginBacktracking:(NSInteger)level;
+- (void)endBacktracking:(NSInteger)level wasSuccessful:(BOOL)successful;
 
-- (void) consume;
-- (id<Token>) getToken:(NSInteger)index;
-- (NSInteger) getIndex;
-- (void) release:(NSInteger)marker;
-- (void) seek:(NSInteger)index;
-- (NSInteger) size;
-- (id<TokenSource>) getTokenSource;
-- (NSString *) getSourceName;
-- (NSString *) description;
-- (NSString *) descriptionFromStart:(NSInteger)aStart ToEnd:(NSInteger)aStop;
-- (NSString *) descriptionFromToken:(CommonToken *)startToken ToToken:(CommonToken *)stopToken;
+#ifdef DONTUSEYET
+public void reportError(IOException e) {
+    System.err.println(e);
+    e.printStackTrace(System.err);
+}
+
+
+public void reportError(RecognitionException e) {
+    super.reportError(e);
+    dbg.recognitionException(e);
+}
+#endif
 
 @end
