@@ -358,20 +358,6 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          isPathRelative = "0"
-         filePath = "../BufferedTokenStream.m"
-         timestampString = "358145387.043115"
-         startingColumnNumber = "2147483647"
-         endingColumnNumber = "2147483647"
-         startingLineNumber = "352"
-         endingLineNumber = "352"
-         landmarkName = "-descriptionFromStart:ToEnd:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "Yes"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         isPathRelative = "0"
          filePath = "../BufferedTokenStream.h"
          timestampString = "358178331.006457"
          startingColumnNumber = "2147483647"

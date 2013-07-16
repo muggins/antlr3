@@ -31,11 +31,12 @@
 
 #import <Foundation/Foundation.h>
 #import "BaseTree.h"
+#import "TreeFilter.h"
 
 @interface TreeVisitorAction : NSObject
 {
-    // SEL preAction;
-    // SEL postAction;
+    SEL preAction;
+    SEL postAction;
 
 }
 
@@ -68,12 +69,12 @@
 
 @interface TreeVisitorActionFiltered : TreeVisitorAction
 {
-    // __strong TreeFilter *aTFilter;
-    // __strong fptr *TDRule;
-    // __strong fptr *BURule;
+    __strong TreeFilter *aTFilter;
+    __strong fptr *TDRule;
+    __strong fptr *BURule;
 }
 
-@property (assign, setter=setATFilter:) TreeFilter *aTFilter;
+@property __strong TreeFilter *aTFilter;
 @property __strong fptr *TDRule;
 @property __strong fptr *BURule;
 
