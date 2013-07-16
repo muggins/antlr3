@@ -51,6 +51,9 @@
       ignoresPersistentStateOnLaunch = "NO"
       debugDocumentVersioning = "YES"
       allowLocationSimulation = "YES">
+      <PathRunnable
+         FilePath = "/Users/acondit/source/antlr/code/antlr3/runtime/ObjC/Framework/otest">
+      </PathRunnable>
       <CommandLineArguments>
          <CommandLineArgument
             argument = "-SenTest Self"
