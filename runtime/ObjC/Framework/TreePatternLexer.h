@@ -66,11 +66,11 @@ typedef enum {
 
 }
 
-@property (copy) NSString *pattern;
+@property (retain) NSString *pattern;
 @property (assign) NSInteger p;
 @property (assign) NSInteger c;
 @property (assign) NSInteger n;
-@property (copy, getter=getSval, setter=setSval:) NSMutableData *sval;
+@property (retain, getter=getSval, setter=setSval:) NSMutableData *sval;
 @property (assign) char *data;
 @property (assign) BOOL error;
 

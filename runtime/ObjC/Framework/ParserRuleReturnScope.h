@@ -32,8 +32,8 @@
 	id<Token> start;
 	id<Token> stopToken;
 }
-@property (copy, getter=getStart, setter=setStart:) id<Token> start;
-@property (copy, getter=getStop, setter=setStop:)   id<Token> stopToken;
+@property (retain, getter=getStart, setter=setStart:) id<Token> start;
+@property (retain, getter=getStop, setter=setStop:)   id<Token> stopToken;
 
 - (id<Token>) getStart;
 - (void) setStart: (id<Token>) aStart;

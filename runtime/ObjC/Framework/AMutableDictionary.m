@@ -112,7 +112,7 @@
     if ( node != nil ) {
         ret = [node searchnode:kp.key match:YES];
         if ( ret >= 0 && ret < node.numkeys ) {
-            obj = node.btNodes[ret];
+            obj = [node getNode:ret];
             if ( obj == [NSNull null] ) {
                 obj = nil;
             }

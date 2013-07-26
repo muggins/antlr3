@@ -58,6 +58,6 @@
 - (NSString *)toInputString;
 - (void)_descriptionLeaves:(NSMutableString *)buf;
 
-@property (copy) id<Token> payload;
-@property (copy) AMutableArray *hiddenTokens;
+@property (retain) id<Token> payload;
+@property (retain) AMutableArray *hiddenTokens;
 @end

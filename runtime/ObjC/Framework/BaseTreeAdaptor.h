@@ -176,7 +176,7 @@
 
 - (id<Token>)createToken:(id<Token>)aFromToken;
 
-@property (copy) UniqueIDMap *treeToUniqueIDMap;
+@property (retain) UniqueIDMap *treeToUniqueIDMap;
 @property (assign) NSInteger uniqueNodeID;
 
 @end

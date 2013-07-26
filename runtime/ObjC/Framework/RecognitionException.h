@@ -42,10 +42,10 @@
 	BOOL approximateLineInfo;
 }
 
-@property (copy, getter=getStream, setter=setStream:) id<IntStream> input;
+@property (retain, getter=getStream, setter=setStream:) id<IntStream> input;
 @property (assign) NSInteger index;
-@property (copy, getter=getToken, setter=setToken:) id<Token>token;
-@property (copy, getter=getNode, setter=setNode:) id<BaseTree>node;
+@property (retain, getter=getToken, setter=setToken:) id<Token>token;
+@property (retain, getter=getNode, setter=setNode:) id<BaseTree>node;
 @property (assign) unichar c;
 @property (assign) NSUInteger line;
 @property (assign) NSUInteger charPositionInLine;

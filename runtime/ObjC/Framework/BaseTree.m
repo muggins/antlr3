@@ -503,12 +503,12 @@ static id<BaseTree> invalidNode = nil;
         
     if ( [theCopy.children count] )
         [theCopy.children removeAllObjects];
-    AMutableArray *childrenCopy = theCopy.children;
+//    AMutableArray *childrenCopy = theCopy.children;
     for (id loopItem in children) {
         id<BaseTree> childCopy = [loopItem deepCopyWithZone:aZone];
         [theCopy addChild:childCopy];
     }
-    //    if ( childrenCopy ) [childrenCopy release];
+//    if ( childrenCopy ) [childrenCopy release];
     return theCopy;
 }
      

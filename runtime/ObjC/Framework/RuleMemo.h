@@ -38,8 +38,8 @@
     ACNumber *stopIndex;
 }
 
-@property (copy, getter=getStartIndex, setter=setStartIndex:) ACNumber *startIndex;
-@property (copy, getter=getStopIndex, setter=setStopIndex:) ACNumber *stopIndex;
+@property (retain, getter=getStartIndex, setter=setStartIndex:) ACNumber *startIndex;
+@property (retain, getter=getStopIndex, setter=setStopIndex:) ACNumber *stopIndex;
 
 + (RuleMemo *)newRuleMemo;
 + (RuleMemo *)newRuleMemoWithStartIndex:(ACNumber *)aStartIndex StopIndex:(ACNumber *)aStopIndex;

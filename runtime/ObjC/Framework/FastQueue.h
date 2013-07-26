@@ -39,7 +39,7 @@
     NSUInteger range;
 }
 
-@property (copy) AMutableArray *data;
+@property (retain) AMutableArray *data;
 @property (assign) NSUInteger p;
 @property (assign, getter=getRange, setter=setRange:) NSUInteger range;
 

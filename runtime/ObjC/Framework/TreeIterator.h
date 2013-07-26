@@ -49,13 +49,13 @@
 }
 
 @property BOOL firstTime;
-@property(copy) id<TreeAdaptor> adaptor;
-@property(copy) id<BaseTree> root;
-@property(copy) id<BaseTree> tree;
-@property(copy) FastQueue *nodes;
-@property(copy, readwrite) id<BaseTree> up;
-@property(copy, readwrite) id<BaseTree> down;
-@property(copy, readwrite) id<BaseTree> eof;
+@property (retain) id<TreeAdaptor> adaptor;
+@property (retain) id<BaseTree> root;
+@property (retain) id<BaseTree> tree;
+@property (retain) FastQueue *nodes;
+@property (retain, readwrite) id<BaseTree> up;
+@property (retain, readwrite) id<BaseTree> down;
+@property (retain, readwrite) id<BaseTree> eof;
 
 + newANTRLTreeIterator;
 + (TreeIterator *) newANTRLTreeIteratorWithAdaptor:(CommonTreeAdaptor *)adaptor

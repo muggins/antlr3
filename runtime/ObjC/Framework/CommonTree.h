@@ -78,17 +78,17 @@
 - (void) setTokenStopIndex: (NSInteger) aStopIndex;
 
 /*
- @property (copy, getter=getCommonToken, setter=setCommonToken:) CommonToken *token;
+ @property (retain, getter=getCommonToken, setter=setCommonToken:) CommonToken *token;
  @property (assign, getter=getTokenStartIndex, setter=setTokenStartIndex:) NSInteger startIndex;
  @property (assign, getter=getTokenStopIndex, setter=setTokenStopIndex:) NSInteger stopIndex;
- @property (copy, getter=getParent, setter=setParent:) id<BaseTree> parentparent;
+ @property (retain, getter=getParent, setter=setParent:) id<BaseTree> parentparent;
  @property (assign, getter=getChildIndex, setter=setChildIndex:) NSInteger childIndex;
  */
 
-@property (copy) CommonToken *token;
+@property (retain) CommonToken *token;
 @property (assign) NSInteger startIndex;
 @property (assign) NSInteger stopIndex;
-@property (copy, getter=getParent, setter=setParent:) CommonTree *parent;
+@property (retain, getter=getParent, setter=setParent:) CommonTree *parent;
 @property (assign, getter=getChildIndex, setter=setChildIndex:) NSInteger childIndex;
 
 @end

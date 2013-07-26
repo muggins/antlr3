@@ -11,13 +11,13 @@
 #import "ANTLRStringStream.h"
 
 @interface ANTLRReaderStream : ANTLRStringStream {
-    NSInputStream *is;
+    __strong NSInputStream *is;
     NSInteger size;
     NSInteger rbSize;
     NSInteger p1;
 }
 
-@property NSInputStream *is;
+@property (retain) NSInputStream *is;
 @property (assign) NSInteger size;
 @property (assign) NSInteger rbSize;
 

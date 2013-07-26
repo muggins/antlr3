@@ -57,9 +57,9 @@
 - (void) visit:(CommonTree *)t Parent:(CommonTree *)parent ChildIndex:(NSInteger)childIndex Map:(Map *)labels;
 
 @property NSInteger action;
-@property (copy) id actor;
-@property (copy) id object1;
-@property (copy) id object2;
+@property (retain) id actor;
+@property (retain) id object1;
+@property (retain) id object2;
 @end
 
 /** When using %label:TOKENNAME in a tree for parse(), we must
@@ -69,7 +69,7 @@
     NSString *label;
     BOOL      hasTextArg;
 }
-@property (copy, getter=getLabel, setter=setLabel:) NSString *label;
+@property (retain, getter=getLabel, setter=setLabel:) NSString *label;
 @property (assign, getter=getHasTextArg, setter=setHasTextArg:) BOOL hasTextArg;
 
 + (CommonTree *)newTreePattern:(id<Token>)payload;
@@ -130,7 +130,7 @@
 - (BOOL)equals:(id)t1 O2:(id)t2;
 - (BOOL) _equals:(id)t1 O2:(id)t2 Adaptor:(id<TreeAdaptor>)anAdaptor;
 
-@property (copy) id<TreeAdaptor> adaptor;
-@property (copy) Map *tokenNameToTypeMap;
+@property (retain) id<TreeAdaptor> adaptor;
+@property (retain) Map *tokenNameToTypeMap;
 @end
 

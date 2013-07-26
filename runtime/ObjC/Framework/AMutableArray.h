@@ -20,7 +20,7 @@
 
 @property (assign) NSInteger BuffSize;
 @property (assign, getter=count, setter=setCount:) NSInteger count;
-// @property (copy) NSMutableData *buffer;
+// @property (retain) NSMutableData *buffer;
 @property (assign) __strong id *ptrBuffer;
 
 + (id) newArray;

@@ -34,8 +34,8 @@
 	NSString *ruleName;
 }
 
-@property (copy) NSString *predicate;
-@property (copy) NSString *ruleName;
+@property (retain) NSString *predicate;
+@property (retain) NSString *ruleName;
 
 + (FailedPredicateException *) newException:(NSString *)theRuleName predicate:(NSString *)thePredicate stream:(id<IntStream>)theStream;
 - (FailedPredicateException *) initWithRuleName:(NSString *)theRuleName predicate:(NSString *)thePredicate stream:(id<IntStream>)theStream;

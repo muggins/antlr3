@@ -51,8 +51,8 @@
 	CommonTreeAdaptor *adaptor;
 }
 
-@property (getter=getDebugEventListener, setter = setDebugEventListener:)  id<DebugEventListener> dbg;
-@property (getter=getTreeAdaptor, setter = setTreeAdaptor:) CommonTreeAdaptor *adaptor;
+@property (retain, getter=getDebugEventListener, setter = setDebugEventListener:)  id<DebugEventListener> dbg;
+@property (retain, getter=getTreeAdaptor, setter = setTreeAdaptor:) CommonTreeAdaptor *adaptor;
 
 + (DebugTreeAdaptor *)newDebugTreeAdaptor:(CommonTreeAdaptor *)aTreeAdaptor debugListener:(id<DebugEventListener>)aDebugListener;
 

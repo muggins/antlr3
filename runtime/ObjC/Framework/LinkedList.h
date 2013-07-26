@@ -13,9 +13,9 @@
     id item;
 }
 
-@property(copy) LLNode *next;
-@property(copy) LLNode *prev;
-@property(copy)      id item;
+@property(retain) LLNode *next;
+@property(retain) LLNode *prev;
+@property(retain)      id item;
 
 + (LLNode *) newNode:(LLNode *)aPrev element:(id)anElement next:(LLNode *)aNext;
 
@@ -133,8 +133,8 @@
     NSInteger modCount;
 }
 
-@property(nonatomic, copy) LLNode *first;
-@property(nonatomic, copy) LLNode *last;
+@property(nonatomic, retain) LLNode *first;
+@property(nonatomic, retain) LLNode *last;
 @property(assign, getter=getCount, setter=setCount:) NSInteger count;
 @property(assign) NSInteger modCount;
 

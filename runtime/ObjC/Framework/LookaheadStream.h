@@ -44,12 +44,12 @@
 	id eof;
 }
 
-@property (readwrite, copy, getter=getEof, setter=setEof:) id eof;
+@property (readwrite, retain, getter=getEof, setter=setEof:) id eof;
 @property (assign) NSInteger index;
 @property (assign, getter=getEofElementIndex, setter=setEofElementIndex:) NSInteger eofElementIndex;
 @property (assign, getter=getLastMarker, setter=setLastMarker:) NSInteger lastMarker;
 @property (assign, getter=getMarkDepth, setter=setMarkDepth:) NSInteger markDepth;
-@property (copy) id prevElement;
+@property (retain) id prevElement;
 
 - (id) initWithEOF:(id) obj;
 - (id) nextElement;

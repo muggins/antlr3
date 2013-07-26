@@ -39,7 +39,7 @@
 	NSUInteger channel;
 }
 
-@property (copy, getter=getChannelOverride,setter=setChannelOverride:) AMutableDictionary *channelOverride;
+@property (retain, getter=getChannelOverride,setter=setChannelOverride:) AMutableDictionary *channelOverride;
 @property (assign, getter=channel,setter=setChannel:) NSUInteger channel;
 
 + (CommonTokenStream *)newCommonTokenStream;

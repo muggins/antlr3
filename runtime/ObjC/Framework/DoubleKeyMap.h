@@ -23,6 +23,6 @@
 - (AMutableArray *) allKeys2:(id)k1;
 - (NSArray *) values;
 
-@property (copy) AMutableDictionary *data;
+@property (retain) AMutableDictionary *data;
 
 @end

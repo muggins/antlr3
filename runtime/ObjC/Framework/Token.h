@@ -49,7 +49,7 @@ typedef enum {
 
 @protocol Token < NSObject, NSCopying >
 
-@property (copy, getter = text, setter = setText:) NSString *text;
+@property (retain, getter = text, setter = setText:) NSString *text;
 @property (assign) NSInteger type;
 @property (assign) NSUInteger line;
 @property (assign) NSUInteger charPositionInLine;

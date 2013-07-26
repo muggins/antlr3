@@ -93,8 +93,8 @@
 - (NSString *) description;
 - (NSString *) descriptionTree;
 
-@property (copy) AMutableArray *children;
-@property (copy) NSException *anException;
+@property (retain) AMutableArray *children;
+@property (retain) NSException *anException;
 
 @end
 
@@ -166,8 +166,8 @@
 - (NSString *) description;
 - (NSString *) descriptionTree;
 
-@property (copy) AMutableArray *children;
-@property (copy) NSException *anException;
+@property (retain) AMutableArray *children;
+@property (retain) NSException *anException;
 
 @end
 

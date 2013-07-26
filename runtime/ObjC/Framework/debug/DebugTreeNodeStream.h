@@ -36,9 +36,9 @@
 	// BOOL initialStreamState;
 }
 
-@property id<DebugEventListener> dbg;
-@property id<TreeAdaptor> adaptor;
-@property id<TreeNodeStream> input;
+@property (retain) id<DebugEventListener> dbg;
+@property (retain) id<TreeAdaptor> adaptor;
+@property (retain) id<TreeNodeStream> input;
 @property BOOL initialStreamState;
 
 - (id) initWithTree:(id<TreeNodeStream>)theStream DebugListener:(id<DebugEventListener>)debugger;

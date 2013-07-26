@@ -34,7 +34,7 @@
 	BOOL isCyclicDecision;
 }
 
-@property (getter = getDBG, setter = setDBG:) __strong id<DebugEventListener> dbg;
+@property (retain, getter = getDBG, setter = setDBG:) __strong id<DebugEventListener> dbg;
 @property (assign) BOOL isCyclicDecision;
 
 /** Create a normal parser except wrap the token stream in a debug

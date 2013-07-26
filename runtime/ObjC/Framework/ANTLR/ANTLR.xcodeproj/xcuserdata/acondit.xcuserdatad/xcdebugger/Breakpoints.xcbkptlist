@@ -672,8 +672,8 @@
          endingColumnNumber = "2147483647"
          startingLineNumber = "108"
          endingLineNumber = "108"
-         landmarkName = "@implementation FastQueue"
-         landmarkType = "3">
+         landmarkName = "-count"
+         landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "Yes"

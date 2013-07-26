@@ -53,10 +53,10 @@
     id value;
 }
 
-@property(nonatomic, copy) HMEntry  *next;
+@property(nonatomic, retain) HMEntry  *next;
 @property(assign)            NSInteger  hash;
-@property(nonatomic, copy) NSString *key;
-@property(nonatomic, copy) id value;
+@property(nonatomic, retain) NSString *key;
+@property(nonatomic, retain) id value;
 
 + (HMEntry *)newEntry:(NSInteger)h key:(NSString *)k value:(id)v next:(HMEntry *) n;
 - (id) init:(NSInteger)h key:(NSString *)k value:(id)v next:(HMEntry *)n;
@@ -120,8 +120,8 @@
     AMutableArray *anArray;
 }
 
-@property (copy) HashMap *hm;
-@property (copy) AMutableArray *anArray;
+@property (retain) HashMap *hm;
+@property (retain) AMutableArray *anArray;
 
 + (HMKeySet *)newKeySet:(HashMap *)aHM;
 
@@ -140,8 +140,8 @@
     AMutableArray *anArray;
 }
 
-@property (copy) HashMap *hm;
-@property (copy) AMutableArray *anArray;
+@property (retain) HashMap *hm;
+@property (retain) AMutableArray *anArray;
 
 + (Values *)newValueSet:(HashMap *)aHM;
 
@@ -159,8 +159,8 @@
     AMutableArray *anArray;
 }
 
-@property (copy) HashMap *hm;
-@property (copy) AMutableArray *anArray;
+@property (retain) HashMap *hm;
+@property (retain) AMutableArray *anArray;
 
 + (HMEntrySet *)newEntrySet:(HashMap *)aHM;
 
@@ -218,7 +218,7 @@
     __strong Values *values;
 }
 
-//@property (copy) TStringPool *fPool;
+//@property (retain) TStringPool *fPool;
 @property (getter=getScope, setter=setScope:) NSInteger Scope;
 @property (getter=getLastHash, setter=setLastHash:) NSInteger LastHash;
 
@@ -227,15 +227,15 @@
 @property (assign) NSInteger Capacity;
 @property (getter=getCount, setter=setCount:) NSUInteger count;
 @property (assign) NSUInteger ptr;
-@property (copy, getter=getBuffer, setter=setBuffer:) NSMutableData *buffer;
+@property (retain, getter=getBuffer, setter=setBuffer:) NSMutableData *buffer;
 @property (assign, getter=getPtrBuffer, setter=setPtrBuffer:) __strong MapElement **ptrBuffer;
 @property (assign) NSInteger threshold;
 @property (assign, getter=getLoadFactor, setter=setLoadFactor:) float loadFactor;
 @property (assign) NSInteger modCount;
-@property (copy, getter=getEntrySet, setter=setEntrySet:) __strong HMEntrySet *entrySet;
+@property (retain, getter=getEntrySet, setter=setEntrySet:) __strong HMEntrySet *entrySet;
 @property (nonatomic, readonly) BOOL empty;
-@property (copy, getter=getKeySet, setter=setKeySet:) __strong HMKeySet *keySet;
-@property (copy, getter=getValues, setter=setValues:) __strong Values *values;
+@property (retain, getter=getKeySet, setter=setKeySet:) __strong HMKeySet *keySet;
+@property (retain, getter=getValues, setter=setValues:) __strong Values *values;
 
 // Contruction/Destruction
 + (id) newHashMap;

@@ -34,7 +34,7 @@
 	id<TreeNodeStream> input;
 }
 
-@property (copy, getter=input, setter=setInput:) id<TreeNodeStream> input;
+@property (retain, getter=input, setter=setInput:) id<TreeNodeStream> input;
 
 + (id) newTreeParser:(id<TreeNodeStream>)anInput;
 + (id) newTreeParser:(id<TreeNodeStream>)anInput State:(RecognizerSharedState *)state;

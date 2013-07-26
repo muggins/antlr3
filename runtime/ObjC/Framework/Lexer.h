@@ -41,7 +41,7 @@
 	NSUInteger ruleNestingLevel;
 }
 
-@property (copy, getter=input, setter=setInput:) id<CharStream> input;
+@property (retain, getter=input, setter=setInput:) id<CharStream> input;
 @property (getter=getRuleNestingLevel, setter=setRuleNestingLevel:) NSUInteger ruleNestingLevel;
 
 #pragma mark Initializer

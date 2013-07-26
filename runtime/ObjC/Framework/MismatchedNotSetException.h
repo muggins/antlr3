@@ -37,7 +37,7 @@
 {
     NSString *expecting;
 }
-@property (copy, getter=getExpecting, setter=setExpecting:) NSString *expecting;
+@property (retain, getter=getExpecting, setter=setExpecting:) NSString *expecting;
 
 - (MismatchedNotSetException *)newException;
 - (MismatchedNotSetException *)newException:(id<IntStream>)anInput

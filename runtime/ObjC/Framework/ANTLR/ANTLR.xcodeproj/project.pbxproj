@@ -160,7 +160,6 @@
 		1A6B1D6C134E8DEB0016A47D /* ANTLRStringStreamTest.h in Resources */ = {isa = PBXBuildFile; fileRef = 1A6B1D55134E8DA10016A47D /* ANTLRStringStreamTest.h */; };
 		1A6B1D6D134E8DEB0016A47D /* ANTLRStringStreamTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A6B1D56134E8DA10016A47D /* ANTLRStringStreamTest.m */; };
 		1A6B1D6E134E8DEB0016A47D /* TestRewriteRuleTokenStream.h in Resources */ = {isa = PBXBuildFile; fileRef = 1A6B1D58134E8DA10016A47D /* TestRewriteRuleTokenStream.h */; };
-		1A6B1D6F134E8DEB0016A47D /* TestRewriteRuleTokenStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A6B1D59134E8DA10016A47D /* TestRewriteRuleTokenStream.m */; };
 		1A6B1D70134E8DEB0016A47D /* CommonTokenTest.h in Resources */ = {isa = PBXBuildFile; fileRef = 1A6B1D5B134E8DA10016A47D /* CommonTokenTest.h */; };
 		1A6B1D71134E8DEB0016A47D /* CommonTokenTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A6B1D5C134E8DA10016A47D /* CommonTokenTest.m */; };
 		1A6B1D72134E8DEB0016A47D /* CommonErrorNodeTest.h in Resources */ = {isa = PBXBuildFile; fileRef = 1A6B1D5E134E8DA10016A47D /* CommonErrorNodeTest.h */; };
@@ -201,8 +200,6 @@
 		1AE7232E134E860B001C3F35 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AE7231B134E860B001C3F35 /* Cocoa.framework */; };
 		1AE72331134E860B001C3F35 /* ANTLR.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AE72318134E860B001C3F35 /* ANTLR.framework */; };
 		1AE72337134E860B001C3F35 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1AE72335134E860B001C3F35 /* InfoPlist.strings */; };
-		1AE7233A134E860B001C3F35 /* Tests.h in Resources */ = {isa = PBXBuildFile; fileRef = 1AE72339134E860B001C3F35 /* Tests.h */; };
-		1AE7233C134E860B001C3F35 /* Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AE7233B134E860B001C3F35 /* Tests.m */; };
 		1AE72347134E89BF001C3F35 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AE72345134E89BF001C3F35 /* CoreFoundation.framework */; };
 		1AE72348134E89BF001C3F35 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AE72346134E89BF001C3F35 /* Foundation.framework */; };
 		1AE7239F134E8AB4001C3F35 /* BaseMapElement.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AE72349134E8AB4001C3F35 /* BaseMapElement.m */; };
@@ -2339,7 +2336,6 @@
 				1A6B1D6C134E8DEB0016A47D /* ANTLRStringStreamTest.h in Resources */,
 				1AAC3C8C136C921800EB094D /* TestDictionary.h in Resources */,
 				1A6B1D6E134E8DEB0016A47D /* TestRewriteRuleTokenStream.h in Resources */,
-				1AE7233A134E860B001C3F35 /* Tests.h in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2567,7 +2563,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1AE7233C134E860B001C3F35 /* Tests.m in Sources */,
 				1A6B1D6B134E8DEB0016A47D /* ANTLRBitSetTest.m in Sources */,
 				1A6B1D71134E8DEB0016A47D /* CommonTokenTest.m in Sources */,
 				1A6B1D73134E8DEB0016A47D /* CommonErrorNodeTest.m in Sources */,
@@ -2578,7 +2573,6 @@
 				1A6B1D69134E8DEB0016A47D /* RecognizerTest.m in Sources */,
 				1A6B1D6D134E8DEB0016A47D /* ANTLRStringStreamTest.m in Sources */,
 				1AAC3C8D136C921800EB094D /* TestDictionary.m in Sources */,
-				1A6B1D6F134E8DEB0016A47D /* TestRewriteRuleTokenStream.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

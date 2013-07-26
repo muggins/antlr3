@@ -100,15 +100,15 @@
 
 // accessors to the raw data of this stream
 
-@property (copy, getter=getData, setter=setData:) NSString *data;
+@property (retain, getter=getData, setter=setData:) NSString *data;
 @property (assign) NSInteger index;
 @property (assign) NSInteger n;
 @property (assign, getter=getLine, setter=setLine:) NSUInteger line;
 @property (assign, getter=getCharPositionInLine, setter=setCharPositionInLine:) NSUInteger charPositionInLine;
 @property (assign) NSInteger markDepth;
-@property (copy, getter=getMarkers, setter=setMarkers:) PtrBuffer *markers;
+@property (retain, getter=getMarkers, setter=setMarkers:) PtrBuffer *markers;
 @property (assign) NSInteger lastMarker;
-@property (copy) NSString *name;
-@property (copy, getter=getCharState, setter=setCharState:) CharStreamState *charState;
+@property (retain) NSString *name;
+@property (retain, getter=getCharState, setter=setCharState:) CharStreamState *charState;
 
 @end

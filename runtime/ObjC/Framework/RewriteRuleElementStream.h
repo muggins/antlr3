@@ -42,10 +42,10 @@
 @property (assign) NSInteger cursor;
 @property (assign) BOOL dirty;
 @property (assign) BOOL isSingleElement;
-@property (copy) id singleElement;
-@property (copy) AMutableArray *elements;
-@property (copy) NSString *elementDescription;
-@property (copy, getter=getTreeAdaptor, setter=setTreeAdaptor:) id<TreeAdaptor> treeAdaptor;
+@property (retain) id singleElement;
+@property (retain) AMutableArray *elements;
+@property (retain) NSString *elementDescription;
+@property (retain, getter=getTreeAdaptor, setter=setTreeAdaptor:) id<TreeAdaptor> treeAdaptor;
 
 + (RewriteRuleElementStream*) newRewriteRuleElementStream:(id<TreeAdaptor>)aTreeAdaptor
                                                         description:(NSString *)anElementDescription;

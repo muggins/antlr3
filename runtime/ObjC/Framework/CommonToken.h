@@ -129,7 +129,7 @@
 
 - (NSString *) description;
 
-@property (copy, getter = text, setter = setText:) NSString *text;
+@property (retain, getter = text, setter = setText:) NSString *text;
 @property (assign) NSInteger type;
 @property (assign) NSUInteger line;
 @property (assign) NSUInteger charPositionInLine;
@@ -137,6 +137,6 @@
 @property (assign) NSInteger index;
 @property (assign, getter=getStart, setter=setStart:) NSInteger startIndex;
 @property (assign, getter=getStop, setter=setStop:) NSInteger stopIndex;
-@property (copy) id<CharStream> input;
+@property (retain) id<CharStream> input;
 
 @end

@@ -110,11 +110,11 @@ NSInteger level;
 /** For debugging; destructive: moves tree iterator to end. */
 - (NSString *) description;
 
-@property (copy, getter=getRoot, setter=setRoot:) CommonTree *root;
-@property (copy, getter=getTokens,setter=setTokens:) id<TokenStream> tokens;
-@property (copy, getter=getTreeAdaptor, setter=setTreeAdaptor:) CommonTreeAdaptor *adaptor;
-@property (copy) TreeIterator *it;
-@property (copy) IntArray *calls;
+@property (retain, getter=getRoot, setter=setRoot:) CommonTree *root;
+@property (retain, getter=getTokens,setter=setTokens:) id<TokenStream> tokens;
+@property (retain, getter=getTreeAdaptor, setter=setTreeAdaptor:) CommonTreeAdaptor *adaptor;
+@property (retain) TreeIterator *it;
+@property (retain) IntArray *calls;
 @property BOOL hasNilRoot;
 @property (assign, getter=getLevel, setter=setLevel:) NSInteger level;
 @end

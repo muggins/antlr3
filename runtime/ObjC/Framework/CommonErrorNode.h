@@ -60,8 +60,8 @@ RecognitionException *trappedException;
 - (NSString *)text;
 - (NSString *)description;
 
-@property (copy) id<IntStream> input;
-@property (copy) id<Token> startToken;
-@property (copy) id<Token> stopToken;
-@property (copy) RecognitionException *trappedException;
+@property (retain) id<IntStream> input;
+@property (retain) id<Token> startToken;
+@property (retain) id<Token> stopToken;
+@property (retain) RecognitionException *trappedException;
 @end

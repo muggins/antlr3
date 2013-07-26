@@ -1,22 +1,27 @@
-#import "Tool.h"
-#import "Label.h"
+#import <Foundation/Foundation.h>
+// #import "Tool.h"
+// #import "Label.h"
 #import "CommonTokenStream.h"
 #import "Token.h"
 #import "TokenSource.h"
 #import "ANTLRErrorListener.h"
-#import "ErrorManager.h"
-#import "GrammarSemanticsMessage.h"
-#import "Message.h"
-#import "After.h"
-#import "Assert.h"
-#import "Before.h"
-#import "ST.h"
+// #import "ErrorManager.h"
+// #import "GrammarSemanticsMessage.h"
+// #import "Message.h"
+// #import "After.h"
+// #import "Assert.h"
+// #import "Before.h"
+// #import "ST.h"
 
-@interface StreamVacuum : NSObject <Runnable> {
-  StringBuffer * buf;
-  BufferedReader * in;
-  Thread * sucker;
+@interface StreamVacuum : NSObject {
+  NSString *buf;
+  BufferedReader *in;
+  Thread *sucker;
 }
+
+@property (retain) NSString *buf;
+@property (retain) BufferedReader *in;
+@property (retain) Thread *sucker;
 
 - (id) initWithIn:(InputStream *)in;
 - (void) start;
@@ -25,24 +30,24 @@
 - (NSString *) description;
 @end
 
-@interface FilteringTokenStream : ANTLRCommonTokenStream {
-  Set * hide;
+@interface FilteringTokenStream : CommonTokenStream {
+  NSSet *hide;
 }
 
-- (id) initWithSrc:(ANTLRCommonTokenSource *)src;
+- (id) initWithSrc:(CommonTokenSource *)src;
 - (void) sync:(int)i;
 - (void) setTokenTypeChannel:(int)ttype channel:(int)channel;
 @end
 
-extern NSString * const jikes;
-extern NSString * const pathSep;
+extern const NSString *jikes;
+extern const NSString *pathSep;
 
 /**
  * When runnning from Maven, the junit tests are run via the surefire plugin. It sets the
  * classpath for the test environment into the following property. We need to pick this up
  * for the junit tests that are going to generate and try to run code.
  */
-extern NSString * const SUREFIRE_CLASSPATH;
+extern const NSString *SUREFIRE_CLASSPATH;
 
 /**
  * Build up the full classpath we need, including the surefire path (if present)

@@ -44,7 +44,7 @@ ST *st;
 @returnScopeInterface.properties() ::= <<
 <@super.properties()>
 /* ST returnScope.properties */
-@property (copy, getter=getST, setter=setST:) ST *st;
+@property (retain, getter=getST, setter=setST:) ST *st;
 >>
 
 @returnScopeInterface.methodsDecl() ::= <<
@@ -103,7 +103,7 @@ STGroup *templateLib; /* ST -- really a part of STAttrMap */
 @genericParserHeaderFile.properties() ::= <<
 <@super.properties()>
 /* ST genericParser.properties */
-@property (copy, getter=getTemplateLib, setter=setTemplateLib:) STGroup *templateLib;
+@property (retain, getter=getTemplateLib, setter=setTemplateLib:) STGroup *templateLib;
 >>
 
 @genericParserHeaderFile.methodsDecl() ::= <<
@@ -185,7 +185,7 @@ static class STAttrMap extends HashMap {
 }
 
 /*    <@STAttrMap.properties()> */
-@property (copy, getter=getTemplateLib, setter=setTemplateLib:) STGroup *templateLib;
+@property (retain, getter=getTemplateLib, setter=setTemplateLib:) STGroup *templateLib;
 /* <@STAttrMap.methodsDecl()> */
 - (id) init;
 - (STAttrMap *) setObject:(id)value forKey:(NSString *)attrName;
@@ -217,7 +217,7 @@ static class STAttrMap extends HashMap {
 
 @STAttrMap.properties() ::= <<
 /* -------- ST start STAttrMap.properties ------------ */
-@property (copy, getter=getTemplateLib, setter=setTemplateLib:) STGroup *templateLib;
+@property (retain, getter=getTemplateLib, setter=setTemplateLib:) STGroup *templateLib;
 /* -------- ST end STAttrMap.properties ------------ */
 >>
 

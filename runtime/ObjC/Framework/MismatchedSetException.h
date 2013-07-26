@@ -32,7 +32,7 @@
 	NSString *expecting;
 }
 
-@property (copy, getter=getExpecting, setter=setExpecting:) NSString *expecting;
+@property (retain, getter=getExpecting, setter=setExpecting:) NSString *expecting;
 
 + (id) newException:(NSString *) theExpectedSet stream:(id<IntStream>) theStream;
 - (id) initWithSet:(NSString *) theExpectedSet stream:(id<IntStream>) theStream;

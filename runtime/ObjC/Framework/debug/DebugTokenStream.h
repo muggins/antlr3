@@ -33,14 +33,14 @@
 
 @interface DebugTokenStream : NSObject <TokenStream>
 {
-	id<DebugEventListener> dbg;
-	id<TokenStream> input;
+	__strong id<DebugEventListener> dbg;
+	__strong id<TokenStream> input;
 	BOOL initialStreamState;
     NSInteger lastMarker;
 }
 
-@property id<DebugEventListener> dbg;
-@property id<TokenStream> input;
+@property (retain) id<DebugEventListener> dbg;
+@property (retain) id<TokenStream> input;
 @property BOOL initialStreamState;
 @property NSInteger lastMarker;
 

@@ -34,7 +34,7 @@ typedef enum {
 }
 
 @property (assign) NSInteger recnum;
-@property (copy) NSString *key;
+@property (retain) NSString *key;
 
 + (ACBKey *)newKey;
 + (ACBKey *)newKeyWithKStr:(NSString *)aKey;
@@ -48,8 +48,6 @@ typedef enum {
     __strong AMutableDictionary *dict;  /* The dictionary that this node belongs to */
     __strong ACBTree *lnode;            /* pointer to left node            */
     __strong ACBTree *rnode;            /* pointer to right node           */
-    __strong ACBKey  **keys;            /* pointer to keys                 */
-    __strong ACBTree **btNodes;         /* pointers to btNodes             */
     __strong ACBKey  *keyArray[BTNODESIZE];
     __strong ACBTree *btNodeArray[BTNODESIZE];
     NSInteger lnodeid;                  /* nodeid of left node             */
@@ -63,11 +61,9 @@ typedef enum {
     NSInteger kidx;
 }
 
-@property AMutableDictionary *dict;
-@property ACBTree  *lnode;
-@property ACBTree  *rnode;
-@property (assign) __strong ACBKey   **keys;
-@property (assign) __strong ACBTree  **btNodes;
+@property (retain) AMutableDictionary *dict;
+@property (retain) ACBTree  *lnode;
+@property (retain) ACBTree  *rnode;
 @property (assign) NSInteger lnodeid;
 @property (assign) NSInteger rnodeid;
 @property (assign) NSInteger nodeid;
@@ -83,6 +79,10 @@ typedef enum {
 - (__strong id)initWithDictionary:(__strong AMutableDictionary *)theDict;
 - (void)dealloc;
 
+- (__strong ACBKey *) getKey:(NSInteger)idx;
+- (void) setKey:(NSInteger)idx with:(ACBKey *)k;
+- (__strong ACBTree *) getNode:(NSInteger)idx;
+- (void) setNode:(NSInteger)idx with:(ACBTree *)t;
 - (__strong ACBTree *)createnode:(__strong ACBKey *)kp0;
 - (__strong ACBTree *)deletekey:(NSString *)dkey;
 - (__strong ACBTree *)insertkey:(__strong ACBKey *)ikp value:(__strong id)value;

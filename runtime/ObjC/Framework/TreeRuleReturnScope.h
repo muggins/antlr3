@@ -37,7 +37,7 @@
     CommonTree *start;
 }
 
-@property (copy, getter=getStart, setter=setStart:) CommonTree *start;
+@property (retain, getter=getStart, setter=setStart:) CommonTree *start;
 
 /** First node or root node of tree matched for this rule. */
 

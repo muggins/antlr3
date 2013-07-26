@@ -330,7 +330,7 @@ lexer(  grammar,
     if ( self != nil ) {
 <if(memoize)>
         if ( state.ruleMemo == nil ) {
-            state.ruleMemo = [[RuleStack newRuleStackWithSize:<numRules>+1] retain];
+            state.ruleMemo = [RuleStack newRuleStackWithSize:<numRules>+1];
         }
         if ( [state.ruleMemo count] == 0 ) {
             // initialize the memoization cache - the indices are 1-based in the runtime code!
@@ -349,7 +349,7 @@ lexer(  grammar,
 
 - (void) dealloc
 {
-    <cyclicDFAs:{dfa | [dfa<dfa.decisionNumber> release];}; separator="\n">
+    <cyclicDFAs:{dfa | dfa<dfa.decisionNumber> = nil;}; separator="\n">
 <actions.lexer.dealloc>
     [super dealloc];
 }
@@ -691,7 +691,7 @@ genericParser(  grammar,
 {
     #pragma mark Bitsets
     <bitsets:{it | <bitsetInit(name={FOLLOW_<it.name>_in_<it.inName><it.tokenIndex>}, words64=it.bits)>}>
-    [BaseRecognizer setTokenNames:[[AMutableArray arrayWithObjects:@"\<invalid>", @"\<EOR>", @"\<DOWN>", @"\<UP>", <tokenNames:{it | @<it>}; separator=", ", wrap="\n ">, nil] retain]];
+    [BaseRecognizer setTokenNames:[AMutableArray arrayWithObjects:@"\<invalid>", @"\<EOR>", @"\<DOWN>", @"\<UP>", <tokenNames:{it | @<it>}; separator=", ", wrap="\n ">, nil]];
     [BaseRecognizer setGrammarFileName:@"<fileName>"];
     <synpreds:{pred | <synpred(pred)>}>
 }
@@ -713,7 +713,7 @@ genericParser(  grammar,
 <else><! TREE_PARSER !>
 - (id) initWithStream:(<inputStreamType>)aStream
 {
-    self = [super initWithStream:aStream State:[[RecognizerSharedState newRecognizerSharedStateWithRuleLen:<numRules>+1] retain]];
+    self = [super initWithStream:aStream State:[RecognizerSharedState newRecognizerSharedStateWithRuleLen:<numRules>+1]];
     if ( self != nil ) {
 <endif>
         <! <parserCtorBody()> !>
@@ -730,11 +730,11 @@ genericParser(  grammar,
 
 - (void) dealloc
 {
-    <cyclicDFAs:{dfa | [dfa<dfa.decisionNumber> release];}; separator="\n">
+    <cyclicDFAs:{dfa | dfa<dfa.decisionNumber> = nil;}; separator="\n">
     <scopes:{it | <if(it.isDynamicGlobalScope)><globalAttributeScopeDealloc(scope=it)><endif>}>
     <actions.(actionScope).dealloc>
     <@dealloc()>
-    [super dealloc];
+    // [super dealloc];
 }
 
 /* ObjC start actions.(actionScope).methods */
@@ -753,7 +753,7 @@ genericParser(  grammar,
 parserCtorBody() ::= <<
 <if(memoize)> /* parserCtorBody */
 <if(grammar.grammarIsRoot)>
-state.ruleMemo = [[RuleStack newRuleStack:<numRules>+1] retain];<\n> <! index from 1..n !>
+state.ruleMemo = [RuleStack newRuleStack:<numRules>+1];<\n> <! index from 1..n !>
 <endif>
 <endif>
 <grammar.delegators:
@@ -952,7 +952,7 @@ retval
 
 ruleCleanUp() ::= <<
 /* token+rule list labels */
-<[ruleDescriptor.tokenListLabels,ruleDescriptor.ruleListLabels]:{it | [list_<it.label.text> release];}; separator="\n">
+<[ruleDescriptor.tokenListLabels,ruleDescriptor.ruleListLabels]:{it | list_<it.label.text> = nil;}; separator="\n">
 <if(ruleDescriptor.hasMultipleReturnValues)>
 <if(!TREE_PARSER)>
 [retval setStop:[input LT:-1]];<\n>
@@ -1174,7 +1174,7 @@ tokenRefAndListLabel(token,label,elementIndex,terminalOptions) ::= <<
 >>
 
 listLabel(label,elem) ::= <<
-if (list_<label> == nil) list_<label> = [[AMutableArray arrayWithCapacity:5] retain];
+if (list_<label> == nil) list_<label> = [AMutableArray arrayWithCapacity:5];
 [list_<label> addObject:<elem>];<\n>
 >>
 
@@ -1237,7 +1237,7 @@ NSInteger <label>Start = input.index;
 [self matchString:<string>]; <checkRuleBacktrackFailure()>
 NSInteger StartLine<elementIndex> = self.line;
 NSInteger <label>StartCharPos<elementIndex> = self.charPositionInLine;
-<label> = [[<labelType> newToken:input Type:TokenTypeInvalid Channel:TokenChannelDefault Start:<label>Start Stop:input.index] retain];
+<label> = [<labelType> newToken:input Type:TokenTypeInvalid Channel:TokenChannelDefault Start:<label>Start Stop:input.index];
 [self setLine:<label>StartLine<elementIndex>];
 [self setCharPositionInLine:<label>StartCharPos<elementIndex>];
 <else>
@@ -1300,7 +1300,7 @@ lexerRuleRef(rule,label,args,elementIndex,scope) ::= <<
 <if(label)>
 NSInteger <label>Start<elementIndex> = input.index;
 [self m<rule.name><if(args)>:<args; separator=" :"><endif>]; <checkRuleBacktrackFailure()><\n>
-<label> = [[<labelType> newToken:input Type:TokenTypeInvalid Channel:TokenChannelDefault Start:<label>Start<elementIndex> Stop:input.index-1] retain];
+<label> = [<labelType> newToken:input Type:TokenTypeInvalid Channel:TokenChannelDefault Start:<label>Start<elementIndex> Stop:input.index-1];
 <label>.line = self.line;
 <else>
 [self <if(scope)><scope:delegateName()>.<endif>m<rule.name><if(args)>:<args; separator=" :"><endif>]; <checkRuleBacktrackFailure()><\n>
@@ -1318,7 +1318,7 @@ lexerMatchEOF(label,elementIndex) ::= <<
 <if(label)>
 NSInteger <label>Start<elementIndex> = input.index;
 [self matchChar:CharStreamEOF]; <checkRuleBacktrackFailure()><\n>
-<labelType> <label> = [[<labelType> newToken:input Type:TokenTypeEOF Channel:TokenChannelDefault Start:<label>Start<elementIndex> Stop:input.index-1] retain];
+<labelType> <label> = [<labelType> newToken:input Type:TokenTypeEOF Channel:TokenChannelDefault Start:<label>Start<elementIndex> Stop:input.index-1];
 <label>.line = self.line;
 <else>
 [self matchChar:CharStreamEOF]; <checkRuleBacktrackFailure()><\n>
@@ -1518,7 +1518,7 @@ const static NSInteger dfa<dfa.decisionNumber>_transition<i0>[] = {<table; separ
 
 + (id) newDFA<dfa.decisionNumber>WithRecognizer:(BaseRecognizer *)aRecognizer
 {
-    return [[[DFA<dfa.decisionNumber> alloc] initWithRecognizer:aRecognizer] retain];
+    return [[DFA<dfa.decisionNumber> alloc] initWithRecognizer:aRecognizer];
 }
 
 - (id) initWithRecognizer:(BaseRecognizer *) theRecognizer
@@ -1740,7 +1740,7 @@ globalAttributeScopeInit(scope) ::= <<
 <scope.name>_stack = [SymbolStack newSymbolStackWithLen:30];<\n>
 >>
 
-globalAttributeScopeDealloc(scope) ::= << [<scope.name>_stack release];<\n> >>
+globalAttributeScopeDealloc(scope) ::= << <scope.name>_stack = nil;<\n> >>
 
 globalAttributeScope(scope) ::= << static <scope.name>_stack;<\n> >>
 
@@ -1797,7 +1797,7 @@ ruleAttributeScopeInit(scope) ::= <%
 <scope.name>_stack = [SymbolStack newSymbolStackWithLen:30];<\n>
 %>
 
-ruleAttributeScopeDealloc(scope) ::= <% [<scope.name>_Scope release];<\n> %>
+ruleAttributeScopeDealloc(scope) ::= <% <scope.name>_Scope = nil;<\n> %>
 
 ruleAttributeScope(scope) ::= <%
 <if(scope.attributes)>
@@ -1891,7 +1891,7 @@ returnScopeImplementation(scope) ::= <%
 <endif>
 + (<ruleDescriptor:returnStructName()> *)new<ruleDescriptor:returnStructName()><\n>
 {<\n>
-    return [[[<ruleDescriptor:returnStructName()> alloc] init] retain];<\n>
+    return [[<ruleDescriptor:returnStructName()> alloc] init];<\n>
 }<\n>
 <\n>
 - (id) init<\n>
@@ -2099,7 +2099,7 @@ static const unsigned long long <name>_data[] = { <words64:{it | <it>LL};separat
 >>
 
 bitsetInit(name, words64) ::= <<
-<name> = [[ANTLRBitSet newBitSetWithBits:(const unsigned long long *)<name>_data Count:(NSUInteger)<length(words64)>] retain];<\n>
+<name> = [ANTLRBitSet newBitSetWithBits:(const unsigned long long *)<name>_data Count:(NSUInteger)<length(words64)>];<\n>
 >>
 
 codeFileExtension() ::= ".m"

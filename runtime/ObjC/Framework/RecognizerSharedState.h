@@ -49,21 +49,21 @@
 	NSString   *text;
 }
 
-@property (copy, getter=getFollowing, setter=setFollowing:) AMutableArray *following;
+@property (retain, getter=getFollowing, setter=setFollowing:) AMutableArray *following;
 @property (assign) NSInteger _fsp;
 @property (assign) BOOL errorRecovery;
 @property (assign) NSInteger lastErrorIndex;
 @property (assign, getter=getFailed, setter=setFailed:) BOOL failed;
 @property (assign) NSInteger syntaxErrors;
 @property (assign, getter=getBacktracking, setter=setBacktracking:) NSInteger backtracking;
-@property (copy, getter=getRuleMemo, setter=setRuleMemo:) RuleStack *ruleMemo;
-@property (copy, getter=getToken, setter=setToken:) id<Token> token;
+@property (retain, getter=getRuleMemo, setter=setRuleMemo:) RuleStack *ruleMemo;
+@property (retain, getter=getToken, setter=setToken:) id<Token> token;
 @property (getter=type,setter=setType:) NSUInteger type;
 @property (getter=channel,setter=setChannel:) NSUInteger channel;
 @property (getter=getTokenStartLine,setter=setTokenStartLine:) NSUInteger tokenStartLine;
 @property (getter=charPositionInLine,setter=setCharPositionInLine:) NSUInteger tokenStartCharPositionInLine;
 @property (getter=getTokenStartCharIndex,setter=setTokenStartCharIndex:) NSInteger tokenStartCharIndex;
-@property (copy, getter=text, setter=setText:) NSString *text;
+@property (retain, getter=text, setter=setText:) NSString *text;
 
 + (RecognizerSharedState *) newRecognizerSharedState;
 + (RecognizerSharedState *) newRecognizerSharedStateWithRuleLen:(NSInteger)aLen;

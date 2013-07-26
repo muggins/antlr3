@@ -23,7 +23,7 @@
     __strong id *ptrBuffer;
 }
 
-@property ACBTree *root;
+@property (retain) ACBTree *root;
 @property (assign) NSInteger nodes_av;
 @property (assign) NSInteger nodes_inuse;
 @property (assign) NSInteger nxt_nodeid;

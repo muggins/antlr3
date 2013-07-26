@@ -34,10 +34,10 @@
 #import "ACNumber.h"
 
 @interface BaseMapElement : LinkBase {
-    ACNumber *index;
+    __strong ACNumber *index;
 }
 
-@property ACNumber *index;
+@property (retain) ACNumber *index;
 
 + (id) newBaseMapElement;
 + (id) newBaseMapElementWithIndex:(ACNumber *)anIdx;
