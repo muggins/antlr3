@@ -593,7 +593,7 @@ float const DEFAULT_LOAD_FACTOR = 0.75f;
             capacity <<= 1;
         
         count = 0;
-        // BuffSize = capacity * sizeof(id);
+        BuffSize = capacity * sizeof(id);
         Capacity = capacity;
         loadFactor = aLoadFactor;
         threshold = (NSInteger)(capacity * loadFactor);
@@ -630,7 +630,8 @@ float const DEFAULT_LOAD_FACTOR = 0.75f;
         while (capacity < initialCapacity)
             capacity <<= 1;
         count = 0;
-        BuffSize = capacity;
+        Capacity = capacity;
+        BuffSize = capacity * sizeof(id);
         loadFactor = DEFAULT_LOAD_FACTOR;
         threshold = (NSInteger)(capacity * loadFactor);
         keySet = nil;
