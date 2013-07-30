@@ -115,8 +115,8 @@
 #endif
     if ( singleElement && isSingleElement ) singleElement = nil;
     else if ( elements && !isSingleElement ) elements = nil;
-    [self setDescription:nil];
-    [self setTreeAdaptor:nil];
+    elementDescription = nil;
+    treeAdaptor = nil;
 }
 
 - (void)reset
