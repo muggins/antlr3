@@ -61,7 +61,7 @@ NSArray *ruleNames;
 @genericParser.init() ::= <<
 /* AST genericParser.init */
 <@super.init()>
-[self setTreeAdaptor:[CommonTreeAdaptor newTreeAdaptor]];
+[self setTreeAdaptor:[<ASTLabelType; null="CommonTree">Adaptor newTreeAdaptor]];
 >>
 
 @genericParser.dealloc() ::= <<
@@ -530,23 +530,24 @@ rewriteRuleListLabelRefRoot(label) ::= <<
 root_<treeLevel> = (<ASTLabelType> *)[treeAdaptor becomeRoot:[stream_<label> nextNode] old:root_<treeLevel>];<\n>
 >>
 
-rewriteWildcardLabelRef(label) ::= <<
+rewriteWildcardLabelRef(label) ::= <%
 [treeAdaptor addChild:[stream_<label> nextTree] toTree:root_<treeLevel>];<\n>
->>
+%>
 
-createImaginaryNode(tokenType,terminalOptions,args) ::= <<
+createImaginaryNode(tokenType,terminalOptions,args) ::= <%
 <if(terminalOptions.node)>
     [<terminalOptions.node> new<terminalOptions.node>:<tokenType> <if(args)>, <args; separator=", "><endif>]
 <else>
+    <! [treeAdaptor createTree:<tokenType> Text:<if(args)><first(args)><else>@"<tokenType>"<endif>] !>
     <if(args)>
         [treeAdaptor createTree:<tokenType> <if(first(args))>FromToken:<first(args)><endif> <if(first(rest(args)))>Text:<first(rest(args))><else>Text:@"<tokenType>"<endif>]
     <else>
         [treeAdaptor createTree:<tokenType> Text:@"<tokenType>"]
     <endif>
 <endif>
->>
+%>
 
-createRewriteNodeFromElement(token,terminalOptions,args) ::= <<
+createRewriteNodeFromElement(token,terminalOptions,args) ::= <%
 <if(terminalOptions.node)>
     [<terminalOptions.node> new<terminalOptions.node>:[stream_<token> nextToken]<if(args)>, <args; separator=", "><endif>]
 <else>
@@ -556,4 +557,4 @@ createRewriteNodeFromElement(token,terminalOptions,args) ::= <<
         [stream_<token> nextNode]
     <endif>
 <endif>
->>
+%>
