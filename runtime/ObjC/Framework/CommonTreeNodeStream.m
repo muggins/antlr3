@@ -31,10 +31,6 @@
 #import "AMutableArray.h"
 #import "CommonTreeAdaptor.h"
 
-#ifndef DEBUG_DEALLOC
-#define DEBUG_DEALLOC
-#endif
-
 @implementation CommonTreeNodeStream
 
 @synthesize root;

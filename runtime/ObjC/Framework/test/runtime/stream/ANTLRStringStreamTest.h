@@ -19,6 +19,6 @@
 -(void) test04Seek;
 -(void) test05SeekMarkAndRewind;
 -(void) test06LAEOF;
--(void) test007LTEOF; // same as LA
+-(void) test07LTEOF; // same as LA
 
 @end
